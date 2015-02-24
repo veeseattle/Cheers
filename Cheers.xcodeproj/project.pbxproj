@@ -15,6 +15,15 @@
 		4E7508851A9BB4900008D3C3 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4E7508841A9BB4900008D3C3 /* Images.xcassets */; };
 		4E7508881A9BB4900008D3C3 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4E7508861A9BB4900008D3C3 /* LaunchScreen.xib */; };
 		4E7508941A9BB4900008D3C3 /* CheersTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 4E7508931A9BB4900008D3C3 /* CheersTests.m */; };
+		4E7508A21A9BB4D90008D3C3 /* Bar.m in Sources */ = {isa = PBXBuildFile; fileRef = 4E7508A11A9BB4D90008D3C3 /* Bar.m */; };
+		4E7508A51A9BB5F80008D3C3 /* Customer.m in Sources */ = {isa = PBXBuildFile; fileRef = 4E7508A41A9BB5F80008D3C3 /* Customer.m */; };
+		4E7508A81A9BB6EF0008D3C3 /* Drink.m in Sources */ = {isa = PBXBuildFile; fileRef = 4E7508A71A9BB6EF0008D3C3 /* Drink.m */; };
+		4E7508AB1A9BB8300008D3C3 /* Bartender.m in Sources */ = {isa = PBXBuildFile; fileRef = 4E7508AA1A9BB8300008D3C3 /* Bartender.m */; };
+		4E7508AE1A9BB9120008D3C3 /* Order.m in Sources */ = {isa = PBXBuildFile; fileRef = 4E7508AD1A9BB9120008D3C3 /* Order.m */; };
+		4E7508B11A9BD1BA0008D3C3 /* OrderingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4E7508B01A9BD1BA0008D3C3 /* OrderingViewController.m */; };
+		4E7508B41A9BDA390008D3C3 /* BartenderViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4E7508B31A9BDA390008D3C3 /* BartenderViewController.m */; };
+		4E7508B71A9D13050008D3C3 /* NetworkController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4E7508B61A9D13050008D3C3 /* NetworkController.m */; };
+		4E7508BC1A9D34660008D3C3 /* drink.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 4E7508BB1A9D34660008D3C3 /* drink.jpg */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -42,6 +51,23 @@
 		4E75088D1A9BB4900008D3C3 /* CheersTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CheersTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		4E7508921A9BB4900008D3C3 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		4E7508931A9BB4900008D3C3 /* CheersTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CheersTests.m; sourceTree = "<group>"; };
+		4E7508A01A9BB4D90008D3C3 /* Bar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Bar.h; sourceTree = "<group>"; };
+		4E7508A11A9BB4D90008D3C3 /* Bar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Bar.m; sourceTree = "<group>"; };
+		4E7508A31A9BB5F80008D3C3 /* Customer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Customer.h; sourceTree = "<group>"; };
+		4E7508A41A9BB5F80008D3C3 /* Customer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Customer.m; sourceTree = "<group>"; };
+		4E7508A61A9BB6EF0008D3C3 /* Drink.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Drink.h; sourceTree = "<group>"; };
+		4E7508A71A9BB6EF0008D3C3 /* Drink.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Drink.m; sourceTree = "<group>"; };
+		4E7508A91A9BB8300008D3C3 /* Bartender.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Bartender.h; sourceTree = "<group>"; };
+		4E7508AA1A9BB8300008D3C3 /* Bartender.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Bartender.m; sourceTree = "<group>"; };
+		4E7508AC1A9BB9120008D3C3 /* Order.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Order.h; sourceTree = "<group>"; };
+		4E7508AD1A9BB9120008D3C3 /* Order.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Order.m; sourceTree = "<group>"; };
+		4E7508AF1A9BD1BA0008D3C3 /* OrderingViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OrderingViewController.h; sourceTree = "<group>"; };
+		4E7508B01A9BD1BA0008D3C3 /* OrderingViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OrderingViewController.m; sourceTree = "<group>"; };
+		4E7508B21A9BDA390008D3C3 /* BartenderViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BartenderViewController.h; sourceTree = "<group>"; };
+		4E7508B31A9BDA390008D3C3 /* BartenderViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BartenderViewController.m; sourceTree = "<group>"; };
+		4E7508B51A9D13050008D3C3 /* NetworkController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NetworkController.h; sourceTree = "<group>"; };
+		4E7508B61A9D13050008D3C3 /* NetworkController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NetworkController.m; sourceTree = "<group>"; };
+		4E7508BB1A9D34660008D3C3 /* drink.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = drink.jpg; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -83,13 +109,13 @@
 		4E7508731A9BB4900008D3C3 /* Cheers */ = {
 			isa = PBXGroup;
 			children = (
+				4E7508BB1A9D34660008D3C3 /* drink.jpg */,
+				4E75089F1A9BB4A70008D3C3 /* Controller */,
+				4E75089E1A9BB4A20008D3C3 /* View */,
+				4E75089D1A9BB49B0008D3C3 /* Model */,
 				4E7508781A9BB4900008D3C3 /* AppDelegate.h */,
 				4E7508791A9BB4900008D3C3 /* AppDelegate.m */,
-				4E75087E1A9BB4900008D3C3 /* ViewController.h */,
-				4E75087F1A9BB4900008D3C3 /* ViewController.m */,
-				4E7508811A9BB4900008D3C3 /* Main.storyboard */,
 				4E7508841A9BB4900008D3C3 /* Images.xcassets */,
-				4E7508861A9BB4900008D3C3 /* LaunchScreen.xib */,
 				4E75087B1A9BB4900008D3C3 /* Cheers.xcdatamodeld */,
 				4E7508741A9BB4900008D3C3 /* Supporting Files */,
 			);
@@ -120,6 +146,47 @@
 				4E7508921A9BB4900008D3C3 /* Info.plist */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		4E75089D1A9BB49B0008D3C3 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				4E7508A01A9BB4D90008D3C3 /* Bar.h */,
+				4E7508A11A9BB4D90008D3C3 /* Bar.m */,
+				4E7508A31A9BB5F80008D3C3 /* Customer.h */,
+				4E7508A41A9BB5F80008D3C3 /* Customer.m */,
+				4E7508A61A9BB6EF0008D3C3 /* Drink.h */,
+				4E7508A71A9BB6EF0008D3C3 /* Drink.m */,
+				4E7508A91A9BB8300008D3C3 /* Bartender.h */,
+				4E7508AA1A9BB8300008D3C3 /* Bartender.m */,
+				4E7508AC1A9BB9120008D3C3 /* Order.h */,
+				4E7508AD1A9BB9120008D3C3 /* Order.m */,
+			);
+			name = Model;
+			sourceTree = "<group>";
+		};
+		4E75089E1A9BB4A20008D3C3 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				4E7508861A9BB4900008D3C3 /* LaunchScreen.xib */,
+				4E7508811A9BB4900008D3C3 /* Main.storyboard */,
+			);
+			name = View;
+			sourceTree = "<group>";
+		};
+		4E75089F1A9BB4A70008D3C3 /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				4E75087E1A9BB4900008D3C3 /* ViewController.h */,
+				4E75087F1A9BB4900008D3C3 /* ViewController.m */,
+				4E7508AF1A9BD1BA0008D3C3 /* OrderingViewController.h */,
+				4E7508B01A9BD1BA0008D3C3 /* OrderingViewController.m */,
+				4E7508B21A9BDA390008D3C3 /* BartenderViewController.h */,
+				4E7508B31A9BDA390008D3C3 /* BartenderViewController.m */,
+				4E7508B51A9D13050008D3C3 /* NetworkController.h */,
+				4E7508B61A9D13050008D3C3 /* NetworkController.m */,
+			);
+			name = Controller;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -202,6 +269,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4E7508BC1A9D34660008D3C3 /* drink.jpg in Resources */,
 				4E7508831A9BB4900008D3C3 /* Main.storyboard in Resources */,
 				4E7508881A9BB4900008D3C3 /* LaunchScreen.xib in Resources */,
 				4E7508851A9BB4900008D3C3 /* Images.xcassets in Resources */,
@@ -222,9 +290,17 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4E7508AE1A9BB9120008D3C3 /* Order.m in Sources */,
 				4E75087A1A9BB4900008D3C3 /* AppDelegate.m in Sources */,
+				4E7508A51A9BB5F80008D3C3 /* Customer.m in Sources */,
+				4E7508A81A9BB6EF0008D3C3 /* Drink.m in Sources */,
+				4E7508B71A9D13050008D3C3 /* NetworkController.m in Sources */,
 				4E75087D1A9BB4900008D3C3 /* Cheers.xcdatamodeld in Sources */,
+				4E7508A21A9BB4D90008D3C3 /* Bar.m in Sources */,
+				4E7508B11A9BD1BA0008D3C3 /* OrderingViewController.m in Sources */,
+				4E7508AB1A9BB8300008D3C3 /* Bartender.m in Sources */,
 				4E7508801A9BB4900008D3C3 /* ViewController.m in Sources */,
+				4E7508B41A9BDA390008D3C3 /* BartenderViewController.m in Sources */,
 				4E7508771A9BB4900008D3C3 /* main.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -418,6 +494,7 @@
 				4E7508991A9BB4900008D3C3 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		4E75089A1A9BB4900008D3C3 /* Build configuration list for PBXNativeTarget "CheersTests" */ = {
 			isa = XCConfigurationList;
@@ -426,6 +503,7 @@
 				4E75089C1A9BB4900008D3C3 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 
