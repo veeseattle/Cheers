@@ -25,7 +25,7 @@
     Drink *drink = [[Drink alloc] init];
     NSLog(drink.drinkName);
     drink.drinkName = item[@"drinkName"];
-    drink.drinkID = item[@"drinkID"];
+    drink.drinkID = item[@"_id"];
     drink.drinkPicture = item[@"drinkPicture"];
     drink.drinkRecipe = item[@"drinkRecipe"];
     

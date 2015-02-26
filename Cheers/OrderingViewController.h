@@ -8,10 +8,12 @@
 
 #import <UIKit/UIKit.h>
 #import "Drink.h"
+#import "BarsTableViewController.h"
 
 @interface OrderingViewController : UIViewController <UIPickerViewDataSource, UIPickerViewDelegate>
 
 @property (strong, nonatomic) Drink *drinkValue;
+@property (strong, nonatomic) NSString *barName;
 
 //@property (strong, nonatomic) NSString *modificationValue;
 

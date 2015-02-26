@@ -16,6 +16,33 @@
 
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
+  
+  //UITabBar Modification from appcoda.com
+  UITabBarController *tabBarController = (UITabBarController *)self.window.rootViewController;
+  UITabBar *tabBar = tabBarController.tabBar;
+  UITabBarItem *tabBarItem1 = [tabBar.items objectAtIndex:0];
+  UITabBarItem *tabBarItem2 = [tabBar.items objectAtIndex:1];
+  
+  //[[tabBar appearance] setBackgroundColor:[UIColor blackColor]];
+  
+  tabBar.barStyle = UIBarStyleBlack;
+  tabBar.translucent = NO;
+  tabBar.barTintColor = [UIColor blackColor];
+  
+  UIImage *barImage1 = [UIImage imageNamed:@"home.png"];
+  UIImage *barImage1Selected = [UIImage imageNamed:@"home_selected.png"];
+  UIImage *barImage2 = [UIImage imageNamed:@"myplan.png"];
+  UIImage *barImage2Selected = [UIImage imageNamed:@"myplan_selected.png"];
+
+  [tabBarItem1 initWithTitle:@"Order Drinks" image:barImage1 selectedImage:barImage1Selected];
+  [tabBarItem2 initWithTitle:@"Bar Queue" image:barImage2 selectedImage:barImage2Selected];
+  
+
+
+
+  return YES;
+
+  
   // Override point for customization after application launch.
   return YES;
 }

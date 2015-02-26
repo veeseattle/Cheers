@@ -12,8 +12,9 @@
 @interface Customer : NSObject
 
 @property (strong,nonatomic) NSString *name;
-@property (strong,nonatomic) NSString *birthday;
-@property (assign) NSInteger *age;
+@property (assign) Boolean *ageConfirmation;
+@property (strong,nonatomic) NSString *emailAddress;
+@property (strong,nonatomic) NSString *password;
 @property (strong,nonatomic) UIImage *image;
 
 

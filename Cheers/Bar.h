@@ -15,7 +15,7 @@
 
 @property (strong,nonatomic) NSString *barName;
 @property (strong,nonatomic) NSString *location;
-@property (strong,nonatomic) UIImage *image;
+//@property (strong,nonatomic) UIImage *image;
 
 
 @end

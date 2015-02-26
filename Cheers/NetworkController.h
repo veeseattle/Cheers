@@ -18,6 +18,8 @@
 
 -(void)fetchDrinkPicture:(NSString *)drinkPicture completionHandler:(void (^) (UIImage *image))completionHandler;
 
+-(void)fetchOrdersForBar: (NSString *)searchTerm completionHandler:(void (^)(NSArray * results, NSString *error))completionHandler;
+
 -(void)postDrinkOrder:(Order *)order;
 
 

@@ -34,8 +34,7 @@
 
 
 
-
-//fetch list of available drinks for a bar, search term is bar name
+//MARK: FetchAvailableDrinks
 -(void)fetchDrinksForBar:(NSString *)searchTerm completionHandler:(void (^)(NSArray *results, NSString *error))completionHandler {
   
   
@@ -78,7 +77,52 @@
   [dataTask resume];
 }
 
-//fetch image for drink
+
+//MARK: FetchOrders
+-(void)fetchOrdersForBar:(NSString *)searchTerm completionHandler:(void (^)(NSArray *results, NSString *error))completionHandler {
+  
+  
+  NSString *urlString = @"http://localhost:3000/api/v1/cheers/drinkorder";
+  
+  NSURL *url = [NSURL URLWithString:urlString];
+  NSMutableURLRequest *request = [[NSMutableURLRequest alloc] initWithURL:url];
+  request.HTTPMethod = @"GET";
+  
+  NSURLSession *session = [NSURLSession sharedSession];
+  
+  NSURLSessionTask *dataTask = [session dataTaskWithRequest:request completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
+    if (error) {
+      completionHandler(nil,@"Could not connect");
+    } else {
+      NSHTTPURLResponse *httpResponse = (NSHTTPURLResponse *)response;
+      NSInteger statusCode = httpResponse.statusCode;
+      
+      switch (statusCode) {
+        case 200 ... 299: {
+          NSLog(@"%ld",(long)statusCode);
+          NSArray *results = [Order orderFromJSON:data];
+          
+          dispatch_async(dispatch_get_main_queue(), ^{
+            if (results) {
+              completionHandler(results,nil);
+            } else {
+              completionHandler(nil,@"Search could not be completed");
+            }
+          });
+          break;
+        }
+        default:
+          NSLog(@"%ld",(long)statusCode);
+          break;
+      }
+      
+    }
+  }];
+  [dataTask resume];
+}
+
+
+//MARK: FetchPictureOfDrink
 -(void)fetchDrinkPicture:(NSString *)drinkPicture completionHandler:(void (^) (UIImage *image))completionHandler {
   
   dispatch_queue_t imageQueue = dispatch_get_global_queue(QOS_CLASS_USER_INTERACTIVE, 0);
@@ -93,6 +137,7 @@
   });
 }
 
+//MARK: PostDrinkOrder
 -(void)postDrinkOrder:(Order *)order {
   
   NSString *urlString = @"http://localhost:3000/api/v1/cheers/drinkorder";
@@ -101,9 +146,26 @@
   NSMutableURLRequest *request = [[NSMutableURLRequest alloc] initWithURL:url];
   request.HTTPMethod = @"POST";
   
+  NSDate *now = [NSDate date];
+  NSDateFormatter *outputFormatter = [[NSDateFormatter alloc] init];
+  [outputFormatter setDateFormat:@"HH:mm:ss"];
+  NSString *newDateString = [outputFormatter stringFromDate:now];
+  
   NSDictionary *drinkOrder = @{@"drinkID" : order.drink.drinkID};
+
+  NSString *post = [NSString stringWithFormat:@"%@",drinkOrder];
+  
+  NSData *postData = [post dataUsingEncoding:NSUTF8StringEncoding allowLossyConversion:YES];
+  
+  NSString *postLength = [NSString stringWithFormat:@"%lu", (unsigned long)[postData length]];
+  
+  [request setValue:postLength forHTTPHeaderField:@"Content-Length"];
+  [request setValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
+  
   NSError *error;
   NSData *data = [NSJSONSerialization dataWithJSONObject:drinkOrder options:0 error:&error];
+  NSDictionary *body = [NSJSONSerialization JSONObjectWithData:data options:0 error:nil];
+  
   request.HTTPBody = data;
   
   NSURLSession *session = [NSURLSession sharedSession];

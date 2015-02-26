@@ -15,9 +15,9 @@
 @property (weak, nonatomic) IBOutlet UIPickerView *drinksPicker;
 @property (weak, nonatomic) IBOutlet UITextField *customDrinkField;
 @property (strong, nonatomic) NSArray *drinksArray;
-@property (weak, nonatomic) IBOutlet UIImageView *drinkPicture;
 
 - (IBAction)drinkButton:(id)sender;
+@property (weak, nonatomic) IBOutlet UIImageView *myPicture;
 
 @end
 
@@ -26,9 +26,19 @@
 - (void)viewDidLoad {
   [super viewDidLoad];
   
+  self.navigationItem.title = @"Bars";
+  
+  //user profile picture
+  self.myPicture.image = [UIImage imageNamed:@"juju.jpg"];
+  self.myPicture.layer.borderWidth = 6;
+  self.myPicture.layer.cornerRadius = 50;
+  self.myPicture.layer.borderColor = [[UIColor whiteColor] CGColor];
+  self.myPicture.clipsToBounds = true;
+  
   [self.drinksPicker setUserInteractionEnabled:false];
   
-  [[NetworkController sharedService] fetchDrinksForBar:@"Bar None" completionHandler:^(NSArray *results, NSString *error) {
+  
+  [[NetworkController sharedService] fetchDrinksForBar:@"Stout - Capitol Hill" completionHandler:^(NSArray *results, NSString *error) {
    
     self.drinksArray = results;
     self.drinkValue = results.firstObject;
@@ -90,12 +100,20 @@
 
 - (IBAction)drinkButton:(id)sender {
   Order *order = [[Order alloc] init];
-  order.customerID = @"BaconCheeseburger";
+  order.customerID = @"BaconCheeseburger"; //replace this with actual user
   order.drink = self.drinkValue;
-  order.drink.drinkID = @"12345";
+  order.status = @"New";
   
   [[NetworkController sharedService] postDrinkOrder:order];
-    
+  
+  UIAlertController *orderSubmitted = [UIAlertController alertControllerWithTitle:@"Order Submitted" message:@"Your drink order has been sent to the bar and should be ready soon!" preferredStyle:UIAlertControllerStyleAlert];
+
+  UIAlertAction *ok = [UIAlertAction actionWithTitle:@"Cool" style:UIAlertActionStyleCancel handler:^(UIAlertAction *action) {
+    [orderSubmitted dismissViewControllerAnimated:YES completion:nil];
+  }];
+  
+  [orderSubmitted addAction:ok];
+ 
   NSLog(@"Posted to the database");
   
 }
