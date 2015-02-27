@@ -110,7 +110,6 @@
 - (IBAction)drinkButton:(id)sender {
   Order *order = [[Order alloc] init];
   order.drink = self.drinkValue;
-  order.status = @"New";
   NSString *drinkID = order.drink.drinkID;
   
   [[NetworkController sharedService] postDrinkOrder:drinkID];

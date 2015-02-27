@@ -23,9 +23,11 @@
   
   for (NSDictionary *item in jsonArray) {
     Order *order = [[Order alloc] init];
-    NSLog(order.orderID);
+    order.orderID = item[@"_id"];
     order.customerID = item[@"customerID"];
-    order.drink.drinkID = item[@"drinkID"];
+    order.drink = item[@"drinkID"];
+    order.drinkID = item[@"drinkID"];
+    order.customerPicture = item[@"customerPicture"];
     
     [temp addObject:order];
   }

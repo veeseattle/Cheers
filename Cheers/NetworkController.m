@@ -102,6 +102,7 @@
   
   [self getMyToken];
   NSString *token = self.token;
+  NSLog(token);
   NSString *urlString = @"https://cheers-bartender-app.herokuapp.com/api/v1/cheers/drink";
  
   //NSLog(self.token);
@@ -110,14 +111,7 @@
   request.HTTPMethod = @"GET";
   
   [request setValue:token forHTTPHeaderField:@"eat"];
-//  NSString *post = self.token;
-//  NSData *postData = [post dataUsingEncoding:NSUTF8StringEncoding allowLossyConversion:YES];
-//  NSString *postLength = [NSString stringWithFormat:@"%lu", (unsigned long)[postData length]];
-  
-//  [request setValue:postLength forHTTPHeaderField:@"Content-Length"];
-//  [request setValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
-//  request.HTTPBody = postData;
-  
+
   NSURLSession *session = [NSURLSession sharedSession];
   
   NSURLSessionTask *dataTask = [session dataTaskWithRequest:request completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
@@ -274,13 +268,15 @@
 }
 
 //MARK: CompleteDrinkOrder
--(void)putDrinkCompletion:(NSString *)orderID completionHandler:(void (^)(NSString *results, NSString *error))completionHandler {
-  
+-(void)putDrinkCompletion:(NSDictionary *)delete completionHandler:(void (^)(NSString *results, NSString *error))completionHandler {
+
   
   [self getMyToken];
   NSString *token = self.token;
-  NSString *queryString = orderID;
-  NSString *urlString = @"https://cheers-bartender-app.herokuapp.com/api/v1/cheers/drinkorder/completed/";
+  NSString *orderID = delete[@"orderID"];
+  NSString *picture = delete[@"deletedPicture"];
+  NSString *baseURL = @"https://cheers-bartender-app.herokuapp.com/api/v1/cheers/drinkorder/completed/";
+  NSString *urlString = [baseURL stringByAppendingString:orderID];
   NSURL *url = [NSURL URLWithString:urlString];
   
   //NSLog(self.token);
@@ -288,6 +284,7 @@
   request.HTTPMethod = @"PUT";
   
   [request setValue:token forHTTPHeaderField:@"eat"];
+  [request setValue:picture forHTTPHeaderField:@"customerPicture"];
   
   NSError *error;
   NSData *data = [NSJSONSerialization dataWithJSONObject:orderID options:0 error:&error];

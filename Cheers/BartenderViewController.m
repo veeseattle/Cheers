@@ -11,10 +11,11 @@
 #import "DrinkOrderCell.h"
 #import "NetworkController.h"
 
-@interface BartenderViewController () <UITableViewDataSource, UITableViewDelegate>
+@interface BartenderViewController () <UITableViewDataSource, UITableViewDelegate, UIScrollViewDelegate>
 @property (weak, nonatomic) IBOutlet UIImageView *barPicture;
 @property (weak, nonatomic) IBOutlet UITableView *orderTable;
 @property (strong, nonatomic) NSMutableArray *pendingOrders;
+@property (weak, nonatomic) IBOutlet UIScrollView *scrollView;
 
 
 @end
@@ -31,7 +32,7 @@
   UINib *cellNib =[UINib nibWithNibName:@"DrinkOrderCell" bundle:[NSBundle mainBundle]];
   [self.orderTable registerNib:cellNib forCellReuseIdentifier:@"ORDER_CELL"];
   
-  [[NetworkController sharedService] fetchOrdersForBar:@"Stout - Capitol Hill" completionHandler:^(NSArray *results, NSString *error) {
+  [[NetworkController sharedService] fetchOrdersForBar:@"Unicorn - Capitol Hill" completionHandler:^(NSArray *results, NSString *error) {
     self.pendingOrders = results;
     [self.orderTable reloadData];
   }];
@@ -45,7 +46,7 @@
   DrinkOrderCell *cell = [tableView dequeueReusableCellWithIdentifier:@"ORDER_CELL" forIndexPath:indexPath];
   Order *order = self.pendingOrders[indexPath.row];
 
-  cell.drinkName.text = order.drink;
+  cell.drinkName.text = order.orderID;
   cell.customerName.text = order.customerID;
   cell.customerPicture.image = [UIImage imageNamed:@"brad.jpeg"];
   cell.customerPicture.layer.cornerRadius = 30;
@@ -56,7 +57,7 @@
 }
 
 
--(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
+-(NSInteger)tableView:(UITableView *)orderTable numberOfRowsInSection:(NSInteger)section {
   return self.pendingOrders.count; //replace this with number of order for this hotel
 }
 
@@ -91,11 +92,17 @@
 //} //end func
 
 
--(void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
+-(void)tableView:(UITableView *)orderTable commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
 
   if (editingStyle == UITableViewCellEditingStyleDelete) {
     Order *deletedOrder = self.pendingOrders[indexPath.row];
-    [[NetworkController sharedService] putDrinkCompletion:deletedOrder.orderID completionHandler:^(NSString *results, NSString *error) {
+    NSString *deletedID = deletedOrder.orderID;
+    NSString *deletedPicture = deletedOrder.customerPicture;
+    NSLog(deletedPicture);
+    NSDictionary *delete = @{@"orderID" : deletedID, @"deletedPicture" : deletedPicture};
+    NSLog(deletedOrder.orderID);
+    
+    [[NetworkController sharedService] putDrinkCompletion:delete completionHandler:^(NSString *results, NSString *error) {
       NSLog(@"done!");
     }];
      
