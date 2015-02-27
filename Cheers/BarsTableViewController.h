@@ -10,6 +10,9 @@
 #import "Bar.h"
 #import "BarCell.h"
 #import "OrderingViewController.h"
+#import "CustomerSignupViewController.h"
+#import "AppDelegate.h"
+#import "NetworkController.h"
 
 @interface BarsTableViewController : UITableViewController
 

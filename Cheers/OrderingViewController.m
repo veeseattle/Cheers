@@ -13,8 +13,8 @@
 
 @interface OrderingViewController ()
 @property (weak, nonatomic) IBOutlet UIPickerView *drinksPicker;
-@property (weak, nonatomic) IBOutlet UITextField *customDrinkField;
 @property (strong, nonatomic) NSArray *drinksArray;
+@property (weak, nonatomic) IBOutlet UILabel *recipe;
 
 - (IBAction)drinkButton:(id)sender;
 @property (weak, nonatomic) IBOutlet UIImageView *myPicture;
@@ -39,11 +39,11 @@
   
   
   [[NetworkController sharedService] fetchDrinksForBar:@"Stout - Capitol Hill" completionHandler:^(NSArray *results, NSString *error) {
-   
+    
     self.drinksArray = results;
     self.drinkValue = results.firstObject;
     self.drinksPicker.reloadAllComponents;
-     [self.drinksPicker setUserInteractionEnabled:true];
+    [self.drinksPicker setUserInteractionEnabled:true];
     if (error) {
       //show alert view
     }}];
@@ -74,9 +74,11 @@
 - (void)pickerView:(UIPickerView *)pickerView didSelectRow:(NSInteger)row inComponent:(NSInteger)component {
   NSLog(@"%ld",(long)row);
   self.drinkValue = [self.drinksArray objectAtIndex:[self.drinksPicker selectedRowInComponent:component ]];
-//  [[NetworkController sharedService] fetchDrinkPicture:self.drinkValue completionHandler:^(UIImage *image) {
-//  self.drinkPicture.image = image;
-//  }];
+  Drink *drink = self.drinkValue;
+  self.recipe.text = drink.drinkRecipe;
+  //  [[NetworkController sharedService] fetchDrinkPicture:self.drinkValue completionHandler:^(UIImage *image) {
+  //  self.drinkPicture.image = image;
+  //  }];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -98,22 +100,23 @@
 //  }
 //}
 
+//Drink Button setup
 - (IBAction)drinkButton:(id)sender {
   Order *order = [[Order alloc] init];
-  order.customerID = @"BaconCheeseburger"; //replace this with actual user
   order.drink = self.drinkValue;
   order.status = @"New";
+  NSString *drinkID = order.drink.drinkID;
   
-  [[NetworkController sharedService] postDrinkOrder:order];
+  [[NetworkController sharedService] postDrinkOrder:drinkID];
   
   UIAlertController *orderSubmitted = [UIAlertController alertControllerWithTitle:@"Order Submitted" message:@"Your drink order has been sent to the bar and should be ready soon!" preferredStyle:UIAlertControllerStyleAlert];
-
+  
   UIAlertAction *ok = [UIAlertAction actionWithTitle:@"Cool" style:UIAlertActionStyleCancel handler:^(UIAlertAction *action) {
     [orderSubmitted dismissViewControllerAnimated:YES completion:nil];
   }];
   
   [orderSubmitted addAction:ok];
- 
+  
   NSLog(@"Posted to the database");
   
 }

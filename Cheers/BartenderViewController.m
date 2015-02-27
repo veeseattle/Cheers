@@ -14,7 +14,7 @@
 @interface BartenderViewController () <UITableViewDataSource, UITableViewDelegate>
 @property (weak, nonatomic) IBOutlet UIImageView *barPicture;
 @property (weak, nonatomic) IBOutlet UITableView *orderTable;
-@property (weak, nonatomic) NSMutableArray *pendingOrders;
+@property (strong, nonatomic) NSMutableArray *pendingOrders;
 
 
 @end
@@ -31,19 +31,22 @@
   UINib *cellNib =[UINib nibWithNibName:@"DrinkOrderCell" bundle:[NSBundle mainBundle]];
   [self.orderTable registerNib:cellNib forCellReuseIdentifier:@"ORDER_CELL"];
   
+  [[NetworkController sharedService] fetchOrdersForBar:@"Stout - Capitol Hill" completionHandler:^(NSArray *results, NSString *error) {
+    self.pendingOrders = results;
+    [self.orderTable reloadData];
+  }];
+  
   // Do any additional setup after loading the view.
 }
 
 //MARK: Order Table Setup
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
   
-  [[NetworkController sharedService] fetchOrdersForBar:@"Stout - Capitol Hill" completionHandler:^(NSArray *results, NSString *error) {
-    //append only NEW results to pendingOrders - or reload?
-  }];
-  
   DrinkOrderCell *cell = [tableView dequeueReusableCellWithIdentifier:@"ORDER_CELL" forIndexPath:indexPath];
-  cell.drinkName.text = @"Cosmo";
-  cell.customerName.text = @"Brad";
+  Order *order = self.pendingOrders[indexPath.row];
+
+  cell.drinkName.text = order.drink;
+  cell.customerName.text = order.customerID;
   cell.customerPicture.image = [UIImage imageNamed:@"brad.jpeg"];
   cell.customerPicture.layer.cornerRadius = 30;
   cell.customerPicture.contentMode = UIViewContentModeScaleAspectFill;
@@ -54,7 +57,7 @@
 
 
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-  return 4; //replace this with number of order for this hotel
+  return self.pendingOrders.count; //replace this with number of order for this hotel
 }
 
 ////Function: Handle event when cell is selected.
@@ -75,12 +78,29 @@
 //  
 //}
 
+////Function: Set table cell edit functionality.
+//func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
+//  if editingStyle == UITableViewCellEditingStyle.Delete {
+//    //Update & Save data.
+//    userProfiles.removeAtIndex(indexPath.row)
+//    let appDelegate = UIApplication.sharedApplication().delegate as AppDelegate
+//    appDelegate.saveUserProfilesToArchive(userProfiles)
+//    //Reload table.
+//    tableUserProfiles.reloadData()
+//  } //end if
+//} //end func
+
 
 -(void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
 
   if (editingStyle == UITableViewCellEditingStyleDelete) {
     Order *deletedOrder = self.pendingOrders[indexPath.row];
-    deletedOrder.status = @"Completed";
+    [[NetworkController sharedService] putDrinkCompletion:deletedOrder.orderID completionHandler:^(NSString *results, NSString *error) {
+      NSLog(@"done!");
+    }];
+     
+     [self.pendingOrders removeObjectAtIndex:(indexPath.row)];
+     
     self.orderTable.reloadData;
   }
 }

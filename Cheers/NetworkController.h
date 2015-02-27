@@ -12,7 +12,11 @@
 
 @interface NetworkController : UIViewController
 
+@property NSUserDefaults *userDefaults;
+
 +(id)sharedService;
+
+-(void)postCustomerID:(NSDictionary *)User completionHandler:(void (^)(NSString *results, NSString *error))completionHandler;
 
 -(void)fetchDrinksForBar:(NSString *)searchTerm completionHandler:(void (^)(NSArray *results, NSString *error))completionHandler;
 
@@ -20,7 +24,9 @@
 
 -(void)fetchOrdersForBar: (NSString *)searchTerm completionHandler:(void (^)(NSArray * results, NSString *error))completionHandler;
 
--(void)postDrinkOrder:(Order *)order;
+-(void)postDrinkOrder:(NSString *)drinkID;
+
+-(void)putDrinkCompletion:(NSString *)orderID completionHandler:(void (^)(NSString *results, NSString *error))completionHandler;
 
 
 

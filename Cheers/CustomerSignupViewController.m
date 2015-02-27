@@ -15,6 +15,8 @@
 @property (weak, nonatomic) IBOutlet UITextField *passwordField;
 @property (weak, nonatomic) IBOutlet UITextField *password2Field;
 @property (weak, nonatomic) IBOutlet UIView *formFrame;
+@property (strong,nonatomic) NSString *imageString;
+
 - (IBAction)signUpButton:(id)sender;
 
 
@@ -112,15 +114,47 @@
   
 }
 
+//Make image smaller
+-(UIImage *) adjustImage:(UIImage *)image toSmallerSize:(CGSize)newSize {
+  
+  NSLog(@"Image made smaller");
+  
+  UIGraphicsBeginImageContext(newSize);
+  [image drawInRect:CGRectMake(0, 0, newSize.width, newSize.height)];
+  UIImage *newImage = UIGraphicsGetImageFromCurrentImageContext();
+  UIGraphicsEndImageContext();
+  return newImage;
+}
 
+//Turn image to NSString
+-(void)turnImageIntoJSON {
+  UIImage *userImage = [self adjustImage:self.userPicture.image toSmallerSize:CGSizeMake(100,100)];
+  NSData *imageData = UIImagePNGRepresentation(userImage);
+  NSString *imageString = [imageData base64EncodedStringWithOptions:NSDataBase64Encoding64CharacterLineLength];
+  
+  self.imageString = imageString;
+  //NSLog(imageString);
+}
+
+
+//MARK: Submit button pressed
 - (IBAction)signUpButton:(id)sender {
   
+  //make sure email is not blank
   if ([self.emailField.text isEqualToString:@""]) {
     UIAlertView *blankEmailAlert = [[UIAlertView alloc] initWithTitle:@"Email not entered" message:@"Please enter an email address" delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
     [blankEmailAlert show];
   }
   else {
-    [self performSegueWithIdentifier:@"SELECT_BAR" sender:self];
+    [self turnImageIntoJSON];
+    NSDictionary *customer = @{@"name" : self.nameField.text, @"email" : self.emailField.text, @"password" : self.passwordField.text, @"userPic" : self.imageString};
+   
+    [[NetworkController sharedService] postCustomerID:customer completionHandler:^(NSString *results, NSString *error) {
+      [self dismissViewControllerAnimated:true completion:nil];
+    }];
+    
+    //[self performSegueWithIdentifier:@"SELECT_BAR" sender:self];
+    
   }
 }
 

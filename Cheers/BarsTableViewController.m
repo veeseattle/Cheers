@@ -26,13 +26,24 @@
   UINib *cellNib =[UINib nibWithNibName:@"BarCell" bundle:[NSBundle mainBundle]];
   [self.barsTableView registerNib:cellNib forCellReuseIdentifier:@"BAR_CELL"];
   
-  self.availableBars = [[NSArray alloc] initWithObjects: @[ @{@"Location" : @"Capitol Hill", @"Name" : @"Unicorn"}, @{@"Location" : @"Ballard", @"Name" : @"Bel Mar"}], nil];
+  self.availableBars = [[NSArray alloc] initWithObjects: @{@"Location" : @"Capitol Hill", @"Name" : @"Unicorn"}, @{@"Location" : @"Ballard", @"Name" : @"Bel Mar"}, nil];
   
   // Uncomment the following line to preserve selection between presentations.
   // self.clearsSelectionOnViewWillAppear = NO;
   
   // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
   // self.navigationItem.rightBarButtonItem = self.editButtonItem;
+}
+
+-(void)viewDidAppear:(BOOL)animated {
+  //If user default token is blank
+  NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
+  NSString *token = [userDefaults objectForKey:@"token"];
+  if (token == nil) {
+    [self gotoCustomerSignup];
+  }
+
+  
 }
 
 - (void)didReceiveMemoryWarning {
@@ -53,17 +64,18 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
   // Return the number of rows in the section.
-  return 2;
+  return self.availableBars.count;
 }
 
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
   
   BarCell *cell = [tableView dequeueReusableCellWithIdentifier:@"BAR_CELL" forIndexPath:indexPath];
-  //NSDictionary *bar = self.availableBars[indexPath.row];
-//  cell.barName.text = bar.barName;
-//  cell.barLocation.text = bar.location;
-  cell.barName.text = @"Unicorn";
-  cell.barLocation.text = @"Capitol Hill";
+
+  NSDictionary *bar = self.availableBars[indexPath.row];
+  cell.barName.text = bar[@"Name"];
+  cell.barLocation.text = bar[@"Location"];
+//  cell.barName.text = @"Unicorn";
+//  cell.barLocation.text = @"Capitol Hill";
   return cell;
 }
 
@@ -79,42 +91,13 @@
 }
 
 
+//Go to User Profile
+-(void)gotoCustomerSignup {
+  //UINavigationController *vcUserProfiles = [self.storyboard instantiateViewControllerWithIdentifier:(@"CustomerSignup")];
+  CustomerSignupViewController *vcUserProfile = [self.storyboard instantiateViewControllerWithIdentifier:(@"CustomerSignup")];
 
-
-/*
- // Override to support conditional editing of the table view.
- - (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath {
- // Return NO if you do not want the specified item to be editable.
- return YES;
- }
- */
-
-/*
- // Override to support editing the table view.
- - (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
- if (editingStyle == UITableViewCellEditingStyleDelete) {
- // Delete the row from the data source
- [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
- } else if (editingStyle == UITableViewCellEditingStyleInsert) {
- // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
- }
- }
- */
-
-/*
- // Override to support rearranging the table view.
- - (void)tableView:(UITableView *)tableView moveRowAtIndexPath:(NSIndexPath *)fromIndexPath toIndexPath:(NSIndexPath *)toIndexPath {
- }
- */
-
-/*
- // Override to support conditional rearranging of the table view.
- - (BOOL)tableView:(UITableView *)tableView canMoveRowAtIndexPath:(NSIndexPath *)indexPath {
- // Return NO if you do not want the item to be re-orderable.
- return YES;
- }
- */
-
+  [self presentViewController:(vcUserProfile) animated:true completion:nil];
+}
 
 
 

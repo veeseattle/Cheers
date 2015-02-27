@@ -27,7 +27,10 @@
     drink.drinkName = item[@"drinkName"];
     drink.drinkID = item[@"_id"];
     drink.drinkPicture = item[@"drinkPicture"];
-    drink.drinkRecipe = item[@"drinkRecipe"];
+    
+    NSArray *drinkRecipeArray = item[@"drinkRecipe"];
+    
+    drink.drinkRecipe = [drinkRecipeArray componentsJoinedByString:@","];
     
     [temp addObject:drink];
   }

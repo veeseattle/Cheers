@@ -7,6 +7,7 @@
 //
 
 #import "AppDelegate.h"
+#import "Customer.h"
 
 @interface AppDelegate ()
 
@@ -23,8 +24,6 @@
   UITabBarItem *tabBarItem1 = [tabBar.items objectAtIndex:0];
   UITabBarItem *tabBarItem2 = [tabBar.items objectAtIndex:1];
   
-  //[[tabBar appearance] setBackgroundColor:[UIColor blackColor]];
-  
   tabBar.barStyle = UIBarStyleBlack;
   tabBar.translucent = NO;
   tabBar.barTintColor = [UIColor blackColor];
@@ -36,16 +35,29 @@
 
   [tabBarItem1 initWithTitle:@"Order Drinks" image:barImage1 selectedImage:barImage1Selected];
   [tabBarItem2 initWithTitle:@"Bar Queue" image:barImage2 selectedImage:barImage2Selected];
-  
-
-
-
-  return YES;
 
   
   // Override point for customization after application launch.
   return YES;
 }
+
+////save customer to archive
+//-(void)saveCustomerToArchive:(Customer *)customer {
+//  NSString *pathDocument = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, true)[0];
+//  NSString *pathArchive = [NSString stringWithFormat:@"%@ /CustomerArchive",pathDocument];
+//  NSLog(@"%@",pathArchive);
+//  [NSKeyedArchiver archiveRootObject:customer toFile:pathArchive];
+//                                                                
+//}
+//
+//-(id)loadCustomerFromArchive {
+//  NSString *pathDocuments = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, true)[0];
+//  NSString *pathArchive = [NSString stringWithFormat:@"%@ /CustomerArchive",pathDocuments];
+//  
+//  //load data, if any
+//  Customer *customer = [NSKeyedUnarchiver unarchiveObjectWithFile:pathArchive];
+//  return customer;
+//}
 
 - (void)applicationWillResignActive:(UIApplication *)application {
   // Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.
