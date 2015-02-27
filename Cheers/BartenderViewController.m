@@ -15,8 +15,6 @@
 @property (weak, nonatomic) IBOutlet UIImageView *barPicture;
 @property (weak, nonatomic) IBOutlet UITableView *orderTable;
 @property (strong, nonatomic) NSMutableArray *pendingOrders;
-@property (weak, nonatomic) IBOutlet UIScrollView *scrollView;
-
 
 @end
 
@@ -25,8 +23,9 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
   self.barPicture.image = [UIImage imageNamed:@"drink.jpg"];
+
   
-  self.orderTable.rowHeight = 99;
+  self.orderTable.rowHeight = 95;
   self.orderTable.dataSource = self;
   self.orderTable.delegate = self;
   UINib *cellNib =[UINib nibWithNibName:@"DrinkOrderCell" bundle:[NSBundle mainBundle]];
@@ -48,6 +47,11 @@
 
   cell.drinkName.text = order.orderID;
   cell.customerName.text = order.customerID;
+  //NSLog(order.customerPicture);
+  //[[NetworkController sharedService] fetchDrinkPicture:order.customerPicture completionHandler:^(UIImage *image) {
+  //  cell.customerPicture.image = image;
+  //}];
+  
   cell.customerPicture.image = [UIImage imageNamed:@"brad.jpeg"];
   cell.customerPicture.layer.cornerRadius = 30;
   cell.customerPicture.contentMode = UIViewContentModeScaleAspectFill;

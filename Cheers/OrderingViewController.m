@@ -82,7 +82,7 @@
   self.recipe.text = drink.drinkRecipe;
   
   [[NetworkController sharedService] fetchDrinkPicture:drink.drinkPicture completionHandler:^(UIImage *image) {
-    
+    NSLog(drink.drinkPicture);
   self.drinkPicture.image = image;
   }];
 }

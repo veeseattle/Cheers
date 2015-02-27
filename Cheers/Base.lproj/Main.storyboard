@@ -106,7 +106,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5zv-Op-LdN">
-                                <rect key="frame" x="156" y="529" width="62" height="37"/>
+                                <rect key="frame" x="156" y="522" width="62" height="37"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="46" id="zUB-iY-L4W"/>
                                 </constraints>
@@ -164,6 +164,7 @@
                             <constraint firstAttribute="centerX" secondItem="AqM-iR-OLo" secondAttribute="centerX" id="hbp-IM-V1Y"/>
                             <constraint firstItem="Tmr-aW-FyP" firstAttribute="leading" secondItem="VF3-ax-Ryi" secondAttribute="leadingMargin" constant="2" id="i60-AB-mfJ"/>
                             <constraint firstItem="AqM-iR-OLo" firstAttribute="leading" secondItem="VF3-ax-Ryi" secondAttribute="leadingMargin" constant="90" id="kgF-5h-gXT"/>
+                            <constraint firstItem="5zv-Op-LdN" firstAttribute="top" secondItem="AqM-iR-OLo" secondAttribute="bottom" constant="135" id="lPp-Mu-7mj"/>
                             <constraint firstItem="lVg-YG-DZB" firstAttribute="top" secondItem="AqM-iR-OLo" secondAttribute="bottom" constant="8" id="mMg-DK-S9W"/>
                             <constraint firstItem="Tmr-aW-FyP" firstAttribute="top" secondItem="Gf4-eW-YgX" secondAttribute="bottom" constant="20" id="oNa-mw-a2l"/>
                             <constraint firstItem="Gf4-eW-YgX" firstAttribute="top" secondItem="IQo-Od-zVS" secondAttribute="bottom" constant="20" id="olg-5y-I3R"/>
@@ -185,6 +186,7 @@
                                 <exclude reference="y20-MB-lPR"/>
                                 <exclude reference="XwP-0r-fvE"/>
                                 <exclude reference="38m-g8-aUl"/>
+                                <exclude reference="I7C-Sx-ql3"/>
                             </mask>
                         </variation>
                     </view>
