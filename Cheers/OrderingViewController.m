@@ -18,6 +18,7 @@
 
 - (IBAction)drinkButton:(id)sender;
 @property (weak, nonatomic) IBOutlet UIImageView *myPicture;
+@property (weak, nonatomic) IBOutlet UIImageView *drinkPicture;
 
 @end
 
@@ -35,6 +36,10 @@
   self.myPicture.layer.borderColor = [[UIColor whiteColor] CGColor];
   self.myPicture.clipsToBounds = true;
   
+  self.drinkPicture.layer.borderColor = [[UIColor whiteColor] CGColor];
+  self.drinkPicture.layer.cornerRadius = 25;
+  self.drinkPicture.clipsToBounds = true;
+  
   [self.drinksPicker setUserInteractionEnabled:false];
   
   
@@ -48,7 +53,6 @@
       //show alert view
     }}];
   
-  //self.drinksArray  = [[NSArray alloc] initWithObjects:@" ", @"Gin & Tonic",@"Manhattan",@"Bud Light", nil];
   self.drinksPicker.delegate = self;
   self.drinksPicker.dataSource = self;
   // Do any additional setup after loading the view.
@@ -76,9 +80,11 @@
   self.drinkValue = [self.drinksArray objectAtIndex:[self.drinksPicker selectedRowInComponent:component ]];
   Drink *drink = self.drinkValue;
   self.recipe.text = drink.drinkRecipe;
-  //  [[NetworkController sharedService] fetchDrinkPicture:self.drinkValue completionHandler:^(UIImage *image) {
-  //  self.drinkPicture.image = image;
-  //  }];
+  
+  [[NetworkController sharedService] fetchDrinkPicture:drink.drinkPicture completionHandler:^(UIImage *image) {
+    
+  self.drinkPicture.image = image;
+  }];
 }
 
 - (void)didReceiveMemoryWarning {

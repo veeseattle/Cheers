@@ -14,8 +14,8 @@
 @property (weak, nonatomic) IBOutlet UITextField *emailField;
 @property (weak, nonatomic) IBOutlet UITextField *passwordField;
 @property (weak, nonatomic) IBOutlet UITextField *password2Field;
-@property (weak, nonatomic) IBOutlet UIView *formFrame;
 @property (strong,nonatomic) NSString *imageString;
+@property (weak, nonatomic) IBOutlet UITextField *promoCode;
 
 - (IBAction)signUpButton:(id)sender;
 
@@ -35,16 +35,10 @@
                                                          delegate:nil
                                                 cancelButtonTitle:@"OK"
                                                 otherButtonTitles: nil];
-    
     [myAlertView show];
-    
   }
   
   Customer *customer = [[Customer alloc] init];
-  
-  //Set up form frame
-  self.formFrame.layer.borderColor = [[UIColor grayColor] CGColor];
-  self.formFrame.layer.borderWidth = 1;
   
   //Set up text fields and get data to Customer object
   self.nameField.delegate = self;
@@ -54,7 +48,8 @@
   self.passwordField.delegate = self;
   self.passwordField.text = customer.password;
   self.password2Field.delegate = self;
-  
+  self.promoCode.delegate = self;
+  self.promoCode.text = customer.promoCode;
   
   //Get user picture
   if (customer.image != nil) {
@@ -63,11 +58,11 @@
   else {
     self.userPicture.image = [UIImage imageNamed:@"juju.jpg"];
   }
+  //User picture set-up
   self.userPicture.layer.cornerRadius = 50;
   self.userPicture.layer.masksToBounds = true;
   self.userPicture.layer.borderColor = [[UIColor whiteColor] CGColor];
   self.userPicture.layer.borderWidth = 6;
-  
   self.userPicture.contentMode = UIViewContentModeScaleAspectFit;
   
   //Camera button
@@ -114,7 +109,7 @@
   
 }
 
-//Make image smaller
+//MARK: AdjustImage - make image smaller
 -(UIImage *) adjustImage:(UIImage *)image toSmallerSize:(CGSize)newSize {
   
   NSLog(@"Image made smaller");
@@ -133,7 +128,6 @@
   NSString *imageString = [imageData base64EncodedStringWithOptions:NSDataBase64Encoding64CharacterLineLength];
   
   self.imageString = imageString;
-  //NSLog(imageString);
 }
 
 
@@ -147,13 +141,12 @@
   }
   else {
     [self turnImageIntoJSON];
-    NSDictionary *customer = @{@"name" : self.nameField.text, @"email" : self.emailField.text, @"password" : self.passwordField.text, @"userPic" : self.imageString};
+
+    NSDictionary *customer = @{@"name" : self.nameField.text, @"email" : self.emailField.text, @"password" : self.passwordField.text, @"userPic" : self.imageString, @"promoCode" : self.promoCode.text};
    
     [[NetworkController sharedService] postCustomerID:customer completionHandler:^(NSString *results, NSString *error) {
       [self dismissViewControllerAnimated:true completion:nil];
     }];
-    
-    //[self performSegueWithIdentifier:@"SELECT_BAR" sender:self];
     
   }
 }

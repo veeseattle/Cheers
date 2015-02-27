@@ -40,22 +40,19 @@
   return mySharedService;
 }
 
-//MARK: CreateNewUser - WORKING! & save token to profile
+//MARK: CreateNewUser - create user & save token to NSUserDefault
 -(void)postCustomerID:(NSDictionary *)User completionHandler:(void (^)(NSString *results, NSString *error))completionHandler {
   //Heroku URL
   NSString *authURL = @"https://cheers-bartender-app.herokuapp.com/api/v1/create_user";
   NSURL *url = [NSURL URLWithString:authURL];
   NSLog(@"%@", url);
-  
   NSMutableURLRequest *request = [[NSMutableURLRequest alloc] initWithURL: url];
-  //[postRequest setURL:[NSURL URLWithString:@"POST"]];
   
   NSDictionary *customer = User;
   
+  //HTTPHeaderField Properties
   NSString *post = [NSString stringWithFormat:@"%@",customer];
-  
   NSData *postData = [post dataUsingEncoding:NSUTF8StringEncoding allowLossyConversion:YES];
-  
   NSString *postLength = [NSString stringWithFormat:@"%lu", (unsigned long)[postData length]];
   
   [request setValue:postLength forHTTPHeaderField:@"Content-Length"];
@@ -63,16 +60,12 @@
   
   NSError *error;
   NSData *data = [NSJSONSerialization dataWithJSONObject:customer options:0 error:&error];
-  //NSDictionary *body = [NSJSONSerialization JSONObjectWithData:data options:0 error:nil];
-
+ 
   request.HTTPBody = data;
-  
   request.HTTPMethod = @"POST";
   
   NSURLSession *session = [NSURLSession sharedSession];
   NSURLSessionTask *dataTask = [session dataTaskWithRequest:request completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
-    
-    //NSLog(@"%@",response);
     
     NSError *responseError;
   
@@ -81,13 +74,7 @@
     
     //NSString *token = [NSString stringWithFormat:@"%@",tokenResponse];
     //NSLog(token);
-   
-//    NSArray *components = [[tokenResponse description] componentsSeparatedByString:@"= \""];
-//    NSString *token = components.lastObject;
-//    NSArray *otherComponents = [[token description] componentsSeparatedByString:@"\""];
-//    NSString *finalToken = otherComponents.firstObject;
-//      NSLog(@"this is a token %@?", finalToken);
-//
+
     if (error) {
       completionHandler(nil, @"could not complete task");
     } else {
@@ -100,7 +87,6 @@
       [userDefaults setObject:token forKey:@"token"]; //replace tokenResponse with finalToken
       [userDefaults synchronize];
       completionHandler(nil,nil);
-      
       
     }
     dispatch_async(dispatch_get_main_queue(), ^{
