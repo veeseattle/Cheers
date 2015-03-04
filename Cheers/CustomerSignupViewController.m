@@ -100,6 +100,16 @@
   
   UIImage *chosenImage = info[UIImagePickerControllerEditedImage];
   self.userPicture.image = chosenImage;
+  
+  NSString *documentsDirectory = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) lastObject];
+  NSString *imageSubdirectory = [documentsDirectory stringByAppendingPathComponent:@"MySubfolderName"];
+  
+  NSString *filePath = [imageSubdirectory stringByAppendingPathComponent:@"MyImage.jpg"];
+  
+  NSData *imageData = UIImageJPEGRepresentation(chosenImage, 0.85);
+  [imageData writeToFile:filePath atomically:YES];
+  
+  
   [picker dismissViewControllerAnimated:YES completion:NULL];
   
 }

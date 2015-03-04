@@ -52,7 +52,7 @@
   //  cell.customerPicture.image = image;
   //}];
   
-  cell.customerPicture.image = [UIImage imageNamed:@"brad.jpeg"];
+  cell.customerPicture.image = [UIImage imageNamed:@"juju.jpg"];
   cell.customerPicture.layer.cornerRadius = 30;
   cell.customerPicture.contentMode = UIViewContentModeScaleAspectFill;
   cell.customerPicture.layer.masksToBounds = true;
@@ -101,12 +101,8 @@
   if (editingStyle == UITableViewCellEditingStyleDelete) {
     Order *deletedOrder = self.pendingOrders[indexPath.row];
     NSString *deletedID = deletedOrder.orderID;
-    NSString *deletedPicture = deletedOrder.customerPicture;
-    NSLog(deletedPicture);
-    NSDictionary *delete = @{@"orderID" : deletedID, @"deletedPicture" : deletedPicture};
-    NSLog(deletedOrder.orderID);
     
-    [[NetworkController sharedService] putDrinkCompletion:delete completionHandler:^(NSString *results, NSString *error) {
+    [[NetworkController sharedService] putDrinkCompletion:deletedID completionHandler:^(NSString *results, NSString *error) {
       NSLog(@"done!");
     }];
      

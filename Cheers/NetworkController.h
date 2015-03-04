@@ -26,7 +26,7 @@
 
 -(void)postDrinkOrder:(NSString *)drinkID;
 
--(void)putDrinkCompletion:(NSDictionary *)orderIDAndPicture completionHandler:(void (^)(NSString *results, NSString *error))completionHandler;
+-(void)putDrinkCompletion:(NSString *)deletedID completionHandler:(void (^)(NSString *results, NSString *error))completionHandler;
 
 
 

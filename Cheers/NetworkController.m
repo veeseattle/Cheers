@@ -268,13 +268,12 @@
 }
 
 //MARK: CompleteDrinkOrder
--(void)putDrinkCompletion:(NSDictionary *)delete completionHandler:(void (^)(NSString *results, NSString *error))completionHandler {
+-(void)putDrinkCompletion:(NSString *)deletedID completionHandler:(void (^)(NSString *results, NSString *error))completionHandler {
 
   
   [self getMyToken];
   NSString *token = self.token;
-  NSString *orderID = delete[@"orderID"];
-  NSString *picture = delete[@"deletedPicture"];
+  NSString *orderID = deletedID;
   NSString *baseURL = @"https://cheers-bartender-app.herokuapp.com/api/v1/cheers/drinkorder/completed/";
   NSString *urlString = [baseURL stringByAppendingString:orderID];
   NSURL *url = [NSURL URLWithString:urlString];
@@ -284,7 +283,6 @@
   request.HTTPMethod = @"PUT";
   
   [request setValue:token forHTTPHeaderField:@"eat"];
-  [request setValue:picture forHTTPHeaderField:@"customerPicture"];
   
   NSError *error;
   NSData *data = [NSJSONSerialization dataWithJSONObject:orderID options:0 error:&error];
