@@ -124,7 +124,7 @@
 //Turn image to NSString
 -(void)turnImageIntoJSON {
   UIImage *userImage = [self adjustImage:self.userPicture.image toSmallerSize:CGSizeMake(100,100)];
-  NSData *imageData = UIImagePNGRepresentation(userImage);
+  NSData *imageData = UIImageJPEGRepresentation(userImage, 0.8);
   NSString *imageString = [imageData base64EncodedStringWithOptions:NSDataBase64Encoding64CharacterLineLength];
   
   self.imageString = imageString;
@@ -142,7 +142,7 @@
   else {
     [self turnImageIntoJSON];
 
-    NSDictionary *customer = @{@"name" : self.nameField.text, @"email" : self.emailField.text, @"password" : self.passwordField.text, @"userPic" : self.imageString, @"promoCode" : self.promoCode.text};
+    NSDictionary *customer = @{@"username" : self.nameField.text, @"email" : self.emailField.text, @"password" : self.passwordField.text, @"userPic" : self.imageString, @"promoCode" : self.promoCode.text};
    
     [[NetworkController sharedService] postCustomerID:customer completionHandler:^(NSString *results, NSString *error) {
       [self dismissViewControllerAnimated:true completion:nil];
