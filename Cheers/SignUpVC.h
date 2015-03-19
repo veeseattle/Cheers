@@ -11,7 +11,7 @@
 #import "OrderingViewController.h"
 #import "NetworkController.h"
 
-@interface CustomerSignupViewController : UIViewController
+@interface SignUpVC : UIViewController
 
 
 @end

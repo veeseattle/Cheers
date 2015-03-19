@@ -45,7 +45,7 @@
 		4EBD33D31A9E3EED001A435F /* BarsTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4EBD33D21A9E3EED001A435F /* BarsTableViewController.m */; };
 		4EBD33D51A9E3FAE001A435F /* BarCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4EBD33D41A9E3FAE001A435F /* BarCell.xib */; };
 		4EBD33D81A9E40BE001A435F /* BarCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 4EBD33D71A9E40BE001A435F /* BarCell.m */; };
-		4EBD33DB1A9EF20D001A435F /* CustomerSignupViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4EBD33DA1A9EF20D001A435F /* CustomerSignupViewController.m */; };
+		4EBD33DB1A9EF20D001A435F /* SignUpVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 4EBD33DA1A9EF20D001A435F /* SignUpVC.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -114,8 +114,8 @@
 		4EBD33D41A9E3FAE001A435F /* BarCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = BarCell.xib; sourceTree = "<group>"; };
 		4EBD33D61A9E40BE001A435F /* BarCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BarCell.h; sourceTree = "<group>"; };
 		4EBD33D71A9E40BE001A435F /* BarCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BarCell.m; sourceTree = "<group>"; };
-		4EBD33D91A9EF20D001A435F /* CustomerSignupViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CustomerSignupViewController.h; sourceTree = "<group>"; };
-		4EBD33DA1A9EF20D001A435F /* CustomerSignupViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CustomerSignupViewController.m; sourceTree = "<group>"; };
+		4EBD33D91A9EF20D001A435F /* SignUpVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SignUpVC.h; sourceTree = "<group>"; };
+		4EBD33DA1A9EF20D001A435F /* SignUpVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SignUpVC.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -257,8 +257,8 @@
 				4EBD33D21A9E3EED001A435F /* BarsTableViewController.m */,
 				4E7508B51A9D13050008D3C3 /* NetworkController.h */,
 				4E7508B61A9D13050008D3C3 /* NetworkController.m */,
-				4EBD33D91A9EF20D001A435F /* CustomerSignupViewController.h */,
-				4EBD33DA1A9EF20D001A435F /* CustomerSignupViewController.m */,
+				4EBD33D91A9EF20D001A435F /* SignUpVC.h */,
+				4EBD33DA1A9EF20D001A435F /* SignUpVC.m */,
 			);
 			name = Controller;
 			sourceTree = "<group>";
@@ -382,7 +382,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				4EBD33DB1A9EF20D001A435F /* CustomerSignupViewController.m in Sources */,
+				4EBD33DB1A9EF20D001A435F /* SignUpVC.m in Sources */,
 				4E7508AE1A9BB9120008D3C3 /* Order.m in Sources */,
 				4E7508C11A9D3D490008D3C3 /* DrinkOrderCell.m in Sources */,
 				4E75087A1A9BB4900008D3C3 /* AppDelegate.m in Sources */,

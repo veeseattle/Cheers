@@ -71,9 +71,6 @@
   
     NSDictionary *tokenResponse = [NSJSONSerialization JSONObjectWithData:data options:0 error:&responseError];
     NSString *token = tokenResponse[@"eat"];
-    
-    //NSString *token = [NSString stringWithFormat:@"%@",tokenResponse];
-    //NSLog(token);
 
     if (error) {
       completionHandler(nil, @"could not complete task");
@@ -84,7 +81,7 @@
       
       //Save token to NSUserDefaults
       NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
-      [userDefaults setObject:token forKey:@"token"]; //replace tokenResponse with finalToken
+      [userDefaults setObject:token forKey:@"token"];
       [userDefaults synchronize];
       completionHandler(nil,nil);
       

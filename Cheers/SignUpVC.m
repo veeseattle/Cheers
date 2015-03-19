@@ -6,9 +6,9 @@
 //  Copyright (c) 2015 Vania Kurniawati. All rights reserved.
 //
 
-#import "CustomerSignupViewController.h"
+#import "SignUpVC.h"
 
-@interface CustomerSignupViewController () <UITextFieldDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate>
+@interface SignUpVC() <UITextFieldDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate, UIScrollViewDelegate>
 @property (weak, nonatomic) IBOutlet UIImageView *userPicture;
 @property (weak, nonatomic) IBOutlet UITextField *nameField;
 @property (weak, nonatomic) IBOutlet UITextField *emailField;
@@ -16,31 +16,34 @@
 @property (weak, nonatomic) IBOutlet UITextField *password2Field;
 @property (strong,nonatomic) NSString *imageString;
 @property (weak, nonatomic) IBOutlet UITextField *promoCode;
+@property (retain,nonatomic) UIScrollView *scrollView;
 
 - (IBAction)signUpButton:(id)sender;
 
 
 @end
 
-@implementation CustomerSignupViewController
+@implementation SignUpVC
 
 - (void)viewDidLoad {
   [super viewDidLoad];
   
-  //check for camera
-  if (![UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera]) {
-    
-    UIAlertView *myAlertView = [[UIAlertView alloc] initWithTitle:@"Error"
-                                                          message:@"Device has no camera"
-                                                         delegate:nil
-                                                cancelButtonTitle:@"OK"
-                                                otherButtonTitles: nil];
-    [myAlertView show];
-  }
+  //scrollView set up
+  self.scrollView = [[UIScrollView alloc]
+                     initWithFrame:self.view.frame];
+  self.scrollView.contentSize = CGSizeMake(1000, 1000);
+  [self.view addSubview:self.scrollView];
+  self.scrollView.pagingEnabled = true;
+  self.scrollView.userInteractionEnabled = true;
+  self.scrollView.delegate = self;
+  
+  UIView *newView = [[UIView alloc] initWithFrame:self.view.frame];
+  [self.scrollView addSubview:newView];
   
   Customer *customer = [[Customer alloc] init];
   
   //Set up text fields and get data to Customer object
+  
   self.nameField.delegate = self;
   self.nameField.text =  customer.name;
   self.emailField.delegate = self;
@@ -50,6 +53,7 @@
   self.password2Field.delegate = self;
   self.promoCode.delegate = self;
   self.promoCode.text = customer.promoCode;
+  
   
   //Get user picture
   if (customer.image != nil) {
@@ -88,9 +92,9 @@
   picturePicker.delegate = self;
   picturePicker.allowsEditing = true;
   picturePicker.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
+  picturePicker.sourceType = UIImagePickerControllerCameraCaptureModePhoto; //NEW - CHECK
   
   [self.navigationController presentViewController:picturePicker animated:true completion:nil];
-  
   
 }
 
@@ -101,14 +105,14 @@
   UIImage *chosenImage = info[UIImagePickerControllerEditedImage];
   self.userPicture.image = chosenImage;
   
+  //Save selected image locally
   NSString *documentsDirectory = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) lastObject];
   NSString *imageSubdirectory = [documentsDirectory stringByAppendingPathComponent:@"MySubfolderName"];
   
-  NSString *filePath = [imageSubdirectory stringByAppendingPathComponent:@"MyImage.jpg"];
+  NSString *filePath = [imageSubdirectory stringByAppendingPathComponent:@"MyPicture.jpg"];
   
   NSData *imageData = UIImageJPEGRepresentation(chosenImage, 0.85);
   [imageData writeToFile:filePath atomically:YES];
-  
   
   [picker dismissViewControllerAnimated:YES completion:NULL];
   
@@ -146,8 +150,14 @@
   
   //make sure email is not blank
   if ([self.emailField.text isEqualToString:@""]) {
-    UIAlertView *blankEmailAlert = [[UIAlertView alloc] initWithTitle:@"Email not entered" message:@"Please enter an email address" delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
+    UIAlertView *blankEmailAlert = [[UIAlertView alloc] initWithTitle:@"Email Not Entered" message:@"Please enter a valid email address" delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
     [blankEmailAlert show];
+  }
+  
+  //make sure both password fields contain equal value
+  if (![self.password2Field.text isEqualToString:self.passwordField.text]) {
+    UIAlertView *passwordErrorAlert = [[UIAlertView alloc] initWithTitle:@"Password Error" message:@"Please check your password to make sure both fields match" delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
+    [passwordErrorAlert show];
   }
   else {
     [self turnImageIntoJSON];

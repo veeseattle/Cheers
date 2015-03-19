@@ -48,9 +48,9 @@
   cell.drinkName.text = order.orderID;
   cell.customerName.text = order.customerID;
   //NSLog(order.customerPicture);
-  //[[NetworkController sharedService] fetchDrinkPicture:order.customerPicture completionHandler:^(UIImage *image) {
-  //  cell.customerPicture.image = image;
-  //}];
+  [[NetworkController sharedService] fetchDrinkPicture:order.customerPicture completionHandler:^(UIImage *image) {
+    cell.customerPicture.image = image;
+  }];
   
   cell.customerPicture.image = [UIImage imageNamed:@"juju.jpg"];
   cell.customerPicture.layer.cornerRadius = 30;

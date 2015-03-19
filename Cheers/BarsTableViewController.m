@@ -94,7 +94,7 @@
 //Go to User Profile
 -(void)gotoCustomerSignup {
   //UINavigationController *vcUserProfiles = [self.storyboard instantiateViewControllerWithIdentifier:(@"CustomerSignup")];
-  CustomerSignupViewController *vcUserProfile = [self.storyboard instantiateViewControllerWithIdentifier:(@"CustomerSignup")];
+  SignUpVC *vcUserProfile = [self.storyboard instantiateViewControllerWithIdentifier:(@"CustomerSignup")];
 
   [self presentViewController:(vcUserProfile) animated:true completion:nil];
 }

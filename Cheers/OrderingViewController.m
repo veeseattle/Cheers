@@ -30,6 +30,7 @@
   self.navigationItem.title = @"Bars";
   
   //user profile picture
+
   self.myPicture.image = [UIImage imageNamed:@"juju.jpg"];
   self.myPicture.layer.borderWidth = 6;
   self.myPicture.layer.cornerRadius = 50;

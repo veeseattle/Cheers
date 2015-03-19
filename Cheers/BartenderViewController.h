@@ -11,6 +11,5 @@
 @interface BartenderViewController : UIViewController
 
 @property (strong, nonatomic) NSString *drinkName;
-@property (strong, nonatomic) NSString *modifications;
 
 @end

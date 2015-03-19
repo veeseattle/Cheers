@@ -23,6 +23,7 @@
   UITabBar *tabBar = tabBarController.tabBar;
   UITabBarItem *tabBarItem1 = [tabBar.items objectAtIndex:0];
   UITabBarItem *tabBarItem2 = [tabBar.items objectAtIndex:1];
+  UITabBarItem *tabBarItem3 = [tabBar.items objectAtIndex:2];
   
   tabBar.barStyle = UIBarStyleBlack;
   tabBar.translucent = NO;
@@ -35,6 +36,7 @@
 
   [tabBarItem1 initWithTitle:@"Order Drinks" image:barImage1 selectedImage:barImage1Selected];
   [tabBarItem2 initWithTitle:@"Bar Queue" image:barImage2 selectedImage:barImage2Selected];
+  [tabBarItem3 initWithTitle:@"Contact Us" image:barImage1 selectedImage:barImage1Selected];
 
   
   // Override point for customization after application launch.
