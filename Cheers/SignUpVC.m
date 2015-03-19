@@ -28,18 +28,6 @@
 - (void)viewDidLoad {
   [super viewDidLoad];
   
-  //scrollView set up
-  self.scrollView = [[UIScrollView alloc]
-                     initWithFrame:self.view.frame];
-  self.scrollView.contentSize = CGSizeMake(1000, 1000);
-  [self.view addSubview:self.scrollView];
-  self.scrollView.pagingEnabled = true;
-  self.scrollView.userInteractionEnabled = true;
-  self.scrollView.delegate = self;
-  
-  UIView *newView = [[UIView alloc] initWithFrame:self.view.frame];
-  [self.scrollView addSubview:newView];
-  
   Customer *customer = [[Customer alloc] init];
   
   //Set up text fields and get data to Customer object
@@ -53,7 +41,6 @@
   self.password2Field.delegate = self;
   self.promoCode.delegate = self;
   self.promoCode.text = customer.promoCode;
-  
   
   //Get user picture
   if (customer.image != nil) {

@@ -10,7 +10,7 @@
 
 @implementation Order
 
-+(NSArray *)orderFromJSON:(NSData *)jsonData {
++(NSMutableArray *)orderFromJSON:(NSData *)jsonData {
   
   NSError *error;
   NSArray *jsonArray = [NSJSONSerialization JSONObjectWithData:jsonData options:0 error:&error];
@@ -31,7 +31,7 @@
     
     [temp addObject:order];
   }
-  NSArray *final = [[NSArray alloc] initWithArray:temp];
+  NSMutableArray *final = [[NSMutableArray alloc] initWithArray:temp];
   return final;
 }
 

@@ -31,7 +31,7 @@
   UINib *cellNib =[UINib nibWithNibName:@"DrinkOrderCell" bundle:[NSBundle mainBundle]];
   [self.orderTable registerNib:cellNib forCellReuseIdentifier:@"ORDER_CELL"];
   
-  [[NetworkController sharedService] fetchOrdersForBar:@"Unicorn - Capitol Hill" completionHandler:^(NSArray *results, NSString *error) {
+  [[NetworkController sharedService] fetchOrdersForBar:@"Unicorn - Capitol Hill" completionHandler:^(NSMutableArray *results, NSString *error) {
     self.pendingOrders = results;
     [self.orderTable reloadData];
   }];
@@ -52,7 +52,7 @@
     cell.customerPicture.image = image;
   }];
   
-  cell.customerPicture.image = [UIImage imageNamed:@"juju.jpg"];
+  //cell.customerPicture.image = [UIImage imageNamed:@"juju.jpg"];
   cell.customerPicture.layer.cornerRadius = 30;
   cell.customerPicture.contentMode = UIViewContentModeScaleAspectFill;
   cell.customerPicture.layer.masksToBounds = true;
@@ -65,16 +65,6 @@
   return self.pendingOrders.count; //replace this with number of order for this hotel
 }
 
-////Function: Handle event when cell is selected.
-//func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-//  //Edit cell.
-//  let cell = tableView.cellForRowAtIndexPath(indexPath) as AllergenCell
-//  cell.selected = false
-//  cell.switchIsAllergen.setOn(!cell.switchIsAllergen.on, animated: true)
-//  //Update user profile.
-//  selectedUserProfile.allergens[indexPath.row].sensitive = cell.switchIsAllergen.on
-//} //end func
-
 //-(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
 //  DrinkOrderCell *cell = tableView cellForRowAtIndexPath:indexPath;
 //  cell.selected = false;
@@ -82,18 +72,6 @@
 //  self.pendingOrders.
 //  
 //}
-
-////Function: Set table cell edit functionality.
-//func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
-//  if editingStyle == UITableViewCellEditingStyle.Delete {
-//    //Update & Save data.
-//    userProfiles.removeAtIndex(indexPath.row)
-//    let appDelegate = UIApplication.sharedApplication().delegate as AppDelegate
-//    appDelegate.saveUserProfilesToArchive(userProfiles)
-//    //Reload table.
-//    tableUserProfiles.reloadData()
-//  } //end if
-//} //end func
 
 
 -(void)tableView:(UITableView *)orderTable commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {

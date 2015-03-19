@@ -13,7 +13,7 @@
 
 @interface Order : NSObject
 
-+(NSArray *)orderFromJSON:(NSData *)jsonData;
++(NSMutableArray *)orderFromJSON:(NSData *)jsonData;
 
 @property (strong,nonatomic) NSString *orderID;
 //@property (strong,nonatomic) Customer *customer;

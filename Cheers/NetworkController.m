@@ -95,7 +95,7 @@
 }
 
 //MARK: FetchAvailableDrinks -- will return id, name, recipe, and picture
--(void)fetchDrinksForBar:(NSString *)searchTerm completionHandler:(void (^)(NSArray *results, NSString *error))completionHandler {
+-(void)fetchDrinksForBar:(NSString *)searchTerm completionHandler:(void (^)(NSMutableArray *results, NSString *error))completionHandler {
   
   [self getMyToken];
   NSString *token = self.token;
@@ -169,7 +169,7 @@
       switch (statusCode) {
         case 200 ... 299: {
           NSLog(@"%ld",(long)statusCode);
-          NSArray *results = [Order orderFromJSON:data];
+          NSMutableArray *results = [Order orderFromJSON:data];
           
           dispatch_async(dispatch_get_main_queue(), ^{
             if (results) {
@@ -267,7 +267,6 @@
 //MARK: CompleteDrinkOrder
 -(void)putDrinkCompletion:(NSString *)deletedID completionHandler:(void (^)(NSString *results, NSString *error))completionHandler {
 
-  
   [self getMyToken];
   NSString *token = self.token;
   NSString *orderID = deletedID;
@@ -282,7 +281,8 @@
   [request setValue:token forHTTPHeaderField:@"eat"];
   
   NSError *error;
-  NSData *data = [NSJSONSerialization dataWithJSONObject:orderID options:0 error:&error];
+  NSDictionary *dictionary = @{@"OrderID":orderID};
+  NSData *data = [NSJSONSerialization dataWithJSONObject:dictionary options:0 error:&error];
   //NSDictionary *body = [NSJSONSerialization JSONObjectWithData:data options:0 error:nil];
   
   request.HTTPBody = data;
