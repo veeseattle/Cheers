@@ -16,9 +16,10 @@
 +(NSMutableArray *)orderFromJSON:(NSData *)jsonData;
 
 @property (strong,nonatomic) NSString *orderID;
-//@property (strong,nonatomic) Customer *customer;
+@property (strong,nonatomic) NSString *customer;
 @property (strong,nonatomic) NSString *customerID;
 @property (strong,nonatomic) Drink *drink;
+@property (strong,nonatomic) NSString *drinkName;
 @property (strong,nonatomic) NSString *drinkID;
 @property (strong,nonatomic) NSString *customerPicture;
 @property (strong,nonatomic) NSString *status;

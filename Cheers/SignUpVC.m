@@ -79,8 +79,7 @@
   picturePicker.delegate = self;
   picturePicker.allowsEditing = true;
   picturePicker.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
-  picturePicker.sourceType = UIImagePickerControllerCameraCaptureModePhoto; //NEW - CHECK
-  
+
   [self.navigationController presentViewController:picturePicker animated:true completion:nil];
   
 }
@@ -94,9 +93,8 @@
   
   //Save selected image locally
   NSString *documentsDirectory = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) lastObject];
-  NSString *imageSubdirectory = [documentsDirectory stringByAppendingPathComponent:@"MySubfolderName"];
   
-  NSString *filePath = [imageSubdirectory stringByAppendingPathComponent:@"MyPicture.jpg"];
+  NSString *filePath = [documentsDirectory stringByAppendingPathComponent:@"MyPicture.jpg"];
   
   NSData *imageData = UIImageJPEGRepresentation(chosenImage, 0.85);
   [imageData writeToFile:filePath atomically:YES];

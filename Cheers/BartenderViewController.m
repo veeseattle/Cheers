@@ -44,15 +44,13 @@
   
   DrinkOrderCell *cell = [tableView dequeueReusableCellWithIdentifier:@"ORDER_CELL" forIndexPath:indexPath];
   Order *order = self.pendingOrders[indexPath.row];
-
-  cell.drinkName.text = order.orderID;
-  cell.customerName.text = order.customerID;
-  //NSLog(order.customerPicture);
+  
+  cell.drinkName.text = order.drink;
+  cell.customerName.text = order.customer;
   [[NetworkController sharedService] fetchDrinkPicture:order.customerPicture completionHandler:^(UIImage *image) {
     cell.customerPicture.image = image;
   }];
   
-  //cell.customerPicture.image = [UIImage imageNamed:@"juju.jpg"];
   cell.customerPicture.layer.cornerRadius = 30;
   cell.customerPicture.contentMode = UIViewContentModeScaleAspectFill;
   cell.customerPicture.layer.masksToBounds = true;
@@ -62,17 +60,8 @@
 
 
 -(NSInteger)tableView:(UITableView *)orderTable numberOfRowsInSection:(NSInteger)section {
-  return self.pendingOrders.count; //replace this with number of order for this hotel
+  return self.pendingOrders.count;
 }
-
-//-(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-//  DrinkOrderCell *cell = tableView cellForRowAtIndexPath:indexPath;
-//  cell.selected = false;
-//  [cell.makeDrink setOn:true animated:true];
-//  self.pendingOrders.
-//  
-//}
-
 
 -(void)tableView:(UITableView *)orderTable commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
 

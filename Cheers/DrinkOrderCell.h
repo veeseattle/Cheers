@@ -9,7 +9,7 @@
 #import <UIKit/UIKit.h>
 
 @interface DrinkOrderCell : UITableViewCell
-@property (weak, nonatomic) IBOutlet UIImageView *customerPicture;
+@property (strong, nonatomic) IBOutlet UIImageView *customerPicture;
 @property (weak, nonatomic) IBOutlet UILabel *drinkName;
 @property (weak, nonatomic) IBOutlet UILabel *customerName;
 @property (weak, nonatomic) IBOutlet UISwitch *makeDrink;

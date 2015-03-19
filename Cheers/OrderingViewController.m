@@ -17,7 +17,7 @@
 @property (weak, nonatomic) IBOutlet UILabel *recipe;
 
 - (IBAction)drinkButton:(id)sender;
-@property (weak, nonatomic) IBOutlet UIImageView *myPicture;
+@property (strong, nonatomic) IBOutlet UIImageView *myPicture;
 @property (weak, nonatomic) IBOutlet UIImageView *drinkPicture;
 
 @end
@@ -30,8 +30,14 @@
   self.navigationItem.title = @"Bars";
   
   //user profile picture
+  NSString *documentsDirectory = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) lastObject];
+  
+  NSString *filePath = [documentsDirectory stringByAppendingPathComponent:@"MyPicture.jpg"];
 
-  self.myPicture.image = [UIImage imageNamed:@"juju.jpg"];
+  
+  UIImage *userPicture = [[UIImage alloc] initWithContentsOfFile:filePath];
+  
+  self.myPicture.image = userPicture;
   self.myPicture.layer.borderWidth = 6;
   self.myPicture.layer.cornerRadius = 50;
   self.myPicture.layer.borderColor = [[UIColor whiteColor] CGColor];

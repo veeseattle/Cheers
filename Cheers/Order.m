@@ -25,14 +25,15 @@
     Order *order = [[Order alloc] init];
     order.orderID = item[@"_id"];
     order.customerID = item[@"customerID"];
+    order.customer = item[@"customerUsername"];
     order.drink = item[@"drinkID"];
-    order.drinkID = item[@"drinkID"];
+    order.drinkName = order.drink.drinkName;
     order.customerPicture = item[@"customerPicture"];
     
     [temp addObject:order];
   }
-  NSMutableArray *final = [[NSMutableArray alloc] initWithArray:temp];
-  return final;
+  
+  return temp;
 }
 
 

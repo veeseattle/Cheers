@@ -143,7 +143,7 @@
   }
 
 //MARK: FetchDrinkOrders
--(void)fetchOrdersForBar:(NSString *)searchTerm completionHandler:(void (^)(NSArray *results, NSString *error))completionHandler {
+-(void)fetchOrdersForBar:(NSString *)searchTerm completionHandler:(void (^)(NSMutableArray *results, NSString *error))completionHandler {
   
   [self getMyToken];
   
@@ -194,15 +194,15 @@
 //MARK: FetchPicture
 -(void)fetchDrinkPicture:(NSString *)picture completionHandler:(void (^) (UIImage *image))completionHandler {
   
-  dispatch_queue_t imageQueue = dispatch_get_global_queue(QOS_CLASS_USER_INTERACTIVE, 0);
-  dispatch_async(dispatch_get_main_queue(), ^{
+  dispatch_queue_t imageQueue = dispatch_get_global_queue(QOS_CLASS_USER_INITIATED, 0);
+  dispatch_async(imageQueue, ^{
     NSURL *url = [NSURL URLWithString:picture];
     NSData *data = [[NSData alloc] initWithContentsOfURL:url];
     UIImage *image = [UIImage imageWithData:data];
     
     dispatch_async(dispatch_get_main_queue(), ^{
       completionHandler(image);
-    });
+  });
   });
 }
 

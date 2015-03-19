@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		4E29A6171ABB72EC000BD947 /* FeedbackVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 4E29A6161ABB72EC000BD947 /* FeedbackVC.m */; };
 		4E7508771A9BB4900008D3C3 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 4E7508761A9BB4900008D3C3 /* main.m */; };
 		4E75087A1A9BB4900008D3C3 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 4E7508791A9BB4900008D3C3 /* AppDelegate.m */; };
 		4E75087D1A9BB4900008D3C3 /* Cheers.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 4E75087B1A9BB4900008D3C3 /* Cheers.xcdatamodeld */; };
@@ -59,6 +60,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		4E29A6151ABB72EC000BD947 /* FeedbackVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FeedbackVC.h; sourceTree = "<group>"; };
+		4E29A6161ABB72EC000BD947 /* FeedbackVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FeedbackVC.m; sourceTree = "<group>"; };
 		4E7508711A9BB4900008D3C3 /* Cheers.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Cheers.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		4E7508751A9BB4900008D3C3 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		4E7508761A9BB4900008D3C3 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -259,6 +262,8 @@
 				4E7508B61A9D13050008D3C3 /* NetworkController.m */,
 				4EBD33D91A9EF20D001A435F /* SignUpVC.h */,
 				4EBD33DA1A9EF20D001A435F /* SignUpVC.m */,
+				4E29A6151ABB72EC000BD947 /* FeedbackVC.h */,
+				4E29A6161ABB72EC000BD947 /* FeedbackVC.m */,
 			);
 			name = Controller;
 			sourceTree = "<group>";
@@ -382,6 +387,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4E29A6171ABB72EC000BD947 /* FeedbackVC.m in Sources */,
 				4EBD33DB1A9EF20D001A435F /* SignUpVC.m in Sources */,
 				4E7508AE1A9BB9120008D3C3 /* Order.m in Sources */,
 				4E7508C11A9D3D490008D3C3 /* DrinkOrderCell.m in Sources */,
