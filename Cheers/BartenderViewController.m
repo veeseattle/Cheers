@@ -45,7 +45,7 @@
   DrinkOrderCell *cell = [tableView dequeueReusableCellWithIdentifier:@"ORDER_CELL" forIndexPath:indexPath];
   Order *order = self.pendingOrders[indexPath.row];
   
-  cell.drinkName.text = order.drink;
+  cell.drinkName.text = order.drinkName;
   cell.customerName.text = order.customer;
   [[NetworkController sharedService] fetchDrinkPicture:order.customerPicture completionHandler:^(UIImage *image) {
     cell.customerPicture.image = image;

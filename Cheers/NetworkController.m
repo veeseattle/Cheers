@@ -223,21 +223,15 @@
   
   NSError *error;
   NSDictionary *drinkOrder = @{@"drinkID" : drinkID};
+  NSString *post = [NSString stringWithFormat:@"%@",drinkOrder];
 
   NSData *data = [NSJSONSerialization dataWithJSONObject:drinkOrder options:0 error:&error];
-  //NSDictionary *body = [NSJSONSerialization JSONObjectWithData:data options:0 error:nil];
   
-  request.HTTPBody = data;
+  NSData *postData = [post dataUsingEncoding:NSUTF8StringEncoding allowLossyConversion:YES];
+  NSString *postLength = [NSString stringWithFormat:@"%lu", (unsigned long)[postData length]];
   
-//  NSString *post = [NSString stringWithFormat:@"%@",drinkOrder];
-//  
-//  NSData *postData = [post dataUsingEncoding:NSUTF8StringEncoding allowLossyConversion:YES];
-//  
-//  NSString *postLength = [NSString stringWithFormat:@"%lu", (unsigned long)[postData length]];
-//  
-//  [request setValue:postLength forHTTPHeaderField:@"Content-Length"];
-//  [request setValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
-//  
+  [request setValue:postLength forHTTPHeaderField:@"Content-Length"];
+  [request setValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
 
   request.HTTPBody = data;
   

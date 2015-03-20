@@ -16,7 +16,7 @@
 @property (weak, nonatomic) IBOutlet UITextField *password2Field;
 @property (strong,nonatomic) NSString *imageString;
 @property (weak, nonatomic) IBOutlet UITextField *promoCode;
-@property (retain,nonatomic) UIScrollView *scrollView;
+@property (weak, nonatomic) IBOutlet UIView *square;
 
 - (IBAction)signUpButton:(id)sender;
 
@@ -29,6 +29,8 @@
   [super viewDidLoad];
   
   Customer *customer = [[Customer alloc] init];
+  
+  self.square.layer.cornerRadius = 20;
   
   //Set up text fields and get data to Customer object
   
@@ -47,14 +49,14 @@
     self.userPicture.image = customer.image;
   }
   else {
-    self.userPicture.image = [UIImage imageNamed:@"juju.jpg"];
+    self.userPicture.image = [UIImage imageNamed:@"cosmo.jpeg"];
   }
   //User picture set-up
   self.userPicture.layer.cornerRadius = 50;
   self.userPicture.layer.masksToBounds = true;
   self.userPicture.layer.borderColor = [[UIColor whiteColor] CGColor];
   self.userPicture.layer.borderWidth = 6;
-  self.userPicture.contentMode = UIViewContentModeScaleAspectFit;
+  self.userPicture.contentMode = UIViewContentModeScaleToFill;
   
   //Camera button
   UIBarButtonItem *cameraButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemCamera target:self action:@selector(cameraButtonPressed)];

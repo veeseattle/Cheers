@@ -7,7 +7,10 @@
 //
 
 #import "AppDelegate.h"
+#import "Stripe.h"
 #import "Customer.h"
+
+NSString * const StripePublishableKey = @"pk_test_W4Opd6G7v4lAT2s1sLsCy004";
 
 @interface AppDelegate ()
 
@@ -17,6 +20,8 @@
 
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
+  
+    [Stripe setDefaultPublishableKey:StripePublishableKey];
   
   //UITabBar Modification from appcoda.com
   UITabBarController *tabBarController = (UITabBarController *)self.window.rootViewController;

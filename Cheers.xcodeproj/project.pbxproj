@@ -42,11 +42,11 @@
 		4EBD33C81A9D86AF001A435F /* settings@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 4EBD33B41A9D86AF001A435F /* settings@2x.png */; };
 		4EBD33C91A9D86AF001A435F /* tabbar_selected.png in Resources */ = {isa = PBXBuildFile; fileRef = 4EBD33B51A9D86AF001A435F /* tabbar_selected.png */; };
 		4EBD33CA1A9D86AF001A435F /* tabbar_selected@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 4EBD33B61A9D86AF001A435F /* tabbar_selected@2x.png */; };
-		4EBD33D01A9D974F001A435F /* juju.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 4EBD33CF1A9D974F001A435F /* juju.jpg */; };
 		4EBD33D31A9E3EED001A435F /* BarsTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4EBD33D21A9E3EED001A435F /* BarsTableViewController.m */; };
 		4EBD33D51A9E3FAE001A435F /* BarCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4EBD33D41A9E3FAE001A435F /* BarCell.xib */; };
 		4EBD33D81A9E40BE001A435F /* BarCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 4EBD33D71A9E40BE001A435F /* BarCell.m */; };
 		4EBD33DB1A9EF20D001A435F /* SignUpVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 4EBD33DA1A9EF20D001A435F /* SignUpVC.m */; };
+		A39DBFB63F80CDAB3B02D6BD /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 4F217E42BA4F88ECC8A3EB96 /* libPods.a */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -62,6 +62,7 @@
 /* Begin PBXFileReference section */
 		4E29A6151ABB72EC000BD947 /* FeedbackVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FeedbackVC.h; sourceTree = "<group>"; };
 		4E29A6161ABB72EC000BD947 /* FeedbackVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FeedbackVC.m; sourceTree = "<group>"; };
+		4E3D1D4A1ABBAF92003E4FCE /* Cheers.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = Cheers.entitlements; sourceTree = "<group>"; };
 		4E7508711A9BB4900008D3C3 /* Cheers.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Cheers.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		4E7508751A9BB4900008D3C3 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		4E7508761A9BB4900008D3C3 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -111,7 +112,6 @@
 		4EBD33B41A9D86AF001A435F /* settings@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "settings@2x.png"; sourceTree = "<group>"; };
 		4EBD33B51A9D86AF001A435F /* tabbar_selected.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = tabbar_selected.png; sourceTree = "<group>"; };
 		4EBD33B61A9D86AF001A435F /* tabbar_selected@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "tabbar_selected@2x.png"; sourceTree = "<group>"; };
-		4EBD33CF1A9D974F001A435F /* juju.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = juju.jpg; sourceTree = "<group>"; };
 		4EBD33D11A9E3EED001A435F /* BarsTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BarsTableViewController.h; sourceTree = "<group>"; };
 		4EBD33D21A9E3EED001A435F /* BarsTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BarsTableViewController.m; sourceTree = "<group>"; };
 		4EBD33D41A9E3FAE001A435F /* BarCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = BarCell.xib; sourceTree = "<group>"; };
@@ -119,6 +119,9 @@
 		4EBD33D71A9E40BE001A435F /* BarCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BarCell.m; sourceTree = "<group>"; };
 		4EBD33D91A9EF20D001A435F /* SignUpVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SignUpVC.h; sourceTree = "<group>"; };
 		4EBD33DA1A9EF20D001A435F /* SignUpVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SignUpVC.m; sourceTree = "<group>"; };
+		4F217E42BA4F88ECC8A3EB96 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		715C933C646A035E02422B6F /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
+		864604E6185D0B9C4D8F0BF5 /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -126,6 +129,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A39DBFB63F80CDAB3B02D6BD /* libPods.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -139,12 +143,23 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		3F802D1747C18C467F3B06FA /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				864604E6185D0B9C4D8F0BF5 /* Pods.debug.xcconfig */,
+				715C933C646A035E02422B6F /* Pods.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
 		4E7508681A9BB4900008D3C3 = {
 			isa = PBXGroup;
 			children = (
 				4E7508731A9BB4900008D3C3 /* Cheers */,
 				4E7508901A9BB4900008D3C3 /* CheersTests */,
 				4E7508721A9BB4900008D3C3 /* Products */,
+				3F802D1747C18C467F3B06FA /* Pods */,
+				B6079BA1251FEBDA400FD4A6 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -160,6 +175,7 @@
 		4E7508731A9BB4900008D3C3 /* Cheers */ = {
 			isa = PBXGroup;
 			children = (
+				4E3D1D4A1ABBAF92003E4FCE /* Cheers.entitlements */,
 				4E75089F1A9BB4A70008D3C3 /* Controller */,
 				4E75089E1A9BB4A20008D3C3 /* View */,
 				4E75089D1A9BB49B0008D3C3 /* Model */,
@@ -175,7 +191,6 @@
 		4E7508741A9BB4900008D3C3 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
-				4EBD33CF1A9D974F001A435F /* juju.jpg */,
 				4EBD33A51A9D86AF001A435F /* home_selected.png */,
 				4EBD33A61A9D86AF001A435F /* home_selected@2x.png */,
 				4EBD33A71A9D86AF001A435F /* home.png */,
@@ -268,6 +283,14 @@
 			name = Controller;
 			sourceTree = "<group>";
 		};
+		B6079BA1251FEBDA400FD4A6 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				4F217E42BA4F88ECC8A3EB96 /* libPods.a */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -275,9 +298,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 4E7508971A9BB4900008D3C3 /* Build configuration list for PBXNativeTarget "Cheers" */;
 			buildPhases = (
+				8383C447057E247A322306DA /* Check Pods Manifest.lock */,
 				4E75086D1A9BB4900008D3C3 /* Sources */,
 				4E75086E1A9BB4900008D3C3 /* Frameworks */,
 				4E75086F1A9BB4900008D3C3 /* Resources */,
+				835FF665199504D65BA25F66 /* Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -317,6 +342,12 @@
 				TargetAttributes = {
 					4E7508701A9BB4900008D3C3 = {
 						CreatedOnToolsVersion = 6.1.1;
+						DevelopmentTeam = 75948KND66;
+						SystemCapabilities = {
+							com.apple.OMC = {
+								enabled = 1;
+							};
+						};
 					};
 					4E75088C1A9BB4900008D3C3 = {
 						CreatedOnToolsVersion = 6.1.1;
@@ -351,7 +382,6 @@
 				4EBD33C51A9D86AF001A435F /* settings_selected.png in Resources */,
 				4EBD33C81A9D86AF001A435F /* settings@2x.png in Resources */,
 				4E7508BC1A9D34660008D3C3 /* drink.jpg in Resources */,
-				4EBD33D01A9D974F001A435F /* juju.jpg in Resources */,
 				4EBD33D51A9E3FAE001A435F /* BarCell.xib in Resources */,
 				4EBD33BA1A9D86AF001A435F /* home_selected@2x.png in Resources */,
 				4E7508831A9BB4900008D3C3 /* Main.storyboard in Resources */,
@@ -381,6 +411,39 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		835FF665199504D65BA25F66 /* Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods/Pods-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		8383C447057E247A322306DA /* Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		4E75086D1A9BB4900008D3C3 /* Sources */ = {
@@ -525,21 +588,41 @@
 		};
 		4E7508981A9BB4900008D3C3 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 864604E6185D0B9C4D8F0BF5 /* Pods.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = Cheers/Cheers.entitlements;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"$(inherited)",
+					"COCOAPODS=1",
+					STRIPE_ENABLE_APPLEPAY,
+				);
 				INFOPLIST_FILE = Cheers/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
 			};
 			name = Debug;
 		};
 		4E7508991A9BB4900008D3C3 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 715C933C646A035E02422B6F /* Pods.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = Cheers/Cheers.entitlements;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"$(inherited)",
+					"COCOAPODS=1",
+					STRIPE_ENABLE_APPLEPAY,
+				);
 				INFOPLIST_FILE = Cheers/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
 			};
 			name = Release;
 		};

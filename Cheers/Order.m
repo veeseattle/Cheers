@@ -27,7 +27,7 @@
     order.customerID = item[@"customerID"];
     order.customer = item[@"customerUsername"];
     order.drink = item[@"drinkID"];
-    order.drinkName = order.drink.drinkName;
+    order.drinkName = item[@"drinkName"];
     order.customerPicture = item[@"customerPicture"];
     
     [temp addObject:order];
