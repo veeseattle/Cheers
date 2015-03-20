@@ -10,6 +10,7 @@
 #import "BartenderViewController.h"
 #import "NetworkController.h"
 #import "Order.h"
+@import PassKit;
 
 @interface OrderingViewController ()
 @property (weak, nonatomic) IBOutlet UIPickerView *drinksPicker;
@@ -19,6 +20,10 @@
 - (IBAction)drinkButton:(id)sender;
 @property (strong, nonatomic) IBOutlet UIImageView *myPicture;
 @property (weak, nonatomic) IBOutlet UIImageView *drinkPicture;
+@property (strong,nonatomic) NSArray *paymentNetwork;
+@property (strong,nonatomic) NSString *applePayMerchantID;
+@property (strong,nonatomic) PKPaymentSummaryItem *subtotal;
+@property (strong,nonatomic) PKPaymentSummaryItem *total;
 
 @end
 
@@ -27,13 +32,16 @@
 - (void)viewDidLoad {
   [super viewDidLoad];
   
+  self.paymentNetwork = (PKPaymentNetworkAmex, PKPaymentNetworkMasterCard, PKPaymentNetworkVisa);
+  self.applePayMerchantID = @"merchant.cheers";
+  
   self.navigationItem.title = @"Bars";
   
   //user profile picture
   NSString *documentsDirectory = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) lastObject];
   
   NSString *filePath = [documentsDirectory stringByAppendingPathComponent:@"MyPicture.jpg"];
-
+  
   
   UIImage *userPicture = [[UIImage alloc] initWithContentsOfFile:filePath];
   
@@ -90,7 +98,7 @@
   
   [[NetworkController sharedService] fetchDrinkPicture:drink.drinkPicture completionHandler:^(UIImage *image) {
     NSLog(drink.drinkPicture);
-  self.drinkPicture.image = image;
+    self.drinkPicture.image = image;
   }];
 }
 
@@ -100,20 +108,8 @@
 }
 
 
-//- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-//  if ([segue.identifier isEqualToString:@"SUBMIT_ORDER"]) {
-//    BartenderViewController *destinationVC = (BartenderViewController *)segue.destinationViewController;
-//    if (!self.drinkValue.length == 0) {
-//      destinationVC.drinkName = self.drinkValue;
-//    }
-//    else {
-//      destinationVC.drinkName = [self.customDrinkField text];
-//    }
-//
-//  }
-//}
 
-//Drink Button setup
+//Submit drink order/pay with Apple Pay button setup & action
 - (IBAction)drinkButton:(id)sender {
   Order *order = [[Order alloc] init];
   order.drink = self.drinkValue;
@@ -121,13 +117,30 @@
   
   [[NetworkController sharedService] postDrinkOrder:drinkID];
   
-  UIAlertController *orderSubmitted = [UIAlertController alertControllerWithTitle:@"Order Submitted" message:@"Your drink order has been sent to the bar and should be ready soon!" preferredStyle:UIAlertControllerStyleAlert];
+  //create simple PKPaymentRequest object that represents a single Apple Pay payment
+  PKPaymentRequest *request = [[PKPaymentRequest alloc] init];
+  PKPaymentAuthorizationViewController *applePayController = [[PKPaymentAuthorizationViewController alloc] initWithPaymentRequest:request];
+  [self presentViewController:applePayController animated:true completion:nil];
   
-  UIAlertAction *ok = [UIAlertAction actionWithTitle:@"Cool" style:UIAlertActionStyleCancel handler:^(UIAlertAction *action) {
-    [orderSubmitted dismissViewControllerAnimated:YES completion:nil];
-  }];
+  //setup for transaction capabilities
+  request.merchantIdentifier = self.applePayMerchantID;
+  request.supportedNetworks = self.paymentNetwork;
+  request.merchantCapabilities = PKMerchantCapability3DS;
+  request.countryCode = @"US";
+  request.currencyCode = @"USD";
   
-  [orderSubmitted addAction:ok];
+  //setup for payment summary
+  NSDecimalNumber *subtotalAmount = [NSDecimalNumber decimalNumberWithMantissa:6 exponent:-2 isNegative:NO]; //replace 6 with actual drink price
+  self.subtotal = [PKPaymentSummaryItem summaryItemWithLabel:@"Subtotal" amount:subtotalAmount];
+  
+  NSDecimalNumber *totalAmount = [NSDecimalNumber zero];
+  totalAmount = [totalAmount decimalNumberByAdding:subtotalAmount];
+  self.total = [PKPaymentSummaryItem summaryItemWithLabel:@"Unicorn - Capitol Hill" amount:totalAmount]; //replace Unicorn - Capitol Hill with actual bar name
+  
+  request.paymentSummaryItems = @[self.subtotal, self.total];
+  
+  
+  
   
   NSLog(@"Posted to the database");
   
