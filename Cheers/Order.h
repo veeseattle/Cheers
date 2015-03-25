@@ -23,8 +23,8 @@
 @property (strong,nonatomic) NSString *drinkID;
 @property (strong,nonatomic) NSString *customerPicture;
 @property (strong,nonatomic) NSString *status;
-@property (assign) BOOL *orderInProgress;
-@property (assign) BOOL *orderInQueue;
+@property (assign) NSNumber *orderInProgress;
+@property (assign) NSNumber *orderInQueue;
 
 
 

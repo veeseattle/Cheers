@@ -151,16 +151,15 @@
     
     [self presentViewController:paymentController animated:YES completion:nil];
     
-    
   }
   else {
     
   };
   
-  PKPaymentAuthorizationViewController *applePayController = [[PKPaymentAuthorizationViewController alloc] initWithPaymentRequest:request];
-  
-  [self presentViewController:applePayController animated:true completion:nil];
-  
+  //  PKPaymentAuthorizationViewController *applePayController = [[PKPaymentAuthorizationViewController alloc] initWithPaymentRequest:request];
+  //
+  //  [self presentViewController:applePayController animated:true completion:nil];
+  //
   
   NSLog(@"Posted to the database");
   
@@ -222,7 +221,7 @@
 
 //MARK: checkoutController - didFinish & didCreate
 - (void) checkoutController:(STPCheckoutViewController *)controller didCreateToken:(STPToken *)token completion:(STPTokenSubmissionHandler)completion {
-
+  
   //Hm, what to put here?
   
 };

@@ -16,6 +16,7 @@
 @property (weak, nonatomic) IBOutlet UIImageView *barPicture;
 @property (weak, nonatomic) IBOutlet UITableView *orderTable;
 @property (strong, nonatomic) NSMutableArray *pendingOrders;
+- (IBAction)refreshButton:(id)sender;
 
 @end
 
@@ -23,9 +24,9 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+  
   self.barPicture.image = [UIImage imageNamed:@"drink.jpg"];
 
-  
   self.orderTable.rowHeight = 95;
   self.orderTable.dataSource = self;
   self.orderTable.delegate = self;
@@ -57,7 +58,8 @@
   cell.customerPicture.contentMode = UIViewContentModeScaleAspectFill;
   cell.customerPicture.layer.masksToBounds = true;
   
-  cell.beingMadeStatus.hidden = (order.orderInProgress == NO);
+  BOOL beingMade = [order.orderInProgress boolValue];
+  cell.beingMadeStatus.hidden = !(beingMade == YES);
   
     // Remove inset of iOS 7 separators.
     if ([cell respondsToSelector:@selector(setSeparatorInset:)]) {
@@ -87,10 +89,13 @@
     
     //submit network call to complete order
     [self.pendingOrders removeObjectAtIndex:(indexPath.row)];
+    [[NetworkController sharedService] putDrinkCompletion:order.orderID completionHandler:^(NSString *results, NSString *error) {
+      NSLog(@"unicorns");
+    }];
     
+    //[self.orderTable reloadData];
   }];
   
-  [self.orderTable reloadData];
   return cell;
 }
 
@@ -130,5 +135,13 @@
     // Pass the selected object to the new view controller.
 }
 */
+
+- (IBAction)refreshButton:(id)sender {
+  //self.pendingOrders = nil;
+  [[NetworkController sharedService] fetchOrdersForBar:@"Unicorn - Capitol Hill" completionHandler:^(NSMutableArray *results, NSString *error) {
+    self.pendingOrders = results;
+  [self.orderTable reloadData];
+  }];
+}
 
 @end

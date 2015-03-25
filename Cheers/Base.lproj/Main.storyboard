@@ -289,10 +289,26 @@
                                     </tableViewCell>
                                 </prototypes>
                             </tableView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="lub-EG-ATM">
+                                <rect key="frame" x="546" y="146" width="30" height="30"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="30" id="QGr-4a-U0P"/>
+                                    <constraint firstAttribute="height" constant="30" id="utY-Yg-Ckq"/>
+                                </constraints>
+                                <size key="titleShadowOffset" width="2" height="2"/>
+                                <state key="normal" title="Button" image="refresh.png">
+                                    <color key="titleShadowColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="refreshButton:" destination="DEr-9Y-MQY" eventType="touchUpInside" id="ANp-Bd-53L"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
+                            <constraint firstAttribute="trailingMargin" secondItem="lub-EG-ATM" secondAttribute="trailing" constant="8" id="3e1-I5-7xx"/>
                             <constraint firstItem="Gxx-82-wHF" firstAttribute="top" secondItem="ZfE-CP-c3G" secondAttribute="bottom" constant="125" id="4Oi-k1-H1t"/>
+                            <constraint firstItem="lub-EG-ATM" firstAttribute="centerY" secondItem="Gxx-82-wHF" secondAttribute="centerY" id="5pO-oc-oiT"/>
                             <constraint firstItem="mY1-dW-iF5" firstAttribute="top" secondItem="ODq-kN-u4h" secondAttribute="bottom" id="C89-qe-2i0"/>
                             <constraint firstItem="mY1-dW-iF5" firstAttribute="top" secondItem="ODq-kN-u4h" secondAttribute="bottom" constant="333" id="Dyc-DX-Qr5"/>
                             <constraint firstItem="ODq-kN-u4h" firstAttribute="top" secondItem="gdd-Ik-PMs" secondAttribute="topMargin" constant="200" id="Iwb-4H-Bcu"/>
@@ -305,6 +321,7 @@
                             <constraint firstAttribute="trailingMargin" secondItem="jMt-pm-Gga" secondAttribute="trailing" constant="-16" id="aZK-jZ-f4t"/>
                             <constraint firstItem="ODq-kN-u4h" firstAttribute="top" secondItem="jMt-pm-Gga" secondAttribute="bottom" id="hFf-YT-BhQ"/>
                             <constraint firstItem="jMt-pm-Gga" firstAttribute="leading" secondItem="gdd-Ik-PMs" secondAttribute="leadingMargin" constant="-16" id="hpT-91-gMY"/>
+                            <constraint firstItem="mY1-dW-iF5" firstAttribute="top" secondItem="lub-EG-ATM" secondAttribute="bottom" constant="16" id="sKq-k9-PKa"/>
                         </constraints>
                         <variation key="default">
                             <mask key="constraints">
@@ -312,6 +329,7 @@
                                 <exclude reference="Qic-AK-jIb"/>
                                 <exclude reference="Dyc-DX-Qr5"/>
                                 <exclude reference="ZGJ-Qj-IO3"/>
+                                <exclude reference="sKq-k9-PKa"/>
                             </mask>
                         </variation>
                     </view>
@@ -587,6 +605,7 @@
     </scenes>
     <resources>
         <image name="ApplePay" width="280" height="64"/>
+        <image name="refresh.png" width="256" height="256"/>
         <image name="registrationPage" width="1254" height="836"/>
     </resources>
     <inferredMetricsTieBreakers>

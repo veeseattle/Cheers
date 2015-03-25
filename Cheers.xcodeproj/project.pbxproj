@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		4E133DAB1AC2064F002E1C3F /* MCSwipeTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 4E133DAA1AC2064F002E1C3F /* MCSwipeTableViewCell.m */; };
+		4E133DAD1AC25F52002E1C3F /* refresh.png in Resources */ = {isa = PBXBuildFile; fileRef = 4E133DAC1AC25F51002E1C3F /* refresh.png */; };
 		4E29A6171ABB72EC000BD947 /* FeedbackVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 4E29A6161ABB72EC000BD947 /* FeedbackVC.m */; };
 		4E7508771A9BB4900008D3C3 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 4E7508761A9BB4900008D3C3 /* main.m */; };
 		4E75087A1A9BB4900008D3C3 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 4E7508791A9BB4900008D3C3 /* AppDelegate.m */; };
@@ -63,6 +64,7 @@
 /* Begin PBXFileReference section */
 		4E133DA91AC2064F002E1C3F /* MCSwipeTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MCSwipeTableViewCell.h; sourceTree = "<group>"; };
 		4E133DAA1AC2064F002E1C3F /* MCSwipeTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MCSwipeTableViewCell.m; sourceTree = "<group>"; };
+		4E133DAC1AC25F51002E1C3F /* refresh.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = refresh.png; sourceTree = "<group>"; };
 		4E29A6151ABB72EC000BD947 /* FeedbackVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FeedbackVC.h; sourceTree = "<group>"; };
 		4E29A6161ABB72EC000BD947 /* FeedbackVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FeedbackVC.m; sourceTree = "<group>"; };
 		4E3D1D4A1ABBAF92003E4FCE /* Cheers.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = Cheers.entitlements; sourceTree = "<group>"; };
@@ -184,6 +186,7 @@
 				4E75089D1A9BB49B0008D3C3 /* Model */,
 				4E7508781A9BB4900008D3C3 /* AppDelegate.h */,
 				4E7508791A9BB4900008D3C3 /* AppDelegate.m */,
+				4E133DAC1AC25F51002E1C3F /* refresh.png */,
 				4E7508841A9BB4900008D3C3 /* Images.xcassets */,
 				4E75087B1A9BB4900008D3C3 /* Cheers.xcdatamodeld */,
 				4E7508741A9BB4900008D3C3 /* Supporting Files */,
@@ -395,6 +398,7 @@
 				4E7508851A9BB4900008D3C3 /* Images.xcassets in Resources */,
 				4EBD33C31A9D86AF001A435F /* myplan.png in Resources */,
 				4EBD33C41A9D86AF001A435F /* myplan@2x.png in Resources */,
+				4E133DAD1AC25F52002E1C3F /* refresh.png in Resources */,
 				4EBD33BB1A9D86AF001A435F /* home.png in Resources */,
 				4EBD33B91A9D86AF001A435F /* home_selected.png in Resources */,
 				4EBD33C71A9D86AF001A435F /* settings.png in Resources */,
