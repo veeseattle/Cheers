@@ -23,7 +23,6 @@
   
   for (NSDictionary *item in jsonArray) {
     Drink *drink = [[Drink alloc] init];
-    NSLog(drink.drinkName);
     drink.drinkName = item[@"drinkName"];
     drink.drinkID = item[@"_id"];
     drink.drinkPicture = item[@"drinkPicture"];

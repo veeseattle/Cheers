@@ -29,7 +29,8 @@
     order.drink = item[@"drinkID"];
     order.drinkName = item[@"drinkName"];
     order.customerPicture = item[@"customerPicture"];
-    
+    order.orderInProgress = (BOOL)item[@"orderInProgress"];
+    order.orderInQueue = (BOOL)item[@"orderInQueue"];
     [temp addObject:order];
   }
   

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="6751" systemVersion="14C109" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="6751" systemVersion="14C1510" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6736"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
@@ -13,48 +13,51 @@
             <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="5nM-Gf-nUn" id="ZT5-5B-jrp">
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Pmp-bB-T1l">
-                        <rect key="frame" x="16" y="16" width="60" height="60"/>
+                    <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Pmp-bB-T1l">
+                        <rect key="frame" x="16" y="17" width="60" height="60"/>
                         <constraints>
                             <constraint firstAttribute="width" constant="60" id="Gzf-GC-8Xl"/>
                             <constraint firstAttribute="height" constant="60" id="aKO-jh-CiD"/>
                         </constraints>
                     </imageView>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Drink Name" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="SG1-u2-4mT">
-                        <rect key="frame" x="88" y="16" width="81" height="21"/>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Drink Name" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="SG1-u2-4mT">
+                        <rect key="frame" x="88" y="17" width="81" height="21"/>
                         <fontDescription key="fontDescription" name="Avenir-Roman" family="Avenir" pointSize="15"/>
                         <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                         <nil key="highlightedColor"/>
                     </label>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Customer Name" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="QMc-3M-Lfg">
-                        <rect key="frame" x="88" y="42" width="104" height="20"/>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Customer Name" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="QMc-3M-Lfg">
+                        <rect key="frame" x="88" y="43" width="104" height="20"/>
                         <fontDescription key="fontDescription" name="Avenir-Roman" family="Avenir" pointSize="14"/>
                         <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                         <nil key="highlightedColor"/>
                     </label>
-                    <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="bmx-i6-3Eq">
-                        <rect key="frame" x="352" y="35" width="51" height="31"/>
-                    </switch>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Being Made" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="uga-Xc-xU8">
+                        <rect key="frame" x="312" y="16" width="91" height="22"/>
+                        <fontDescription key="fontDescription" name="Avenir-Heavy" family="Avenir" pointSize="16"/>
+                        <color key="textColor" red="0.4369994364" green="0.72526041669999997" blue="0.05451743379" alpha="1" colorSpace="calibratedRGB"/>
+                        <nil key="highlightedColor"/>
+                    </label>
                 </subviews>
-                <color key="backgroundColor" red="0.80000000000000004" green="0.80000000000000004" blue="0.80000000000000004" alpha="0.47999999999999998" colorSpace="calibratedRGB"/>
+                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                 <constraints>
+                    <constraint firstAttribute="trailingMargin" secondItem="uga-Xc-xU8" secondAttribute="trailing" constant="16" id="5N7-XP-UOs"/>
                     <constraint firstItem="SG1-u2-4mT" firstAttribute="leading" secondItem="Pmp-bB-T1l" secondAttribute="trailing" constant="12" id="7ZI-SV-vV2"/>
+                    <constraint firstItem="uga-Xc-xU8" firstAttribute="top" secondItem="SG1-u2-4mT" secondAttribute="top" id="TcS-oe-7YK"/>
                     <constraint firstItem="Pmp-bB-T1l" firstAttribute="top" secondItem="SG1-u2-4mT" secondAttribute="top" id="b2r-Bh-p4h"/>
-                    <constraint firstAttribute="centerY" secondItem="bmx-i6-3Eq" secondAttribute="centerY" id="cEU-f2-evQ"/>
                     <constraint firstItem="Pmp-bB-T1l" firstAttribute="top" secondItem="ZT5-5B-jrp" secondAttribute="topMargin" constant="8" id="cKh-6I-GZ8"/>
-                    <constraint firstAttribute="trailingMargin" secondItem="bmx-i6-3Eq" secondAttribute="trailing" constant="18" id="due-EF-Xgb"/>
                     <constraint firstItem="QMc-3M-Lfg" firstAttribute="leading" secondItem="SG1-u2-4mT" secondAttribute="leading" id="pZR-Ti-xEl"/>
                     <constraint firstItem="Pmp-bB-T1l" firstAttribute="leading" secondItem="ZT5-5B-jrp" secondAttribute="leadingMargin" constant="8" id="tgI-YB-21m"/>
                     <constraint firstItem="QMc-3M-Lfg" firstAttribute="top" secondItem="SG1-u2-4mT" secondAttribute="bottom" constant="5" id="uRh-fI-WPi"/>
                 </constraints>
             </tableViewCellContentView>
             <connections>
+                <outlet property="beingMadeStatus" destination="uga-Xc-xU8" id="SEC-qr-Ota"/>
                 <outlet property="customerName" destination="QMc-3M-Lfg" id="JrD-FV-T21"/>
                 <outlet property="customerPicture" destination="Pmp-bB-T1l" id="riK-8z-qng"/>
                 <outlet property="drinkName" destination="SG1-u2-4mT" id="XEr-qE-kPG"/>
-                <outlet property="makeDrink" destination="bmx-i6-3Eq" id="M3x-T3-n4E"/>
             </connections>
-            <point key="canvasLocation" x="552.5" y="346.5"/>
+            <point key="canvasLocation" x="552.5" y="344.5"/>
         </tableViewCell>
     </objects>
 </document>

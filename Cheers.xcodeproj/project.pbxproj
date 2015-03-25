@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		4E133DAB1AC2064F002E1C3F /* MCSwipeTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 4E133DAA1AC2064F002E1C3F /* MCSwipeTableViewCell.m */; };
 		4E29A6171ABB72EC000BD947 /* FeedbackVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 4E29A6161ABB72EC000BD947 /* FeedbackVC.m */; };
 		4E7508771A9BB4900008D3C3 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 4E7508761A9BB4900008D3C3 /* main.m */; };
 		4E75087A1A9BB4900008D3C3 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 4E7508791A9BB4900008D3C3 /* AppDelegate.m */; };
@@ -60,6 +61,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		4E133DA91AC2064F002E1C3F /* MCSwipeTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MCSwipeTableViewCell.h; sourceTree = "<group>"; };
+		4E133DAA1AC2064F002E1C3F /* MCSwipeTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MCSwipeTableViewCell.m; sourceTree = "<group>"; };
 		4E29A6151ABB72EC000BD947 /* FeedbackVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FeedbackVC.h; sourceTree = "<group>"; };
 		4E29A6161ABB72EC000BD947 /* FeedbackVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FeedbackVC.m; sourceTree = "<group>"; };
 		4E3D1D4A1ABBAF92003E4FCE /* Cheers.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = Cheers.entitlements; sourceTree = "<group>"; };
@@ -233,6 +236,8 @@
 		4E75089D1A9BB49B0008D3C3 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				4E133DA91AC2064F002E1C3F /* MCSwipeTableViewCell.h */,
+				4E133DAA1AC2064F002E1C3F /* MCSwipeTableViewCell.m */,
 				4E7508BF1A9D3D490008D3C3 /* DrinkOrderCell.h */,
 				4E7508C01A9D3D490008D3C3 /* DrinkOrderCell.m */,
 				4E7508A01A9BB4D90008D3C3 /* Bar.h */,
@@ -460,6 +465,7 @@
 				4E7508B71A9D13050008D3C3 /* NetworkController.m in Sources */,
 				4E75087D1A9BB4900008D3C3 /* Cheers.xcdatamodeld in Sources */,
 				4E7508A21A9BB4D90008D3C3 /* Bar.m in Sources */,
+				4E133DAB1AC2064F002E1C3F /* MCSwipeTableViewCell.m in Sources */,
 				4E7508B11A9BD1BA0008D3C3 /* OrderingViewController.m in Sources */,
 				4E7508AB1A9BB8300008D3C3 /* Bartender.m in Sources */,
 				4E7508801A9BB4900008D3C3 /* ViewController.m in Sources */,

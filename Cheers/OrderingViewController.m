@@ -25,6 +25,7 @@
 - (IBAction)drinkButton:(id)sender;
 @property (strong, nonatomic) IBOutlet UIImageView *myPicture;
 @property (weak, nonatomic) IBOutlet UIImageView *drinkPicture;
+
 @property (strong,nonatomic) NSArray *paymentNetwork;
 @property (strong,nonatomic) NSString *applePayMerchantID;
 @property (strong,nonatomic) PKPaymentSummaryItem *subtotal;
@@ -102,7 +103,6 @@
   self.recipe.text = drink.drinkRecipe;
   
   [[NetworkController sharedService] fetchDrinkPicture:drink.drinkPicture completionHandler:^(UIImage *image) {
-    NSLog(drink.drinkPicture);
     self.drinkPicture.image = image;
   }];
 }
@@ -114,6 +114,7 @@
 
 
 
+//MARK: Drink button
 //Submit drink order/pay with Apple Pay button setup & action
 - (IBAction)drinkButton:(id)sender {
   Order *order = [[Order alloc] init];
@@ -169,6 +170,7 @@
 
 - (void) paymentAuthorizationViewController:(PKPaymentAuthorizationViewController *)controller didAuthorizePayment:(PKPayment *)payment completion:(void (^)(PKPaymentAuthorizationStatus))completion {
   //use Stripe SDK to finish charging customer
+  controller.delegate = self;
   [self handlePaymentAuthorizationWithPayment:payment completion:completion];
   
   //when this is done, call completion(PKPaymentAuthorizationStatus.Success)
@@ -216,5 +218,20 @@
                            }
                          }];
 }
+
+
+//MARK: checkoutController - didFinish & didCreate
+- (void) checkoutController:(STPCheckoutViewController *)controller didCreateToken:(STPToken *)token completion:(STPTokenSubmissionHandler)completion {
+
+  //Hm, what to put here?
+  
+};
+
+- (void) checkoutController:(STPCheckoutViewController *)controller didFinishWithStatus:(STPPaymentStatus)status error:(NSError *)error {
+  
+  
+};
+
+
 
 @end

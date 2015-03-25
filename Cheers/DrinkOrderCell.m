@@ -8,11 +8,11 @@
 
 #import "DrinkOrderCell.h"
 
-
 @implementation DrinkOrderCell
 
 - (void)awakeFromNib {
     // Initialization code
+  self.beingMadeStatus.hidden = true;
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {

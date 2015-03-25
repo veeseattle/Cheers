@@ -286,7 +286,7 @@
     
     //NSLog(@"%@",response);
     
-    NSError *responseError;
+    //NSError *responseError;
     
     if (error) {
       completionHandler(nil, @"could not complete task");

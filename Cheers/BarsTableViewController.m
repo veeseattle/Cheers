@@ -86,7 +86,7 @@
     OrderingViewController *destinationVC = (OrderingViewController *)segue.destinationViewController;
     NSIndexPath *indexPath = self.barsTableView.indexPathForSelectedRow;
     NSDictionary *bar = self.availableBars[indexPath.row];
-   // destinationVC.barName = bar[@"Name"];
+    destinationVC.barName = @"Unicorn"; //replace with bar[@"Name"];
   }
 }
 
