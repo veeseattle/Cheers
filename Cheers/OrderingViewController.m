@@ -30,6 +30,7 @@
 @property (strong,nonatomic) NSString *applePayMerchantID;
 @property (strong,nonatomic) PKPaymentSummaryItem *subtotal;
 @property (strong,nonatomic) PKPaymentSummaryItem *total;
+//@property (strong,nonatomic) NSTimer *refreshTimer;
 
 @end
 
@@ -68,7 +69,7 @@
     
     self.drinksArray = results;
     self.drinkValue = results.firstObject;
-    self.drinksPicker.reloadAllComponents;
+    [self.drinksPicker reloadAllComponents];
     [self.drinksPicker setUserInteractionEnabled:true];
     if (error) {
       //show alert view
@@ -120,6 +121,13 @@
   Order *order = [[Order alloc] init];
   order.drink = self.drinkValue;
   NSString *drinkID = order.drink.drinkID;
+  
+//  if (self.refreshTimer) {
+//    [self.refreshTimer invalidate];
+//  }
+//  
+//  self.refreshTimer = [NSTimer scheduledTimerWithTimeInterval:interval target:self selector:@selector(refreshStopsInRegion) userInfo:nil repeats:NO];
+  
   
   [[NetworkController sharedService] postDrinkOrder:drinkID];
   

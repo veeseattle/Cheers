@@ -25,6 +25,8 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
   
+  //NSTimer *time = [NSTimer scheduledTimerWithTimeInterval:15.0 target:self selector:@selector(refreshButton:) userInfo:nil repeats:NO];
+  
   self.barPicture.image = [UIImage imageNamed:@"drink.jpg"];
 
   self.orderTable.rowHeight = 95;
@@ -44,6 +46,8 @@
 //MARK: Order Table Setup
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
   
+  //add an if statement
+  
   DrinkOrderCell *cell = [tableView dequeueReusableCellWithIdentifier:@"ORDER_CELL" forIndexPath:indexPath];
   Order *order = self.pendingOrders[indexPath.row];
   //NSLog(@"The order in progress status is %@",order.orderInProgress);
@@ -59,7 +63,7 @@
   cell.customerPicture.layer.masksToBounds = true;
   
   BOOL beingMade = [order.orderInProgress boolValue];
-  cell.beingMadeStatus.hidden = !(beingMade == YES);
+  cell.beingMadeStatus.hidden = !beingMade;
   
     // Remove inset of iOS 7 separators.
     if ([cell respondsToSelector:@selector(setSeparatorInset:)]) {
@@ -76,6 +80,14 @@
   [cell setSwipeGestureWithView:makeDrink color:greenColor mode:MCSwipeTableViewCellModeExit state:MCSwipeTableViewCellState1 completionBlock:^(MCSwipeTableViewCell *cell, MCSwipeTableViewCellState state, MCSwipeTableViewCellMode mode) {
     
     //submit network call to mark order as in progress
+    order.orderInProgress = @1;
+//    NSIndexPath *indexPath = [self.orderTable indexPathForCell:cell];
+//    Order *orderToChange = self.pendingOrders[indexPath.row];
+//    [orderToChange setOrderInProgress:@1];
+    //DrinkOrderCell *myCell = [[DrinkOrderCell alloc] init];
+    //myCell.beingMadeStatus.hidden  = FALSE;
+    
+    [cell swipeToOriginWithCompletion:nil];
     
       }];
   
@@ -105,43 +117,17 @@
   return self.pendingOrders.count;
 }
 
-//-(void)tableView:(UITableView *)orderTable commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
-//
-//  if (editingStyle == UITableViewCellEditingStyleDelete) {
-//    Order *deletedOrder = self.pendingOrders[indexPath.row];
-//    NSString *deletedID = deletedOrder.orderID;
-//    
-//    [[NetworkController sharedService] putDrinkCompletion:deletedID completionHandler:^(NSString *results, NSString *error) {
-//      NSLog(@"done!");
-//    }];
-//     
-//     [self.pendingOrders removeObjectAtIndex:(indexPath.row)];
-//     
-//    self.orderTable.reloadData;
-//  }
-//}
-
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
 
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
-
 - (IBAction)refreshButton:(id)sender {
-  //self.pendingOrders = nil;
-  [[NetworkController sharedService] fetchOrdersForBar:@"Unicorn - Capitol Hill" completionHandler:^(NSMutableArray *results, NSString *error) {
-    self.pendingOrders = results;
+//  //self.pendingOrders = nil;
+//  [[NetworkController sharedService] fetchOrdersForBar:@"Unicorn - Capitol Hill" completionHandler:^(NSMutableArray *results, NSString *error) {
+//    self.pendingOrders = results;
   [self.orderTable reloadData];
-  }];
+// }];
 }
 
 @end
