@@ -95,11 +95,11 @@
 }
 
 //MARK: FetchAvailableDrinks -- will return id, name, recipe, and picture
--(void)fetchDrinksForBar:(NSString *)searchTerm completionHandler:(void (^)(NSMutableArray *results, NSString *error))completionHandler {
+-(void)fetchDrinksForBar:(NSString *)searchTerm completionHandler:(void (^)(NSArray *results, NSString *error))completionHandler {
   
   [self getMyToken];
   NSString *token = self.token;
-  NSLog(token);
+  //NSLog(token);
   NSString *urlString = @"https://cheers-bartender-app.herokuapp.com/api/v1/cheers/drink";
  
   //NSLog(self.token);
@@ -267,8 +267,49 @@
   NSString *baseURL = @"https://cheers-bartender-app.herokuapp.com/api/v1/cheers/drinkorder/completed/";
   NSString *urlString = [baseURL stringByAppendingString:orderID];
   NSURL *url = [NSURL URLWithString:urlString];
+  NSMutableURLRequest *request = [[NSMutableURLRequest alloc] initWithURL:url];
+  request.HTTPMethod = @"PUT";
+  [request setValue:token forHTTPHeaderField:@"eat"];
   
-  //NSLog(self.token);
+  NSError *error;
+  NSDictionary *dictionary = @{@"OrderID":orderID};
+  NSData *data = [NSJSONSerialization dataWithJSONObject:dictionary options:0 error:&error];
+  //NSDictionary *body = [NSJSONSerialization JSONObjectWithData:data options:0 error:nil];
+  
+  request.HTTPBody = data;
+  
+  NSURLSession *session = [NSURLSession sharedSession];
+  NSURLSessionTask *dataTask = [session dataTaskWithRequest:request completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
+    
+    //NSLog(@"%@",response);
+    
+    //NSError *responseError;
+    
+    if (error) {
+      completionHandler(nil, @"could not complete task");
+    } else {
+      NSHTTPURLResponse *httpResponse = (NSHTTPURLResponse *)response;
+      NSInteger statusCode = httpResponse.statusCode;
+      NSLog(@"statusCode %ld", (long)statusCode);
+      
+    }
+    dispatch_async(dispatch_get_main_queue(), ^{
+      
+      
+    });
+  }];
+  [dataTask resume];
+}
+
+//MARK: MakeDrinkOrder
+-(void)putDrinkOrderToInProgress:(NSString *)drinkOrderID completionHandler:(void (^)(NSString *results, NSString *error))completionHandler {
+  
+[self getMyToken];
+  NSString *token = self.token;
+  NSString *orderID = drinkOrderID;
+  NSString *baseURL = @"https://cheers-bartender-app.herokuapp.com/api/v1/cheers/drinkorder/";
+  NSString *urlString = [baseURL stringByAppendingString:orderID];
+  NSURL *url = [NSURL URLWithString:urlString];
   NSMutableURLRequest *request = [[NSMutableURLRequest alloc] initWithURL:url];
   request.HTTPMethod = @"PUT";
   
@@ -303,7 +344,6 @@
   }];
   [dataTask resume];
 }
-
 
 
 /*

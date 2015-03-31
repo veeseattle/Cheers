@@ -360,10 +360,10 @@
                                 <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="VxO-4B-bAJ">
-                                        <rect key="frame" x="0.0" y="0.0" width="600" height="836"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="600" height="720"/>
                                         <subviews>
                                             <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="registrationPage" translatesAutoresizingMaskIntoConstraints="NO" id="L1s-Kh-2V3">
-                                                <rect key="frame" x="-16" y="0.0" width="632" height="836"/>
+                                                <rect key="frame" x="-16" y="0.0" width="632" height="720"/>
                                             </imageView>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="oec-uj-tyy">
                                                 <rect key="frame" x="20" y="30" width="560" height="500"/>
@@ -412,7 +412,7 @@
                                                         <rect key="frame" x="256" y="435" width="48" height="33"/>
                                                         <fontDescription key="fontDescription" name="Avenir-Roman" family="Avenir" pointSize="15"/>
                                                         <state key="normal" title="Submit">
-                                                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                                            <color key="titleShadowColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                                                         </state>
                                                         <connections>
                                                             <action selector="signUpButton:" destination="nu6-gh-Wme" eventType="touchUpInside" id="ni1-ol-eWU"/>
@@ -421,11 +421,11 @@
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="By clicking below, I confirm that I am at least 21 years old" textAlignment="center" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="twl-Ln-U6m">
                                                         <rect key="frame" x="25" y="399" width="510" height="21"/>
                                                         <fontDescription key="fontDescription" name="Avenir-Roman" family="Avenir" pointSize="15"/>
-                                                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                        <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                                                         <nil key="highlightedColor"/>
                                                     </label>
                                                 </subviews>
-                                                <color key="backgroundColor" white="1" alpha="0.5" colorSpace="calibratedWhite"/>
+                                                <color key="backgroundColor" white="0.25" alpha="0.5" colorSpace="custom" customColorSpace="calibratedWhite"/>
                                                 <constraints>
                                                     <constraint firstItem="xpk-sX-sjL" firstAttribute="top" secondItem="QF2-iL-8pW" secondAttribute="bottom" constant="16" id="0Q9-Qa-tZv"/>
                                                     <constraint firstItem="VCs-ZP-FeL" firstAttribute="top" secondItem="twl-Ln-U6m" secondAttribute="bottom" constant="15" id="0Xh-DF-elc"/>
@@ -606,7 +606,7 @@
     <resources>
         <image name="ApplePay" width="280" height="64"/>
         <image name="refresh.png" width="256" height="256"/>
-        <image name="registrationPage" width="1254" height="836"/>
+        <image name="registrationPage" width="1082" height="720"/>
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="iog-Ec-V8G"/>

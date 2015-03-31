@@ -23,12 +23,12 @@
 @implementation BartenderViewController
 
 - (void)viewDidLoad {
-    [super viewDidLoad];
+  [super viewDidLoad];
   
   //NSTimer *time = [NSTimer scheduledTimerWithTimeInterval:15.0 target:self selector:@selector(refreshButton:) userInfo:nil repeats:NO];
   
   self.barPicture.image = [UIImage imageNamed:@"drink.jpg"];
-
+  
   self.orderTable.rowHeight = 95;
   self.orderTable.dataSource = self;
   self.orderTable.delegate = self;
@@ -51,7 +51,7 @@
   DrinkOrderCell *cell = [tableView dequeueReusableCellWithIdentifier:@"ORDER_CELL" forIndexPath:indexPath];
   Order *order = self.pendingOrders[indexPath.row];
   //NSLog(@"The order in progress status is %@",order.orderInProgress);
-
+  
   cell.drinkName.text = order.drinkName;
   cell.customerName.text = order.customer;
   [[NetworkController sharedService] fetchDrinkPicture:order.customerPicture completionHandler:^(UIImage *image) {
@@ -65,10 +65,10 @@
   BOOL beingMade = [order.orderInProgress boolValue];
   cell.beingMadeStatus.hidden = !beingMade;
   
-    // Remove inset of iOS 7 separators.
-    if ([cell respondsToSelector:@selector(setSeparatorInset:)]) {
-      cell.separatorInset = UIEdgeInsetsZero;
-    }
+  // Remove inset of iOS 7 separators.
+  if ([cell respondsToSelector:@selector(setSeparatorInset:)]) {
+    cell.separatorInset = UIEdgeInsetsZero;
+  }
   
   
   UILabel *makeDrink = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 150, 44)];
@@ -79,17 +79,20 @@
   
   [cell setSwipeGestureWithView:makeDrink color:greenColor mode:MCSwipeTableViewCellModeExit state:MCSwipeTableViewCellState1 completionBlock:^(MCSwipeTableViewCell *cell, MCSwipeTableViewCellState state, MCSwipeTableViewCellMode mode) {
     
-    //submit network call to mark order as in progress
-    order.orderInProgress = @1;
-//    NSIndexPath *indexPath = [self.orderTable indexPathForCell:cell];
-//    Order *orderToChange = self.pendingOrders[indexPath.row];
-//    [orderToChange setOrderInProgress:@1];
+    //order.orderInProgress = @1;
+    NSIndexPath *indexPath = [self.orderTable indexPathForCell:cell];
+    Order *orderToChange = self.pendingOrders[indexPath.row];
+    NSString *orderID = orderToChange.orderID;
+    //    [orderToChange setOrderInProgress:@1];
     //DrinkOrderCell *myCell = [[DrinkOrderCell alloc] init];
     //myCell.beingMadeStatus.hidden  = FALSE;
+    [[NetworkController sharedService] putDrinkOrderToInProgress:orderID completionHandler:^(NSString *results, NSString *error) {
+      order.orderInProgress = @1;
+    }];
     
     [cell swipeToOriginWithCompletion:nil];
     
-      }];
+  }];
   
   UILabel *completeOrder = [[UILabel alloc] initWithFrame:CGRectMake(35, 0, 150, 44)];
   completeOrder.text = NSLocalizedString(@"Complete Order",@"");
@@ -118,16 +121,16 @@
 }
 
 - (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
+  [super didReceiveMemoryWarning];
+  // Dispose of any resources that can be recreated.
 }
 
 - (IBAction)refreshButton:(id)sender {
-//  //self.pendingOrders = nil;
-//  [[NetworkController sharedService] fetchOrdersForBar:@"Unicorn - Capitol Hill" completionHandler:^(NSMutableArray *results, NSString *error) {
-//    self.pendingOrders = results;
-  [self.orderTable reloadData];
-// }];
+  self.pendingOrders = nil;
+  [[NetworkController sharedService] fetchOrdersForBar:@"Unicorn - Capitol Hill" completionHandler:^(NSMutableArray *results, NSString *error) {
+    self.pendingOrders = results;
+    [self.orderTable reloadData];
+  }];
 }
 
 @end

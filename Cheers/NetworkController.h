@@ -28,6 +28,8 @@
 
 -(void)putDrinkCompletion:(NSString *)deletedID completionHandler:(void (^)(NSString *results, NSString *error))completionHandler;
 
+-(void)putDrinkOrderToInProgress:(NSString *)drinkOrderID completionHandler:(void (^)(NSString *results, NSString *error))completionHandler;
+
 
 
 @end
