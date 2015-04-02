@@ -153,8 +153,9 @@
   request.paymentSummaryItems = [NSArray arrayWithObjects:self.subtotal, self.total, nil];
   
   if ([Stripe canSubmitPaymentRequest:request]) {
+
     
-    STPTestPaymentAuthorizationViewController *paymentController = [[STPTestPaymentAuthorizationViewController alloc]
+    PKPaymentAuthorizationViewController *paymentController = [[PKPaymentAuthorizationViewController alloc]
                                                                     initWithPaymentRequest:request];
     paymentController.delegate = self;
     
