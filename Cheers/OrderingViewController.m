@@ -216,7 +216,6 @@
   //request body is the stripe token
   request.HTTPMethod = @"POST";
   NSString *body     = [NSString stringWithFormat:@"stripeToken=%@", token.tokenId];
-  NSLog(body);
   request.HTTPBody   = [body dataUsingEncoding:NSUTF8StringEncoding allowLossyConversion:YES];
   NSString *postLength = [NSString stringWithFormat:@"%lu", (unsigned long)[body length]];
   
@@ -231,8 +230,10 @@
                                              NSError *error) {
                            if (error) {
                              completion(PKPaymentAuthorizationStatusFailure);
+                             NSLog(@"oopsie, that failed!");
                            } else {
                              completion(PKPaymentAuthorizationStatusSuccess);
+                             NSLog(@"ok, that worked!");
                            }
                          }];
 }
