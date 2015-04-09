@@ -73,6 +73,7 @@
     [self.drinksPicker setUserInteractionEnabled:true];
     if (error) {
       //show alert view
+        [[[UIAlertView alloc] initWithTitle:@"Unable to Connect" message:@"There was a connection error. Please try again later." delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil] show];
     }}];
   
   self.drinksPicker.delegate = self;
@@ -108,12 +109,6 @@
     self.drinkPicture.image = image;
   }];
 }
-
-- (void)didReceiveMemoryWarning {
-  [super didReceiveMemoryWarning];
-  // Dispose of any resources that can be recreated.
-}
-
 
 
 //MARK: Drink button
@@ -189,6 +184,7 @@
   [controller dismissViewControllerAnimated:true completion:nil];
 };
 
+//this creates the stripe token
 - (void)handlePaymentAuthorizationWithPayment:(PKPayment *)payment
                                    completion:(void (^)(PKPaymentAuthorizationStatus))completion {
   [[STPAPIClient sharedClient] createTokenWithPayment:payment
@@ -209,12 +205,25 @@
 
 - (void)createBackendChargeWithToken:(STPToken *)token
                           completion:(void (^)(PKPaymentAuthorizationStatus))completion {
-  NSURL *url = [NSURL URLWithString:@"https://example.com/token"];
+  NSURL *url = [NSURL URLWithString:@"https://cheers-bartender-app.herokuapp.com/api/v1/cheers/drinkorder"];
   NSMutableURLRequest *request = [[NSMutableURLRequest alloc] initWithURL:url];
+  
+  //get our javascript server's token, put it in header
+  NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
+  NSString *ourServersToken = [userDefaults objectForKey:@"token"];
+  [request setValue:ourServersToken forHTTPHeaderField:@"eat"];
+  
+  //request body is the stripe token
   request.HTTPMethod = @"POST";
   NSString *body     = [NSString stringWithFormat:@"stripeToken=%@", token.tokenId];
-  request.HTTPBody   = [body dataUsingEncoding:NSUTF8StringEncoding];
+  NSLog(body);
+  request.HTTPBody   = [body dataUsingEncoding:NSUTF8StringEncoding allowLossyConversion:YES];
+  NSString *postLength = [NSString stringWithFormat:@"%lu", (unsigned long)[body length]];
   
+  //javascript post requirement
+  [request setValue:postLength forHTTPHeaderField:@"Content-Length"];
+  [request setValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
+
   [NSURLConnection sendAsynchronousRequest:request
                                      queue:[NSOperationQueue mainQueue]
                          completionHandler:^(NSURLResponse *response,
