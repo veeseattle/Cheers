@@ -7,8 +7,9 @@
 //
 
 #import "SignUpVC.h"
+#import "ImagePickerObject.h"
 
-@interface SignUpVC() <UITextFieldDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate, UIScrollViewDelegate>
+@interface SignUpVC() <UITextFieldDelegate, ImagePickerDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate, UIScrollViewDelegate>
 @property (weak, nonatomic) IBOutlet UIImageView *userPicture;
 @property (weak, nonatomic) IBOutlet UITextField *nameField;
 @property (weak, nonatomic) IBOutlet UITextField *emailField;
@@ -17,6 +18,10 @@
 @property (strong,nonatomic) NSString *imageString;
 @property (weak, nonatomic) IBOutlet UITextField *promoCode;
 @property (weak, nonatomic) IBOutlet UIView *square;
+@property (strong,nonatomic) ImagePickerObject *imagePicker;
+@property (nonatomic, assign) CGRect rect;
+@property (nonatomic, strong) UIView *viewWindow;
+@property (nonatomic, strong) UIViewController *viewController;
 
 - (IBAction)signUpButton:(id)sender;
 
@@ -77,38 +82,40 @@
 
 //Camera Button Pressed
 -(void)cameraButtonPressed {
-  UIImagePickerController *picturePicker = [[UIImagePickerController alloc] init];
-  picturePicker.delegate = self;
-  picturePicker.allowsEditing = true;
-  picturePicker.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
-
-  [self.navigationController presentViewController:picturePicker animated:true completion:nil];
-  
+  ImagePickerObject *imagePicker = [[ImagePickerObject alloc] init];
+  self.imagePicker = imagePicker;
+  imagePicker.delegate = self;
+  if ((UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad)) {
+    UIView *view = self.viewWindow;
+    [imagePicker presentFromRect:[view convertRect:self.view.bounds fromView:self.view] inView:self.viewWindow];
+  } else {
+    [imagePicker presentWithViewController:self];
+  }
 }
 
 
-//MARK: Image Picker Controller Delegate methods
-- (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info {
-  
-  UIImage *chosenImage = info[UIImagePickerControllerEditedImage];
-  self.userPicture.image = chosenImage;
-  
-  //Save selected image locally
-  NSString *documentsDirectory = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) lastObject];
-  
-  NSString *filePath = [documentsDirectory stringByAppendingPathComponent:@"MyPicture.jpg"];
-  
-  NSData *imageData = UIImageJPEGRepresentation(chosenImage, 0.85);
-  [imageData writeToFile:filePath atomically:YES];
-  
-  [picker dismissViewControllerAnimated:YES completion:NULL];
-  
-}
-
-- (void)imagePickerControllerDidCancel:(UIImagePickerController *)picker {
-  [picker dismissViewControllerAnimated:YES completion:NULL];
-  
-}
+////MARK: Image Picker Controller Delegate methods
+//- (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info {
+//  
+//  UIImage *chosenImage = info[UIImagePickerControllerEditedImage];
+//  self.userPicture.image = chosenImage;
+//  
+//  //Save selected image locally
+//  NSString *documentsDirectory = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) lastObject];
+//  
+//  NSString *filePath = [documentsDirectory stringByAppendingPathComponent:@"MyPicture.jpg"];
+//  
+//  NSData *imageData = UIImageJPEGRepresentation(chosenImage, 0.85);
+//  [imageData writeToFile:filePath atomically:YES];
+//  
+//  [picker dismissViewControllerAnimated:YES completion:NULL];
+//  
+//}
+//
+//- (void)imagePickerControllerDidCancel:(UIImagePickerController *)picker {
+//  [picker dismissViewControllerAnimated:YES completion:NULL];
+//  
+//}
 
 //MARK: AdjustImage - make image smaller
 -(UIImage *) adjustImage:(UIImage *)image toSmallerSize:(CGSize)newSize {
@@ -157,5 +164,31 @@
     
   }
 }
+
+#pragma mark - ImagePickerObjectDelegate
+
+- (void)imagePicker:(ImagePickerObject *)imagePicker didSelectImage:(UIImage *)image
+{
+  
+  UIImage *chosenImage = image;
+  self.userPicture.image = chosenImage;
+  
+  //Save selected image locally
+  NSString *documentsDirectory = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) lastObject];
+  
+  NSString *filePath = [documentsDirectory stringByAppendingPathComponent:@"MyPicture.jpg"];
+  
+  NSData *imageData = UIImageJPEGRepresentation(chosenImage, 0.85);
+  [imageData writeToFile:filePath atomically:YES];
+  
+  self.imagePicker = nil;
+}
+
+
+- (void)imagePickerDidCancel:(ImagePickerObject *)imagePicker
+{
+  self.imagePicker = nil;
+}
+
 
 @end

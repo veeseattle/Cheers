@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		4E07CFFC1AD662EB00FDEF99 /* ImagePickerObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 4E07CFFB1AD662EB00FDEF99 /* ImagePickerObject.m */; };
 		4E133DAB1AC2064F002E1C3F /* MCSwipeTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 4E133DAA1AC2064F002E1C3F /* MCSwipeTableViewCell.m */; };
 		4E133DAD1AC25F52002E1C3F /* refresh.png in Resources */ = {isa = PBXBuildFile; fileRef = 4E133DAC1AC25F51002E1C3F /* refresh.png */; };
 		4E29A6171ABB72EC000BD947 /* FeedbackVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 4E29A6161ABB72EC000BD947 /* FeedbackVC.m */; };
@@ -62,6 +63,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		4E07CFFA1AD662EB00FDEF99 /* ImagePickerObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ImagePickerObject.h; sourceTree = "<group>"; };
+		4E07CFFB1AD662EB00FDEF99 /* ImagePickerObject.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ImagePickerObject.m; sourceTree = "<group>"; };
 		4E133DA91AC2064F002E1C3F /* MCSwipeTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MCSwipeTableViewCell.h; sourceTree = "<group>"; };
 		4E133DAA1AC2064F002E1C3F /* MCSwipeTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MCSwipeTableViewCell.m; sourceTree = "<group>"; };
 		4E133DAC1AC25F51002E1C3F /* refresh.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = refresh.png; sourceTree = "<group>"; };
@@ -255,6 +258,8 @@
 				4E7508AD1A9BB9120008D3C3 /* Order.m */,
 				4EBD33D61A9E40BE001A435F /* BarCell.h */,
 				4EBD33D71A9E40BE001A435F /* BarCell.m */,
+				4E07CFFA1AD662EB00FDEF99 /* ImagePickerObject.h */,
+				4E07CFFB1AD662EB00FDEF99 /* ImagePickerObject.m */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -468,6 +473,7 @@
 				4E7508A81A9BB6EF0008D3C3 /* Drink.m in Sources */,
 				4E7508B71A9D13050008D3C3 /* NetworkController.m in Sources */,
 				4E75087D1A9BB4900008D3C3 /* Cheers.xcdatamodeld in Sources */,
+				4E07CFFC1AD662EB00FDEF99 /* ImagePickerObject.m in Sources */,
 				4E7508A21A9BB4D90008D3C3 /* Bar.m in Sources */,
 				4E133DAB1AC2064F002E1C3F /* MCSwipeTableViewCell.m in Sources */,
 				4E7508B11A9BD1BA0008D3C3 /* OrderingViewController.m in Sources */,
