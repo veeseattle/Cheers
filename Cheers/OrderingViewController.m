@@ -63,7 +63,7 @@
   
   [self.drinksPicker setUserInteractionEnabled:false];
   
-  [[NetworkController sharedService] fetchDrinksForBar:@"Stout - Capitol Hill" completionHandler:^(NSArray *results, NSString *error) {
+  [[NetworkController sharedService] fetchDrinksForBar:self.bar.barID completionHandler:^(NSArray *results, NSString *error) {
     
     self.drinksArray = results;
     self.drinkValue = results.firstObject;

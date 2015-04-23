@@ -339,6 +339,7 @@
                     <tabBarItem key="tabBarItem" title="Item" id="ST1-Ga-FS0"/>
                     <navigationItem key="navigationItem" id="tmV-XT-bK7"/>
                     <connections>
+                        <outlet property="barName" destination="Gxx-82-wHF" id="Fxk-R2-SKk"/>
                         <outlet property="barPicture" destination="jMt-pm-Gga" id="L52-of-NBi"/>
                         <outlet property="orderTable" destination="ODq-kN-u4h" id="nfO-FX-uFY"/>
                     </connections>

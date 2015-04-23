@@ -42,19 +42,15 @@
   if (token == nil) {
     [self gotoCustomerSignup];
   }
-
-  
 }
 
 
-#pragma mark - Table view data source
+#pragma mark - tableView dataSource
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-  // Return the number of sections.
   return 1;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-  // Return the number of rows in the section.
   return self.availableBars.count;
 }
 
@@ -74,20 +70,19 @@
 }
 
 
-//MARK: SEGUE
+#pragma mark - Segue on didSelectRow
 -(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
   if ([segue.identifier isEqualToString:@"ORDER_DRINKS"]) {
     OrderingViewController *destinationVC = (OrderingViewController *)segue.destinationViewController;
     NSIndexPath *indexPath = self.barsTableView.indexPathForSelectedRow;
-    //NSDictionary *bar = self.availableBars[indexPath.row];
-    destinationVC.barName = @"Unicorn"; //replace with bar[@"Name"];
+    Bar *bar = self.availableBars[indexPath.row];
+    destinationVC.bar = bar;
   }
 }
 
 
-//Go to User Profile
+#pragma mark - goToCustomerSignUp
 -(void)gotoCustomerSignup {
-  //UINavigationController *vcUserProfiles = [self.storyboard instantiateViewControllerWithIdentifier:(@"CustomerSignup")];
   SignUpVC *vcUserProfile = [self.storyboard instantiateViewControllerWithIdentifier:(@"CustomerSignup")];
 
   [self presentViewController:(vcUserProfile) animated:true completion:nil];

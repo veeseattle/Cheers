@@ -17,6 +17,7 @@
 @property (weak, nonatomic) IBOutlet UITableView *orderTable;
 @property (strong, nonatomic) NSMutableArray *pendingOrders;
 - (IBAction)refreshButton:(id)sender;
+@property (weak, nonatomic) IBOutlet UILabel *barName;
 
 @end
 
@@ -38,6 +39,7 @@
   [[NetworkController sharedService] fetchOrdersForBar:@"Unicorn - Capitol Hill" completionHandler:^(NSMutableArray *results, NSString *error) {
     self.pendingOrders = results;
     [self.orderTable reloadData];
+    
   }];
   
   // Do any additional setup after loading the view.

@@ -159,7 +159,8 @@
 //MARK: FetchAvailableDrinks -- will return id, name, recipe, and picture
 -(void)fetchDrinksForBar:(NSString *)searchTerm completionHandler:(void (^)(NSArray *results, NSString *error))completionHandler {
   
-  NSString *urlString = @"https://cheers-bartender-app.herokuapp.com/api/v1/cheers/bars/55385a31554fa50300b89008/drinks";
+  NSString *urlString = [NSString stringWithFormat:@"https://cheers-bartender-app.herokuapp.com/api/v1/cheers/bars/%@/drinks",searchTerm];
+  NSLog(@"%@",urlString);
   
   [self setUpGETNetworkCall:urlString completionHandler:^(NSMutableURLRequest *request) {
     

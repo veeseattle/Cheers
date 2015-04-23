@@ -264,9 +264,9 @@
 		4E75089E1A9BB4A20008D3C3 /* View */ = {
 			isa = PBXGroup;
 			children = (
-				4E7508BD1A9D3C780008D3C3 /* DrinkOrderCell.xib */,
 				4E7508861A9BB4900008D3C3 /* LaunchScreen.xib */,
 				4E7508811A9BB4900008D3C3 /* Main.storyboard */,
+				4E7508BD1A9D3C780008D3C3 /* DrinkOrderCell.xib */,
 				4EBD33D41A9E3FAE001A435F /* BarCell.xib */,
 			);
 			name = View;
