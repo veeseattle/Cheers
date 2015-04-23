@@ -11,10 +11,10 @@
 
 @interface Bar : NSObject
 
-+(Bar *)barInfoFromJSON:(NSData *)jsonData;
++(NSMutableArray *)barInfoFromJSON:(NSData *)jsonData;
 
 @property (strong,nonatomic) NSString *barName;
-@property (strong,nonatomic) NSString *location;
+@property (strong,nonatomic) NSString *barID;
 //@property (strong,nonatomic) UIImage *image;
 
 

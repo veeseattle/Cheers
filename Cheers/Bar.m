@@ -11,23 +11,27 @@
 @implementation Bar
 
 
-+(Bar *)barInfoFromJSON:(NSData *)jsonData {
++(NSMutableArray *)barInfoFromJSON:(NSData *)jsonData {
   
   NSError *error;
-  NSDictionary *jsonDictionary = [NSJSONSerialization JSONObjectWithData:jsonData options:0 error:&error];
+  NSArray *jsonArray = [NSJSONSerialization JSONObjectWithData:jsonData options:0 error:&error];
+  
   if (error) {
     NSLog(@"%@",error.localizedDescription);
     return nil;
   }
+ 
+  NSMutableArray *temp = [[NSMutableArray alloc] init];
   
-  //to change according to the JSON
-  NSArray *items = [jsonDictionary objectForKey:@"items"];
-  NSDictionary *myInfo = items.firstObject;
+  for (NSDictionary *item in jsonArray) {
   
   Bar *bar = [[Bar alloc] init];
-  bar.barName = myInfo[@"display_name"];
-
-  return bar;
+  bar.barName = item[@"barName"];
+  bar.barID = item[@"_id"];
+    
+  }
+  
+  return temp;
 }
 
 

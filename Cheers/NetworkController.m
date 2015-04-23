@@ -9,24 +9,41 @@
 #import "NetworkController.h"
 #import "Drink.h"
 #import "Order.h"
+#import "Bar.h"
 
 @interface NetworkController ()
 @property (strong,nonatomic) NSString *token;
+@property (strong,nonatomic) NSString *baseURL;
 @end
 
 @implementation NetworkController
 
 - (void)viewDidLoad {
-    [super viewDidLoad];
-
-
-    // Do any additional setup after loading the view.
+  [super viewDidLoad];
+  self.baseURL = @"https://cheers-bartender-app.herokuapp.com/api/v1/cheers/";
+  
+  
 }
 
 -(void)getMyToken {
   NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
   NSString *token = [userDefaults objectForKey:@"token"];
   self.token = token;
+}
+
+- (void) setUpGETNetworkCall: (NSString *)urlPath completionHandler:(void (^)(NSMutableURLRequest *request))completionHandler {
+  
+  [self getMyToken];
+  NSString *token = self.token;
+  
+  NSString *urlString = urlPath;
+  NSURL *url = [NSURL URLWithString:urlString];
+  NSMutableURLRequest *request = [[NSMutableURLRequest alloc] initWithURL:url];
+  request.HTTPMethod = @"GET";
+  [request setValue:token forHTTPHeaderField:@"eat"];
+  
+  completionHandler(request);
+  
 }
 
 
@@ -40,12 +57,12 @@
   return mySharedService;
 }
 
-//MARK: CreateNewUser - create user & save token to NSUserDefault
--(void)postCustomerID:(NSDictionary *)User completionHandler:(void (^)(NSString *results, NSString *error))completionHandler {
-  //Heroku URL
+
+#pragma mark - createNewUser and save token to NSUserDefault
+-(void)createNewUser:(NSDictionary *)User completionHandler:(void (^)(NSString *results, NSString *error))completionHandler {
+  
   NSString *authURL = @"https://cheers-bartender-app.herokuapp.com/api/v1/create_user";
   NSURL *url = [NSURL URLWithString:authURL];
-  NSLog(@"%@", url);
   NSMutableURLRequest *request = [[NSMutableURLRequest alloc] initWithURL: url];
   
   NSDictionary *customer = User;
@@ -60,7 +77,7 @@
   
   NSError *error;
   NSData *data = [NSJSONSerialization dataWithJSONObject:customer options:0 error:&error];
- 
+  
   request.HTTPBody = data;
   request.HTTPMethod = @"POST";
   
@@ -68,10 +85,11 @@
   NSURLSessionTask *dataTask = [session dataTaskWithRequest:request completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
     
     NSError *responseError;
-  
+    
     NSDictionary *tokenResponse = [NSJSONSerialization JSONObjectWithData:data options:0 error:&responseError];
     NSString *token = tokenResponse[@"eat"];
-
+    NSLog(@"%@", token);
+    
     if (error) {
       completionHandler(nil, @"could not complete task");
     } else {
@@ -88,106 +106,137 @@
     }
     dispatch_async(dispatch_get_main_queue(), ^{
       
-    
+      
     });
   }];
   [dataTask resume];
 }
 
+
+#pragma mark - fetchAvailableBars
+- (void) fetchAvailableBars:(NSString *)city completionHandler:(void (^)(NSArray *results, NSString *error))completionHandler {
+  
+  NSString *urlString = @"https://cheers-bartender-app.herokuapp.com/api/v1/cheers/bars";
+  [self setUpGETNetworkCall:urlString completionHandler:^(NSMutableURLRequest *request) {
+  
+    NSURLSession *session = [NSURLSession sharedSession];
+    NSURLSessionTask *dataTask = [session dataTaskWithRequest:request completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
+      if (error) {
+        completionHandler(nil,@"Could not connect to get bars");
+      }
+      else {
+        NSHTTPURLResponse *httpResponse = (NSHTTPURLResponse *)response;
+        NSInteger statusCode = httpResponse.statusCode;
+        
+        switch (statusCode) {
+          case 200 ... 299: {
+            NSLog(@"%ld",(long)statusCode);
+            NSMutableArray *results = [Bar barInfoFromJSON:data];
+            
+            dispatch_async(dispatch_get_main_queue(), ^{
+              if (results) {
+                completionHandler(results,nil);
+              }
+              else {
+                
+                completionHandler(nil, @"Cannot get list of bars");
+              }
+            });
+            
+            break;
+            
+          }
+          default:
+            NSLog(@"%ld",(long)statusCode);
+            break;
+        }
+      }
+    }];
+  }];
+  
+}
+
 //MARK: FetchAvailableDrinks -- will return id, name, recipe, and picture
 -(void)fetchDrinksForBar:(NSString *)searchTerm completionHandler:(void (^)(NSArray *results, NSString *error))completionHandler {
   
-  [self getMyToken];
-  NSString *token = self.token;
-  //NSLog(token);
-  NSString *urlString = @"https://cheers-bartender-app.herokuapp.com/api/v1/cheers/drink";
- 
-  //NSLog(self.token);
-  NSURL *url = [NSURL URLWithString:urlString];
-  NSMutableURLRequest *request = [[NSMutableURLRequest alloc] initWithURL:url];
-  request.HTTPMethod = @"GET";
+  NSString *urlString = @"https://cheers-bartender-app.herokuapp.com/api/v1/cheers/bars/55385a31554fa50300b89008/drinks";
   
-  [request setValue:token forHTTPHeaderField:@"eat"];
-
-  NSURLSession *session = [NSURLSession sharedSession];
-  
-  NSURLSessionTask *dataTask = [session dataTaskWithRequest:request completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
-    if (error) {
-      completionHandler(nil,@"Could not connect");
-    } else {
-      NSLog(@"gets here");
-      NSHTTPURLResponse *httpResponse = (NSHTTPURLResponse *)response;
-      NSInteger statusCode = httpResponse.statusCode;
-      
-      switch (statusCode) {
-        case 200 ... 299: {
-          NSLog(@"%ld",(long)statusCode);
-          NSArray *results = [Drink drinkFromJSON:data];
-          
-          dispatch_async(dispatch_get_main_queue(), ^{
-            if (results) {
-              completionHandler(results,nil);
-            } else {
-              completionHandler(nil,@"Search could not be completed");
-            }
-          });
-          break;
+  [self setUpGETNetworkCall:urlString completionHandler:^(NSMutableURLRequest *request) {
+    
+    NSURLSession *session = [NSURLSession sharedSession];
+    
+    NSURLSessionTask *dataTask = [session dataTaskWithRequest:request completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
+      if (error) {
+        completionHandler(nil,@"Unable to connect");
+      } else {
+        NSHTTPURLResponse *httpResponse = (NSHTTPURLResponse *)response;
+        NSInteger statusCode = httpResponse.statusCode;
+        
+        switch (statusCode) {
+          case 200 ... 299: {
+            NSLog(@"%ld",(long)statusCode);
+            NSArray *results = [Drink drinkFromJSON:data];
+            
+            dispatch_async(dispatch_get_main_queue(), ^{
+              if (results) {
+                completionHandler(results,nil);
+              } else {
+                completionHandler(nil,@"Search could not be completed");
+              }
+            });
+            break;
+          }
+          default:
+            NSLog(@"%ld",(long)statusCode);
+            break;
         }
-        default:
-          NSLog(@"%ld",(long)statusCode);
-          break;
       }
-      }
+    }];
+    [dataTask resume];
   }];
-  [dataTask resume];
-  }
+}
 
 //MARK: FetchDrinkOrders
 -(void)fetchOrdersForBar:(NSString *)searchTerm completionHandler:(void (^)(NSMutableArray *results, NSString *error))completionHandler {
   
-  [self getMyToken];
-  
-  NSString *token = self.token;
   
   NSString *urlString = @"https://cheers-bartender-app.herokuapp.com/api/v1/cheers/drinkorder";
   
-  NSURL *url = [NSURL URLWithString:urlString];
-  NSMutableURLRequest *request = [[NSMutableURLRequest alloc] initWithURL:url];
-  request.HTTPMethod = @"GET";
-  
-  [request setValue:token forHTTPHeaderField:@"eat"];
-
-  NSURLSession *session = [NSURLSession sharedSession];
-  
-  NSURLSessionTask *dataTask = [session dataTaskWithRequest:request completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
-    if (error) {
-      completionHandler(nil,@"Could not connect");
-    } else {
-      NSHTTPURLResponse *httpResponse = (NSHTTPURLResponse *)response;
-      NSInteger statusCode = httpResponse.statusCode;
-      
-      switch (statusCode) {
-        case 200 ... 299: {
-          NSLog(@"%ld",(long)statusCode);
-          NSMutableArray *results = [Order orderFromJSON:data];
-          
-          dispatch_async(dispatch_get_main_queue(), ^{
-            if (results) {
-              completionHandler(results,nil);
-            } else {
-              completionHandler(nil,@"Search could not be completed");
-            }
-          });
-          break;
+  [self setUpGETNetworkCall:urlString completionHandler:^(NSMutableURLRequest *request) {
+    
+    
+    NSURLSession *session = [NSURLSession sharedSession];
+    
+    NSURLSessionTask *dataTask = [session dataTaskWithRequest:request completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
+      if (error) {
+        completionHandler(nil,@"Could not connect");
+      } else {
+        NSHTTPURLResponse *httpResponse = (NSHTTPURLResponse *)response;
+        NSInteger statusCode = httpResponse.statusCode;
+        
+        switch (statusCode) {
+          case 200 ... 299: {
+            NSLog(@"%ld",(long)statusCode);
+            NSMutableArray *results = [Order orderFromJSON:data];
+            
+            dispatch_async(dispatch_get_main_queue(), ^{
+              if (results) {
+                completionHandler(results,nil);
+              } else {
+                completionHandler(nil,@"Search could not be completed");
+              }
+            });
+            break;
+          }
+          default:
+            NSLog(@"%ld",(long)statusCode);
+            break;
         }
-        default:
-          NSLog(@"%ld",(long)statusCode);
-          break;
+        
       }
-      
-    }
+    }];
+    [dataTask resume];
   }];
-  [dataTask resume];
 }
 
 
@@ -202,7 +251,7 @@
     
     dispatch_async(dispatch_get_main_queue(), ^{
       completionHandler(image);
-  });
+    });
   });
 }
 
@@ -224,7 +273,7 @@
   NSError *error;
   NSDictionary *drinkOrder = @{@"drinkID" : drinkID};
   NSString *post = [NSString stringWithFormat:@"%@",drinkOrder];
-
+  
   NSData *data = [NSJSONSerialization dataWithJSONObject:drinkOrder options:0 error:&error];
   
   NSData *postData = [post dataUsingEncoding:NSUTF8StringEncoding allowLossyConversion:YES];
@@ -232,7 +281,7 @@
   
   [request setValue:postLength forHTTPHeaderField:@"Content-Length"];
   [request setValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
-
+  
   request.HTTPBody = data;
   
   NSURLSession *session = [NSURLSession sharedSession];
@@ -247,7 +296,7 @@
       switch (statusCode) {
         case 200 ... 299: {
           NSLog(@"%ld",(long)statusCode);
-        break;
+          break;
         }
         default:
           NSLog(@"%ld",(long)statusCode);
@@ -260,7 +309,7 @@
 
 //MARK: CompleteDrinkOrder
 -(void)putDrinkCompletion:(NSString *)deletedID completionHandler:(void (^)(NSString *results, NSString *error))completionHandler {
-
+  
   [self getMyToken];
   NSString *token = self.token;
   NSString *orderID = deletedID;
@@ -304,7 +353,7 @@
 //MARK: MakeDrinkOrder
 -(void)putDrinkOrderToInProgress:(NSString *)drinkOrderID completionHandler:(void (^)(NSString *results, NSString *error))completionHandler {
   
-[self getMyToken];
+  [self getMyToken];
   NSString *token = self.token;
   NSString *orderID = drinkOrderID;
   NSString *baseURL = @"https://cheers-bartender-app.herokuapp.com/api/v1/cheers/drinkorder/";
@@ -318,16 +367,12 @@
   NSError *error;
   NSDictionary *dictionary = @{@"OrderID":orderID};
   NSData *data = [NSJSONSerialization dataWithJSONObject:dictionary options:0 error:&error];
-  //NSDictionary *body = [NSJSONSerialization JSONObjectWithData:data options:0 error:nil];
   
   request.HTTPBody = data;
   
   NSURLSession *session = [NSURLSession sharedSession];
   NSURLSessionTask *dataTask = [session dataTaskWithRequest:request completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
     
-    //NSLog(@"%@",response);
-    
-    //NSError *responseError;
     
     if (error) {
       completionHandler(nil, @"could not complete task");
@@ -346,14 +391,5 @@
 }
 
 
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
 
 @end

@@ -10,6 +10,7 @@
 #import "ImagePickerObject.h"
 
 @interface SignUpVC() <UITextFieldDelegate, ImagePickerDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate, UIScrollViewDelegate>
+
 @property (weak, nonatomic) IBOutlet UIImageView *userPicture;
 @property (weak, nonatomic) IBOutlet UITextField *nameField;
 @property (weak, nonatomic) IBOutlet UITextField *emailField;
@@ -23,7 +24,8 @@
 @property (nonatomic, strong) UIView *viewWindow;
 @property (nonatomic, strong) UIViewController *viewController;
 
-- (IBAction)signUpButton:(id)sender;
+
+- (IBAction)signUpButtonClicked:(id)sender;
 
 
 @end
@@ -37,8 +39,6 @@
   
   self.square.layer.cornerRadius = 20;
   
-  //Set up text fields and get data to Customer object
-  
   self.nameField.delegate = self;
   self.nameField.text =  customer.name;
   self.emailField.delegate = self;
@@ -49,7 +49,6 @@
   self.promoCode.delegate = self;
   self.promoCode.text = customer.promoCode;
   
-  //Get user picture
   if (customer.image != nil) {
     self.userPicture.image = customer.image;
   }
@@ -75,10 +74,10 @@
   // Dispose of any resources that can be recreated.
 }
 
--(BOOL)textFieldShouldReturn:(UITextField *)textField {
-  textField.resignFirstResponder;
-  return true;
-}
+//-(BOOL)textFieldShouldReturn:(UITextField *)textField {
+//  textField.resignFirstResponder;
+//  return true;
+//}
 
 //Camera Button Pressed
 -(void)cameraButtonPressed {
@@ -93,34 +92,8 @@
   }
 }
 
-
-////MARK: Image Picker Controller Delegate methods
-//- (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info {
-//  
-//  UIImage *chosenImage = info[UIImagePickerControllerEditedImage];
-//  self.userPicture.image = chosenImage;
-//  
-//  //Save selected image locally
-//  NSString *documentsDirectory = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) lastObject];
-//  
-//  NSString *filePath = [documentsDirectory stringByAppendingPathComponent:@"MyPicture.jpg"];
-//  
-//  NSData *imageData = UIImageJPEGRepresentation(chosenImage, 0.85);
-//  [imageData writeToFile:filePath atomically:YES];
-//  
-//  [picker dismissViewControllerAnimated:YES completion:NULL];
-//  
-//}
-//
-//- (void)imagePickerControllerDidCancel:(UIImagePickerController *)picker {
-//  [picker dismissViewControllerAnimated:YES completion:NULL];
-//  
-//}
-
 //MARK: AdjustImage - make image smaller
 -(UIImage *) adjustImage:(UIImage *)image toSmallerSize:(CGSize)newSize {
-  
-  NSLog(@"Image made smaller");
   
   UIGraphicsBeginImageContext(newSize);
   [image drawInRect:CGRectMake(0, 0, newSize.width, newSize.height)];
@@ -139,8 +112,8 @@
 }
 
 
-//MARK: Submit button pressed
-- (IBAction)signUpButton:(id)sender {
+#pragma mark - signUpButtonClicked
+- (IBAction)signUpButtonClicked:(id)sender {
   
   //make sure email is not blank
   if ([self.emailField.text isEqualToString:@""]) {
@@ -153,12 +126,19 @@
     UIAlertView *passwordErrorAlert = [[UIAlertView alloc] initWithTitle:@"Password Error" message:@"Please check your password to make sure both fields match" delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
     [passwordErrorAlert show];
   }
+  
+  //check for no picture
+  if (self.imageString) {
+    UIAlertView *blankPictureAlert = [[UIAlertView alloc] initWithTitle:@"No Picture Found" message:@"Please upload an image to complete registration" delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
+    [blankPictureAlert show];
+  }
+  
   else {
     [self turnImageIntoJSON];
 
     NSDictionary *customer = @{@"username" : self.nameField.text, @"email" : self.emailField.text, @"password" : self.passwordField.text, @"userPic" : self.imageString, @"promoCode" : self.promoCode.text};
    
-    [[NetworkController sharedService] postCustomerID:customer completionHandler:^(NSString *results, NSString *error) {
+    [[NetworkController sharedService] createNewUser:customer completionHandler:^(NSString *results, NSString *error) {
       [self dismissViewControllerAnimated:true completion:nil];
     }];
     
@@ -166,7 +146,6 @@
 }
 
 #pragma mark - ImagePickerObjectDelegate
-
 - (void)imagePicker:(ImagePickerObject *)imagePicker didSelectImage:(UIImage *)image
 {
   
@@ -175,7 +154,7 @@
   
   //Save selected image locally
   NSString *documentsDirectory = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) lastObject];
-  
+
   NSString *filePath = [documentsDirectory stringByAppendingPathComponent:@"MyPicture.jpg"];
   
   NSData *imageData = UIImageJPEGRepresentation(chosenImage, 0.85);

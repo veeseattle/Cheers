@@ -16,7 +16,7 @@
 
 +(id)sharedService;
 
--(void)postCustomerID:(NSDictionary *)User completionHandler:(void (^)(NSString *results, NSString *error))completionHandler;
+-(void)createNewUser:(NSDictionary *)User completionHandler:(void (^)(NSString *results, NSString *error))completionHandler;
 
 -(void)fetchDrinksForBar:(NSString *)searchTerm completionHandler:(void (^)(NSArray *results, NSString *error))completionHandler;
 

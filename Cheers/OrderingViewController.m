@@ -30,7 +30,6 @@
 @property (strong,nonatomic) NSString *applePayMerchantID;
 @property (strong,nonatomic) PKPaymentSummaryItem *subtotal;
 @property (strong,nonatomic) PKPaymentSummaryItem *total;
-//@property (strong,nonatomic) NSTimer *refreshTimer;
 
 @end
 
@@ -39,16 +38,16 @@
 - (void)viewDidLoad {
   [super viewDidLoad];
   
+  self.navigationItem.title = @"Bars";
+  
+  //payment network setup
   self.paymentNetwork = [NSArray arrayWithObjects:PKPaymentNetworkAmex, PKPaymentNetworkMasterCard, PKPaymentNetworkVisa, nil];
   self.applePayMerchantID = @"merchant.cheers";
-  
-  self.navigationItem.title = @"Bars";
   
   //user profile picture
   NSString *documentsDirectory = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) lastObject];
   
   NSString *filePath = [documentsDirectory stringByAppendingPathComponent:@"MyPicture.jpg"];
-  
   
   UIImage *userPicture = [[UIImage alloc] initWithContentsOfFile:filePath];
   
@@ -64,7 +63,6 @@
   
   [self.drinksPicker setUserInteractionEnabled:false];
   
-  
   [[NetworkController sharedService] fetchDrinksForBar:@"Stout - Capitol Hill" completionHandler:^(NSArray *results, NSString *error) {
     
     self.drinksArray = results;
@@ -72,22 +70,20 @@
     [self.drinksPicker reloadAllComponents];
     [self.drinksPicker setUserInteractionEnabled:true];
     if (error) {
-      //show alert view
         [[[UIAlertView alloc] initWithTitle:@"Unable to Connect" message:@"There was a connection error. Please try again later." delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil] show];
     }}];
   
   self.drinksPicker.delegate = self;
   self.drinksPicker.dataSource = self;
-  // Do any additional setup after loading the view.
+  
 }
 
 
 
-//MARK: UIPickerView
+#pragma mark UIPickerView
 - (NSInteger)numberOfComponentsInPickerView:(UIPickerView *)pickerView {
   return 1;
 }
-
 
 - (NSInteger)pickerView:(UIPickerView *)pickerView numberOfRowsInComponent: (NSInteger)component {
   return self.drinksArray.count;
@@ -96,11 +92,9 @@
 -(NSString *)pickerView:(UIPickerView *)pickerView titleForRow:(NSInteger)row forComponent:(NSInteger)component {
   Drink *drink = self.drinksArray[row];
   return drink.drinkName;
-  
 }
 
 - (void)pickerView:(UIPickerView *)pickerView didSelectRow:(NSInteger)row inComponent:(NSInteger)component {
-  NSLog(@"%ld",(long)row);
   self.drinkValue = [self.drinksArray objectAtIndex:[self.drinksPicker selectedRowInComponent:component ]];
   Drink *drink = self.drinkValue;
   self.recipe.text = drink.drinkRecipe;
@@ -112,18 +106,10 @@
 
 
 //MARK: Drink button
-//Submit drink order/pay with Apple Pay button setup & action
 - (IBAction)drinkButton:(id)sender {
   Order *order = [[Order alloc] init];
   order.drink = self.drinkValue;
   NSString *drinkID = order.drink.drinkID;
-  
-//  if (self.refreshTimer) {
-//    [self.refreshTimer invalidate];
-//  }
-//  
-//  self.refreshTimer = [NSTimer scheduledTimerWithTimeInterval:interval target:self selector:@selector(refreshStopsInRegion) userInfo:nil repeats:NO];
-  
   
   [[NetworkController sharedService] postDrinkOrder:drinkID];
   

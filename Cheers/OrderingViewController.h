@@ -15,6 +15,5 @@
 @property (strong, nonatomic) Drink *drinkValue;
 @property (strong, nonatomic) NSString *barName;
 
-//@property (strong, nonatomic) NSString *modificationValue;
 
 @end

@@ -14,4 +14,8 @@
 @interface SignUpVC : UIViewController
 
 
+-(void)cameraButtonPressed;
+- (IBAction)signUpButtonClicked:(id)sender;
+
+
 @end
