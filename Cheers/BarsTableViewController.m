@@ -7,6 +7,7 @@
 //
 
 #import "BarsTableViewController.h"
+#import "NetworkController.h"
 
 @interface BarsTableViewController () <UITableViewDataSource, UITableViewDelegate>
 @property (strong, nonatomic) NSArray *availableBars;
@@ -26,7 +27,11 @@
   UINib *cellNib =[UINib nibWithNibName:@"BarCell" bundle:[NSBundle mainBundle]];
   [self.barsTableView registerNib:cellNib forCellReuseIdentifier:@"BAR_CELL"];
   
-  self.availableBars = [[NSArray alloc] initWithObjects: @{@"Location" : @"Capitol Hill", @"Name" : @"Unicorn"}, @{@"Location" : @"Ballard", @"Name" : @"Bel Mar"}, nil];
+  
+  [[NetworkController sharedService] fetchAvailableBars:@"Seattle" completionHandler:^(NSArray *results, NSString *error) {
+    self.availableBars = [[NSArray alloc] initWithArray:results];
+    [self.barsTableView reloadData];
+  }];
   
 }
 
@@ -41,17 +46,8 @@
   
 }
 
-- (void)didReceiveMemoryWarning {
-  [super didReceiveMemoryWarning];
-  // Dispose of any resources that can be recreated.
-}
 
-
--(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-  [self performSegueWithIdentifier:@"ORDER_DRINKS" sender:self];
-}
 #pragma mark - Table view data source
-
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
   // Return the number of sections.
   return 1;
@@ -66,12 +62,15 @@
   
   BarCell *cell = [tableView dequeueReusableCellWithIdentifier:@"BAR_CELL" forIndexPath:indexPath];
 
-  NSDictionary *bar = self.availableBars[indexPath.row];
-  cell.barName.text = bar[@"Name"];
-  cell.barLocation.text = bar[@"Location"];
-//  cell.barName.text = @"Unicorn";
-//  cell.barLocation.text = @"Capitol Hill";
+  Bar *bar = self.availableBars[indexPath.row];
+  cell.barName.text = bar.barName;
+  cell.barLocation.text = bar.barID;
   return cell;
+  
+}
+
+-(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+  [self performSegueWithIdentifier:@"ORDER_DRINKS" sender:self];
 }
 
 
@@ -80,7 +79,7 @@
   if ([segue.identifier isEqualToString:@"ORDER_DRINKS"]) {
     OrderingViewController *destinationVC = (OrderingViewController *)segue.destinationViewController;
     NSIndexPath *indexPath = self.barsTableView.indexPathForSelectedRow;
-    NSDictionary *bar = self.availableBars[indexPath.row];
+    //NSDictionary *bar = self.availableBars[indexPath.row];
     destinationVC.barName = @"Unicorn"; //replace with bar[@"Name"];
   }
 }

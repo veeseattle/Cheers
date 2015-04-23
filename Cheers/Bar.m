@@ -20,15 +20,15 @@
     NSLog(@"%@",error.localizedDescription);
     return nil;
   }
- 
+  
   NSMutableArray *temp = [[NSMutableArray alloc] init];
   
   for (NSDictionary *item in jsonArray) {
-  
-  Bar *bar = [[Bar alloc] init];
-  bar.barName = item[@"barName"];
-  bar.barID = item[@"_id"];
     
+    Bar *bar = [[Bar alloc] init];
+    bar.barName = item[@"name"];
+    bar.barID = item[@"_id"];
+    [temp addObject:bar];
   }
   
   return temp;

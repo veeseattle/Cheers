@@ -22,6 +22,8 @@
 
 -(void)fetchDrinkPicture:(NSString *)drinkPicture completionHandler:(void (^) (UIImage *image))completionHandler;
 
+-(void)fetchAvailableBars:(NSString *)city completionHandler:(void (^)(NSArray *results, NSString *error))completionHandler;
+
 -(void)fetchOrdersForBar: (NSString *)searchTerm completionHandler:(void (^)(NSMutableArray * results, NSString *error))completionHandler;
 
 -(void)postDrinkOrder:(NSString *)drinkID;

@@ -122,9 +122,8 @@
     NSURLSession *session = [NSURLSession sharedSession];
     NSURLSessionTask *dataTask = [session dataTaskWithRequest:request completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
       if (error) {
-        completionHandler(nil,@"Could not connect to get bars");
-      }
-      else {
+        completionHandler(nil,@"Unable to connect");
+      } else {
         NSHTTPURLResponse *httpResponse = (NSHTTPURLResponse *)response;
         NSInteger statusCode = httpResponse.statusCode;
         
@@ -136,7 +135,7 @@
             dispatch_async(dispatch_get_main_queue(), ^{
               if (results) {
                 completionHandler(results,nil);
-              }
+                }
               else {
                 
                 completionHandler(nil, @"Cannot get list of bars");
@@ -152,6 +151,7 @@
         }
       }
     }];
+    [dataTask resume];
   }];
   
 }
