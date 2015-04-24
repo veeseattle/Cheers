@@ -23,6 +23,7 @@
 @property (nonatomic, assign) CGRect rect;
 @property (nonatomic, strong) UIView *viewWindow;
 @property (nonatomic, strong) UIViewController *viewController;
+@property (strong,nonatomic) Customer *customer;
 
 
 - (IBAction)signUpButtonClicked:(id)sender;
@@ -35,22 +36,22 @@
 - (void)viewDidLoad {
   [super viewDidLoad];
   
-  Customer *customer = [[Customer alloc] init];
+  self.customer = [[Customer alloc] init];
   
   self.square.layer.cornerRadius = 20;
   
   self.nameField.delegate = self;
-  self.nameField.text =  customer.name;
+  self.nameField.text =  self.customer.name;
   self.emailField.delegate = self;
-  self.emailField.text = customer.emailAddress;
+  self.emailField.text = self.customer.emailAddress;
   self.passwordField.delegate = self;
-  self.passwordField.text = customer.password;
+  self.passwordField.text = self.customer.password;
   self.password2Field.delegate = self;
   self.promoCode.delegate = self;
-  self.promoCode.text = customer.promoCode;
+  self.promoCode.text = self.customer.promoCode;
   
-  if (customer.image != nil) {
-    self.userPicture.image = customer.image;
+  if (self.customer.image != nil) {
+    self.userPicture.image = self.customer.image;
   }
   else {
     self.userPicture.image = [UIImage imageNamed:@"cosmo.jpeg"];
@@ -128,7 +129,7 @@
   }
   
   //check for no picture
-  if (self.imageString) {
+  if (!self.customer.image) {
     UIAlertView *blankPictureAlert = [[UIAlertView alloc] initWithTitle:@"No Picture Found" message:@"Please upload an image to complete registration" delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
     [blankPictureAlert show];
   }
@@ -151,6 +152,7 @@
   
   UIImage *chosenImage = image;
   self.userPicture.image = chosenImage;
+  self.customer.image = chosenImage;
   
   //Save selected image locally
   NSString *documentsDirectory = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) lastObject];

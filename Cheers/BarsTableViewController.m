@@ -27,21 +27,11 @@
   UINib *cellNib =[UINib nibWithNibName:@"BarCell" bundle:[NSBundle mainBundle]];
   [self.barsTableView registerNib:cellNib forCellReuseIdentifier:@"BAR_CELL"];
   
-  
   [[NetworkController sharedService] fetchAvailableBars:@"Seattle" completionHandler:^(NSArray *results, NSString *error) {
     self.availableBars = [[NSArray alloc] initWithArray:results];
     [self.barsTableView reloadData];
   }];
   
-}
-
--(void)viewDidAppear:(BOOL)animated {
-  //If user default token is blank
-  NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
-  NSString *token = [userDefaults objectForKey:@"token"];
-  if (token == nil) {
-    [self gotoCustomerSignup];
-  }
 }
 
 

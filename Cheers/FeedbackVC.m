@@ -17,7 +17,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
   
-  NSString *fullURL = @"https://docs.google.com/forms/d/1Wz_BV9fBxbvg07IjNjQjR-KSJlCUtJm4KS6NMlzjjfo/viewform";
+  NSString *fullURL = @"http://www.google.com";
   NSURL *url = [NSURL URLWithString:fullURL];
   NSURLRequest *requestObj = [NSURLRequest requestWithURL:url];
   [_webView loadRequest:requestObj];

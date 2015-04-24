@@ -10,6 +10,8 @@
 	<string>Cheers</string>
 	<key>IDESourceControlProjectOriginsDictionary</key>
 	<dict>
+		<key>1B58AAF830866962DA522DE8C9F434288CD7E481</key>
+		<string>https://github.com/madjid/MMPickerView.git</string>
 		<key>47C325FD1A2057B0FBCCB81AD7772D854A6D12DF</key>
 		<string>https://github.com/veeseattle/Cheers</string>
 	</dict>
@@ -17,6 +19,8 @@
 	<string>Cheers.xcworkspace</string>
 	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
 	<dict>
+		<key>1B58AAF830866962DA522DE8C9F434288CD7E481</key>
+		<string>../../MMPickerView</string>
 		<key>47C325FD1A2057B0FBCCB81AD7772D854A6D12DF</key>
 		<string>..</string>
 	</dict>
@@ -35,6 +39,14 @@
 			<string>47C325FD1A2057B0FBCCB81AD7772D854A6D12DF</string>
 			<key>IDESourceControlWCCName</key>
 			<string>Cheers</string>
+		</dict>
+		<dict>
+			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
+			<string>public.vcs.git</string>
+			<key>IDESourceControlWCCIdentifierKey</key>
+			<string>1B58AAF830866962DA522DE8C9F434288CD7E481</string>
+			<key>IDESourceControlWCCName</key>
+			<string>MMPickerView</string>
 		</dict>
 	</array>
 </dict>

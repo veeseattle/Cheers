@@ -21,50 +21,52 @@ NSString * const StripePublishableKey = @"pk_test_W4Opd6G7v4lAT2s1sLsCy004";
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
   
-    [Stripe setDefaultPublishableKey:StripePublishableKey];
+  [Stripe setDefaultPublishableKey:StripePublishableKey];
   
-  //UITabBar Modification from appcoda.com
-  UITabBarController *tabBarController = (UITabBarController *)self.window.rootViewController;
-  UITabBar *tabBar = tabBarController.tabBar;
-  UITabBarItem *tabBarItem1 = [tabBar.items objectAtIndex:0];
-  UITabBarItem *tabBarItem2 = [tabBar.items objectAtIndex:1];
-  UITabBarItem *tabBarItem3 = [tabBar.items objectAtIndex:2];
+//  self.window = [ [ UIWindow alloc ] initWithFrame:[ [ UIScreen mainScreen ] bounds ] ];
+//  self.window.backgroundColor = [UIColor whiteColor];
+//  [self.window makeKeyAndVisible];
   
-  tabBar.barStyle = UIBarStyleBlack;
-  tabBar.translucent = NO;
-  tabBar.barTintColor = [UIColor blackColor];
-  
-  UIImage *barImage1 = [UIImage imageNamed:@"home.png"];
-  UIImage *barImage1Selected = [UIImage imageNamed:@"home_selected.png"];
-  UIImage *barImage2 = [UIImage imageNamed:@"myplan.png"];
-  UIImage *barImage2Selected = [UIImage imageNamed:@"myplan_selected.png"];
-
-  [tabBarItem1 initWithTitle:@"Order Drinks" image:barImage1 selectedImage:barImage1Selected];
-  [tabBarItem2 initWithTitle:@"Bar Queue" image:barImage2 selectedImage:barImage2Selected];
-  [tabBarItem3 initWithTitle:@"Contact Us" image:barImage1 selectedImage:barImage1Selected];
-
-  
-  // Override point for customization after application launch.
+  NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
+  NSString *token = [userDefaults objectForKey:@"token"];
+  if (token == nil) {
+    
+    UIViewController  *rootController = [[UIStoryboard storyboardWithName:@"Main" bundle:[NSBundle mainBundle]] instantiateViewControllerWithIdentifier:@"SignUpVC"];
+    UINavigationController  *navigation = [[UINavigationController alloc] initWithRootViewController:rootController];
+    self.window.rootViewController = navigation;
+    
+    
+  }
+  else
+  {
+    //
+    //    UIViewController  *rootController = [[UIStoryboard storyboardWithName:@"Main" bundle:[NSBundle mainBundle]] instantiateViewControllerWithIdentifier:@"BarsTableViewController"];
+    //    self.window.rootViewController = rootController;
+    UITabBarController *tabBarController = (UITabBarController *)self.window.rootViewController;
+    
+    UITabBar *tabBar = tabBarController.tabBar;
+    UITabBarItem *tabBarItem1 = [tabBar.items objectAtIndex:0];
+    UITabBarItem *tabBarItem2 = [tabBar.items objectAtIndex:1];
+    UITabBarItem *tabBarItem3 = [tabBar.items objectAtIndex:2];
+    
+    tabBar.barStyle = UIBarStyleBlack;
+    tabBar.translucent = NO;
+    tabBar.barTintColor = [UIColor blackColor];
+    
+    UIImage *barImage1 = [UIImage imageNamed:@"home.png"];
+    UIImage *barImage1Selected = [UIImage imageNamed:@"home_selected.png"];
+    UIImage *barImage2 = [UIImage imageNamed:@"myplan.png"];
+    UIImage *barImage2Selected = [UIImage imageNamed:@"myplan_selected.png"];
+    
+    tabBarItem1 = [tabBarItem1 initWithTitle:@"Order Drinks" image:barImage1 selectedImage:barImage1Selected];
+    tabBarItem2 = [tabBarItem2 initWithTitle:@"Bar Queue" image:barImage2 selectedImage:barImage2Selected];
+    tabBarItem3 = [tabBarItem3 initWithTitle:@"Placeholder" image:barImage1 selectedImage:barImage1Selected];
+    
+    [self.window setRootViewController:tabBarController];
+  }
   return YES;
 }
 
-////save customer to archive
-//-(void)saveCustomerToArchive:(Customer *)customer {
-//  NSString *pathDocument = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, true)[0];
-//  NSString *pathArchive = [NSString stringWithFormat:@"%@ /CustomerArchive",pathDocument];
-//  NSLog(@"%@",pathArchive);
-//  [NSKeyedArchiver archiveRootObject:customer toFile:pathArchive];
-//                                                                
-//}
-//
-//-(id)loadCustomerFromArchive {
-//  NSString *pathDocuments = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, true)[0];
-//  NSString *pathArchive = [NSString stringWithFormat:@"%@ /CustomerArchive",pathDocuments];
-//  
-//  //load data, if any
-//  Customer *customer = [NSKeyedUnarchiver unarchiveObjectWithFile:pathArchive];
-//  return customer;
-//}
 
 - (void)applicationWillResignActive:(UIApplication *)application {
   // Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.
@@ -97,77 +99,77 @@ NSString * const StripePublishableKey = @"pk_test_W4Opd6G7v4lAT2s1sLsCy004";
 @synthesize persistentStoreCoordinator = _persistentStoreCoordinator;
 
 - (NSURL *)applicationDocumentsDirectory {
-    // The directory the application uses to store the Core Data store file. This code uses a directory named "VK.Cheers" in the application's documents directory.
-    return [[[NSFileManager defaultManager] URLsForDirectory:NSDocumentDirectory inDomains:NSUserDomainMask] lastObject];
+  // The directory the application uses to store the Core Data store file. This code uses a directory named "VK.Cheers" in the application's documents directory.
+  return [[[NSFileManager defaultManager] URLsForDirectory:NSDocumentDirectory inDomains:NSUserDomainMask] lastObject];
 }
 
 - (NSManagedObjectModel *)managedObjectModel {
-    // The managed object model for the application. It is a fatal error for the application not to be able to find and load its model.
-    if (_managedObjectModel != nil) {
-        return _managedObjectModel;
-    }
-    NSURL *modelURL = [[NSBundle mainBundle] URLForResource:@"Cheers" withExtension:@"momd"];
-    _managedObjectModel = [[NSManagedObjectModel alloc] initWithContentsOfURL:modelURL];
+  // The managed object model for the application. It is a fatal error for the application not to be able to find and load its model.
+  if (_managedObjectModel != nil) {
     return _managedObjectModel;
+  }
+  NSURL *modelURL = [[NSBundle mainBundle] URLForResource:@"Cheers" withExtension:@"momd"];
+  _managedObjectModel = [[NSManagedObjectModel alloc] initWithContentsOfURL:modelURL];
+  return _managedObjectModel;
 }
 
 - (NSPersistentStoreCoordinator *)persistentStoreCoordinator {
-    // The persistent store coordinator for the application. This implementation creates and return a coordinator, having added the store for the application to it.
-    if (_persistentStoreCoordinator != nil) {
-        return _persistentStoreCoordinator;
-    }
-    
-    // Create the coordinator and store
-    
-    _persistentStoreCoordinator = [[NSPersistentStoreCoordinator alloc] initWithManagedObjectModel:[self managedObjectModel]];
-    NSURL *storeURL = [[self applicationDocumentsDirectory] URLByAppendingPathComponent:@"Cheers.sqlite"];
-    NSError *error = nil;
-    NSString *failureReason = @"There was an error creating or loading the application's saved data.";
-    if (![_persistentStoreCoordinator addPersistentStoreWithType:NSSQLiteStoreType configuration:nil URL:storeURL options:nil error:&error]) {
-        // Report any error we got.
-        NSMutableDictionary *dict = [NSMutableDictionary dictionary];
-        dict[NSLocalizedDescriptionKey] = @"Failed to initialize the application's saved data";
-        dict[NSLocalizedFailureReasonErrorKey] = failureReason;
-        dict[NSUnderlyingErrorKey] = error;
-        error = [NSError errorWithDomain:@"YOUR_ERROR_DOMAIN" code:9999 userInfo:dict];
-        // Replace this with code to handle the error appropriately.
-        // abort() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development.
-        NSLog(@"Unresolved error %@, %@", error, [error userInfo]);
-        abort();
-    }
-    
+  // The persistent store coordinator for the application. This implementation creates and return a coordinator, having added the store for the application to it.
+  if (_persistentStoreCoordinator != nil) {
     return _persistentStoreCoordinator;
+  }
+  
+  // Create the coordinator and store
+  
+  _persistentStoreCoordinator = [[NSPersistentStoreCoordinator alloc] initWithManagedObjectModel:[self managedObjectModel]];
+  NSURL *storeURL = [[self applicationDocumentsDirectory] URLByAppendingPathComponent:@"Cheers.sqlite"];
+  NSError *error = nil;
+  NSString *failureReason = @"There was an error creating or loading the application's saved data.";
+  if (![_persistentStoreCoordinator addPersistentStoreWithType:NSSQLiteStoreType configuration:nil URL:storeURL options:nil error:&error]) {
+    // Report any error we got.
+    NSMutableDictionary *dict = [NSMutableDictionary dictionary];
+    dict[NSLocalizedDescriptionKey] = @"Failed to initialize the application's saved data";
+    dict[NSLocalizedFailureReasonErrorKey] = failureReason;
+    dict[NSUnderlyingErrorKey] = error;
+    error = [NSError errorWithDomain:@"YOUR_ERROR_DOMAIN" code:9999 userInfo:dict];
+    // Replace this with code to handle the error appropriately.
+    // abort() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development.
+    NSLog(@"Unresolved error %@, %@", error, [error userInfo]);
+    abort();
+  }
+  
+  return _persistentStoreCoordinator;
 }
 
 
 - (NSManagedObjectContext *)managedObjectContext {
-    // Returns the managed object context for the application (which is already bound to the persistent store coordinator for the application.)
-    if (_managedObjectContext != nil) {
-        return _managedObjectContext;
-    }
-    
-    NSPersistentStoreCoordinator *coordinator = [self persistentStoreCoordinator];
-    if (!coordinator) {
-        return nil;
-    }
-    _managedObjectContext = [[NSManagedObjectContext alloc] init];
-    [_managedObjectContext setPersistentStoreCoordinator:coordinator];
+  // Returns the managed object context for the application (which is already bound to the persistent store coordinator for the application.)
+  if (_managedObjectContext != nil) {
     return _managedObjectContext;
+  }
+  
+  NSPersistentStoreCoordinator *coordinator = [self persistentStoreCoordinator];
+  if (!coordinator) {
+    return nil;
+  }
+  _managedObjectContext = [[NSManagedObjectContext alloc] init];
+  [_managedObjectContext setPersistentStoreCoordinator:coordinator];
+  return _managedObjectContext;
 }
 
 #pragma mark - Core Data Saving support
 
 - (void)saveContext {
-    NSManagedObjectContext *managedObjectContext = self.managedObjectContext;
-    if (managedObjectContext != nil) {
-        NSError *error = nil;
-        if ([managedObjectContext hasChanges] && ![managedObjectContext save:&error]) {
-            // Replace this implementation with code to handle the error appropriately.
-            // abort() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development.
-            NSLog(@"Unresolved error %@, %@", error, [error userInfo]);
-            abort();
-        }
+  NSManagedObjectContext *managedObjectContext = self.managedObjectContext;
+  if (managedObjectContext != nil) {
+    NSError *error = nil;
+    if ([managedObjectContext hasChanges] && ![managedObjectContext save:&error]) {
+      // Replace this implementation with code to handle the error appropriately.
+      // abort() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development.
+      NSLog(@"Unresolved error %@, %@", error, [error userInfo]);
+      abort();
     }
+  }
 }
 
 @end

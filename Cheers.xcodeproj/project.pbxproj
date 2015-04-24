@@ -48,6 +48,10 @@
 		4EBD33D51A9E3FAE001A435F /* BarCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4EBD33D41A9E3FAE001A435F /* BarCell.xib */; };
 		4EBD33D81A9E40BE001A435F /* BarCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 4EBD33D71A9E40BE001A435F /* BarCell.m */; };
 		4EBD33DB1A9EF20D001A435F /* SignUpVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 4EBD33DA1A9EF20D001A435F /* SignUpVC.m */; };
+		4EFFC9DF1AE8AE28002475B9 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4EFFC9DE1AE8AE28002475B9 /* CoreGraphics.framework */; };
+		4EFFC9EA1AE8AF02002475B9 /* MMPickerView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4EFFC9E91AE8AF02002475B9 /* MMPickerView.m */; };
+		4EFFC9EC1AEA16C9002475B9 /* DrinkInCartCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4EFFC9EB1AEA16C9002475B9 /* DrinkInCartCell.xib */; };
+		4EFFC9EF1AEA1703002475B9 /* DrinkToOrderCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 4EFFC9EE1AEA1703002475B9 /* DrinkToOrderCell.m */; };
 		A39DBFB63F80CDAB3B02D6BD /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 4F217E42BA4F88ECC8A3EB96 /* libPods.a */; };
 /* End PBXBuildFile section */
 
@@ -124,6 +128,12 @@
 		4EBD33D71A9E40BE001A435F /* BarCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BarCell.m; sourceTree = "<group>"; };
 		4EBD33D91A9EF20D001A435F /* SignUpVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SignUpVC.h; sourceTree = "<group>"; };
 		4EBD33DA1A9EF20D001A435F /* SignUpVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SignUpVC.m; sourceTree = "<group>"; };
+		4EFFC9DE1AE8AE28002475B9 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
+		4EFFC9E81AE8AF02002475B9 /* MMPickerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MMPickerView.h; sourceTree = "<group>"; };
+		4EFFC9E91AE8AF02002475B9 /* MMPickerView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MMPickerView.m; sourceTree = "<group>"; };
+		4EFFC9EB1AEA16C9002475B9 /* DrinkInCartCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DrinkInCartCell.xib; sourceTree = "<group>"; };
+		4EFFC9ED1AEA1703002475B9 /* DrinkToOrderCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DrinkToOrderCell.h; sourceTree = "<group>"; };
+		4EFFC9EE1AEA1703002475B9 /* DrinkToOrderCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DrinkToOrderCell.m; sourceTree = "<group>"; };
 		4F217E42BA4F88ECC8A3EB96 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		715C933C646A035E02422B6F /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
 		864604E6185D0B9C4D8F0BF5 /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
@@ -134,6 +144,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4EFFC9DF1AE8AE28002475B9 /* CoreGraphics.framework in Frameworks */,
 				A39DBFB63F80CDAB3B02D6BD /* libPods.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -197,6 +208,8 @@
 		4E7508741A9BB4900008D3C3 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				4EFFC9E81AE8AF02002475B9 /* MMPickerView.h */,
+				4EFFC9E91AE8AF02002475B9 /* MMPickerView.m */,
 				4EBD33A51A9D86AF001A435F /* home_selected.png */,
 				4EBD33A61A9D86AF001A435F /* home_selected@2x.png */,
 				4EBD33A71A9D86AF001A435F /* home.png */,
@@ -257,6 +270,8 @@
 				4EBD33D71A9E40BE001A435F /* BarCell.m */,
 				4E07CFFA1AD662EB00FDEF99 /* ImagePickerObject.h */,
 				4E07CFFB1AD662EB00FDEF99 /* ImagePickerObject.m */,
+				4EFFC9ED1AEA1703002475B9 /* DrinkToOrderCell.h */,
+				4EFFC9EE1AEA1703002475B9 /* DrinkToOrderCell.m */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -268,6 +283,7 @@
 				4E7508811A9BB4900008D3C3 /* Main.storyboard */,
 				4E7508BD1A9D3C780008D3C3 /* DrinkOrderCell.xib */,
 				4EBD33D41A9E3FAE001A435F /* BarCell.xib */,
+				4EFFC9EB1AEA16C9002475B9 /* DrinkInCartCell.xib */,
 			);
 			name = View;
 			sourceTree = "<group>";
@@ -275,16 +291,16 @@
 		4E75089F1A9BB4A70008D3C3 /* Controller */ = {
 			isa = PBXGroup;
 			children = (
+				4EBD33D91A9EF20D001A435F /* SignUpVC.h */,
+				4EBD33DA1A9EF20D001A435F /* SignUpVC.m */,
+				4EBD33D11A9E3EED001A435F /* BarsTableViewController.h */,
+				4EBD33D21A9E3EED001A435F /* BarsTableViewController.m */,
 				4E7508AF1A9BD1BA0008D3C3 /* OrderingViewController.h */,
 				4E7508B01A9BD1BA0008D3C3 /* OrderingViewController.m */,
 				4E7508B21A9BDA390008D3C3 /* BartenderViewController.h */,
 				4E7508B31A9BDA390008D3C3 /* BartenderViewController.m */,
-				4EBD33D11A9E3EED001A435F /* BarsTableViewController.h */,
-				4EBD33D21A9E3EED001A435F /* BarsTableViewController.m */,
 				4E7508B51A9D13050008D3C3 /* NetworkController.h */,
 				4E7508B61A9D13050008D3C3 /* NetworkController.m */,
-				4EBD33D91A9EF20D001A435F /* SignUpVC.h */,
-				4EBD33DA1A9EF20D001A435F /* SignUpVC.m */,
 				4E29A6151ABB72EC000BD947 /* FeedbackVC.h */,
 				4E29A6161ABB72EC000BD947 /* FeedbackVC.m */,
 			);
@@ -294,6 +310,7 @@
 		B6079BA1251FEBDA400FD4A6 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				4EFFC9DE1AE8AE28002475B9 /* CoreGraphics.framework */,
 				4F217E42BA4F88ECC8A3EB96 /* libPods.a */,
 			);
 			name = Frameworks;
@@ -395,6 +412,7 @@
 				4E7508831A9BB4900008D3C3 /* Main.storyboard in Resources */,
 				4E7508BE1A9D3C780008D3C3 /* DrinkOrderCell.xib in Resources */,
 				4E7508881A9BB4900008D3C3 /* LaunchScreen.xib in Resources */,
+				4EFFC9EC1AEA16C9002475B9 /* DrinkInCartCell.xib in Resources */,
 				4E7508851A9BB4900008D3C3 /* Images.xcassets in Resources */,
 				4EBD33C31A9D86AF001A435F /* myplan.png in Resources */,
 				4EBD33C41A9D86AF001A435F /* myplan@2x.png in Resources */,
@@ -459,6 +477,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4EFFC9EF1AEA1703002475B9 /* DrinkToOrderCell.m in Sources */,
 				4E29A6171ABB72EC000BD947 /* FeedbackVC.m in Sources */,
 				4EBD33DB1A9EF20D001A435F /* SignUpVC.m in Sources */,
 				4E7508AE1A9BB9120008D3C3 /* Order.m in Sources */,
@@ -466,6 +485,7 @@
 				4E75087A1A9BB4900008D3C3 /* AppDelegate.m in Sources */,
 				4E7508A51A9BB5F80008D3C3 /* Customer.m in Sources */,
 				4E7508A81A9BB6EF0008D3C3 /* Drink.m in Sources */,
+				4EFFC9EA1AE8AF02002475B9 /* MMPickerView.m in Sources */,
 				4E7508B71A9D13050008D3C3 /* NetworkController.m in Sources */,
 				4E75087D1A9BB4900008D3C3 /* Cheers.xcdatamodeld in Sources */,
 				4E07CFFC1AD662EB00FDEF99 /* ImagePickerObject.m in Sources */,
