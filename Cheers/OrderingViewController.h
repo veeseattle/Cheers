@@ -16,10 +16,4 @@
 @property (strong, nonatomic) NSString *barName;
 @property (strong, nonatomic) Bar *bar;
 
-
-+(void)showPickerViewInView: (UIView *)view
-                withObjetcs: (NSArray *)objects
-                withOptions: (NSDictionary *)options
-    objectToStringConverter: (NSString *(^)(id object))converter
-                 completion: (void(^)(id selectedObject))completion;
 @end

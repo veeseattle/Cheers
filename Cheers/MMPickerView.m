@@ -30,6 +30,7 @@ NSString * const MMshowsSelectionIndicator = @"showsSelectionIndicator";
 @property (nonatomic, strong) UIToolbar *pickerViewToolBar;
 @property (nonatomic, strong) UIBarButtonItem *pickerViewBarButtonItem;
 @property (nonatomic, strong) UIButton *pickerDoneButton;
+@property (nonatomic, strong) UIButton *pickerCancelButton;
 @property (nonatomic, strong) UIPickerView *pickerView;
 @property (nonatomic, strong) NSArray *pickerViewArray;
 @property (nonatomic, strong) UIColor *pickerViewTextColor;
@@ -180,7 +181,7 @@ NSString * const MMshowsSelectionIndicator = @"showsSelectionIndicator";
   [self addSubview:_pickerViewContainerView];
   
   //PickerView Container with top bar
-  _pickerContainerView = [[UIView alloc] initWithFrame:CGRectMake(0.0, _pickerViewContainerView.bounds.size.height - 260.0, 320.0, 260.0)];
+  _pickerContainerView = [[UIView alloc] initWithFrame:CGRectMake(0.0, _pickerViewContainerView.bounds.size.height - 260.0, _pickerViewContainerView.bounds.size.width, 260.0)];
     
   //Default Color Values (if colors == nil)
   
@@ -260,6 +261,7 @@ NSString * const MMshowsSelectionIndicator = @"showsSelectionIndicator";
   UIBarButtonItem *flexibleSpace = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace target:nil action:nil];
   
   _pickerViewBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemDone target:self action:@selector(dismiss)];
+  
   _pickerViewToolBar.items = @[flexibleSpace, _pickerViewBarButtonItem];
   [_pickerViewBarButtonItem setTintColor:buttonTextColor];
   

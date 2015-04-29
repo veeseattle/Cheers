@@ -27,10 +27,19 @@
   UINib *cellNib =[UINib nibWithNibName:@"BarCell" bundle:[NSBundle mainBundle]];
   [self.barsTableView registerNib:cellNib forCellReuseIdentifier:@"BAR_CELL"];
   
-  [[NetworkController sharedService] fetchAvailableBars:@"Seattle" completionHandler:^(NSArray *results, NSString *error) {
-    self.availableBars = [[NSArray alloc] initWithArray:results];
-    [self.barsTableView reloadData];
-  }];
+//  [[NetworkController sharedService] fetchAvailableBars:@"Seattle" completionHandler:^(NSArray *results, NSString *error) {
+//    self.availableBars = [[NSArray alloc] initWithArray:results];
+//    [self.barsTableView reloadData];
+//  }];
+  
+  Bar *dummyBar = [[Bar alloc] init];
+  dummyBar.barID = @"12345";
+  dummyBar.barName = @"Dummy bar name";
+  
+  self.availableBars = [[NSArray alloc] init];
+  self.availableBars = @[dummyBar];
+  
+  
   
 }
 
@@ -64,9 +73,9 @@
 -(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
   if ([segue.identifier isEqualToString:@"ORDER_DRINKS"]) {
     OrderingViewController *destinationVC = (OrderingViewController *)segue.destinationViewController;
-    NSIndexPath *indexPath = self.barsTableView.indexPathForSelectedRow;
-    Bar *bar = self.availableBars[indexPath.row];
-    destinationVC.bar = bar;
+//    NSIndexPath *indexPath = self.barsTableView.indexPathForSelectedRow;
+//    Bar *bar = self.availableBars[indexPath.row];
+//    destinationVC.bar = bar;
   }
 }
 

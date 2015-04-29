@@ -16,7 +16,7 @@
 @property (strong,nonatomic) NSString *drinkName;
 @property (strong,nonatomic) NSString *drinkRecipe;
 @property (assign) NSInteger *drinkPrice;
-@property (strong,nonatomic) UIImage *drinkPicture;
+@property (strong,nonatomic) NSString *drinkPicture;
 
 
 @end

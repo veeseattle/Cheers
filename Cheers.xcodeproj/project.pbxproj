@@ -10,7 +10,6 @@
 		4E07CFFC1AD662EB00FDEF99 /* ImagePickerObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 4E07CFFB1AD662EB00FDEF99 /* ImagePickerObject.m */; };
 		4E133DAB1AC2064F002E1C3F /* MCSwipeTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 4E133DAA1AC2064F002E1C3F /* MCSwipeTableViewCell.m */; };
 		4E133DAD1AC25F52002E1C3F /* refresh.png in Resources */ = {isa = PBXBuildFile; fileRef = 4E133DAC1AC25F51002E1C3F /* refresh.png */; };
-		4E29A6171ABB72EC000BD947 /* FeedbackVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 4E29A6161ABB72EC000BD947 /* FeedbackVC.m */; };
 		4E7508771A9BB4900008D3C3 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 4E7508761A9BB4900008D3C3 /* main.m */; };
 		4E75087A1A9BB4900008D3C3 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 4E7508791A9BB4900008D3C3 /* AppDelegate.m */; };
 		4E75087D1A9BB4900008D3C3 /* Cheers.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 4E75087B1A9BB4900008D3C3 /* Cheers.xcdatamodeld */; };
@@ -71,8 +70,6 @@
 		4E133DA91AC2064F002E1C3F /* MCSwipeTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MCSwipeTableViewCell.h; sourceTree = "<group>"; };
 		4E133DAA1AC2064F002E1C3F /* MCSwipeTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MCSwipeTableViewCell.m; sourceTree = "<group>"; };
 		4E133DAC1AC25F51002E1C3F /* refresh.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = refresh.png; sourceTree = "<group>"; };
-		4E29A6151ABB72EC000BD947 /* FeedbackVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FeedbackVC.h; sourceTree = "<group>"; };
-		4E29A6161ABB72EC000BD947 /* FeedbackVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FeedbackVC.m; sourceTree = "<group>"; };
 		4E3D1D4A1ABBAF92003E4FCE /* Cheers.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = Cheers.entitlements; sourceTree = "<group>"; };
 		4E7508711A9BB4900008D3C3 /* Cheers.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Cheers.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		4E7508751A9BB4900008D3C3 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -208,8 +205,6 @@
 		4E7508741A9BB4900008D3C3 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
-				4EFFC9E81AE8AF02002475B9 /* MMPickerView.h */,
-				4EFFC9E91AE8AF02002475B9 /* MMPickerView.m */,
 				4EBD33A51A9D86AF001A435F /* home_selected.png */,
 				4EBD33A61A9D86AF001A435F /* home_selected@2x.png */,
 				4EBD33A71A9D86AF001A435F /* home.png */,
@@ -272,6 +267,8 @@
 				4E07CFFB1AD662EB00FDEF99 /* ImagePickerObject.m */,
 				4EFFC9ED1AEA1703002475B9 /* DrinkToOrderCell.h */,
 				4EFFC9EE1AEA1703002475B9 /* DrinkToOrderCell.m */,
+				4EFFC9E81AE8AF02002475B9 /* MMPickerView.h */,
+				4EFFC9E91AE8AF02002475B9 /* MMPickerView.m */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -301,8 +298,6 @@
 				4E7508B31A9BDA390008D3C3 /* BartenderViewController.m */,
 				4E7508B51A9D13050008D3C3 /* NetworkController.h */,
 				4E7508B61A9D13050008D3C3 /* NetworkController.m */,
-				4E29A6151ABB72EC000BD947 /* FeedbackVC.h */,
-				4E29A6161ABB72EC000BD947 /* FeedbackVC.m */,
 			);
 			name = Controller;
 			sourceTree = "<group>";
@@ -478,7 +473,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				4EFFC9EF1AEA1703002475B9 /* DrinkToOrderCell.m in Sources */,
-				4E29A6171ABB72EC000BD947 /* FeedbackVC.m in Sources */,
 				4EBD33DB1A9EF20D001A435F /* SignUpVC.m in Sources */,
 				4E7508AE1A9BB9120008D3C3 /* Order.m in Sources */,
 				4E7508C11A9D3D490008D3C3 /* DrinkOrderCell.m in Sources */,

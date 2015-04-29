@@ -8,10 +8,15 @@
 
 #import "DrinkToOrderCell.h"
 
+
 @implementation DrinkToOrderCell
 
 - (void)awakeFromNib {
-    // Initialization code
+  
+  
+//  int rowTotalInt = ([self.drinkQty.text intValue] * [self.drinkPrice.text intValue]);
+//  NSNumber *rowTotal = [NSNumber numberWithInt:rowTotalInt];
+//  self.drinkPrice.text = (NSString *)rowTotal;
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {

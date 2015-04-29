@@ -12,32 +12,28 @@
 #import "Order.h"
 #import "Stripe.h"
 #import "STPTestPaymentAuthorizationViewController.h"
-#import "MMPickerView.h"
 #import "Drink.h"
-#import "DrinkToOrderCell.h"
+
 
 @import PassKit;
 
-@interface OrderingViewController () <UITableViewDelegate, UITableViewDataSource, PKPaymentAuthorizationViewControllerDelegate, STPCheckoutViewControllerDelegate>
-
-
-@property (weak, nonatomic) IBOutlet UITableView *orderTable;
+@interface OrderingViewController () <UIPickerViewDelegate, UIPickerViewDataSource, PKPaymentAuthorizationViewControllerDelegate, STPCheckoutViewControllerDelegate>
 
 @property (strong,nonatomic) NSArray *initialDrinksArray;
 @property (strong, nonatomic) NSMutableArray *drinksArray;
-@property (weak, nonatomic) IBOutlet UILabel *recipe;
 
 - (IBAction)drinkButton:(id)sender;
-@property (weak, nonatomic) IBOutlet UIImageView *drinkPicture;
 
 @property (strong,nonatomic) NSArray *paymentNetwork;
 @property (strong,nonatomic) NSString *applePayMerchantID;
 @property (strong,nonatomic) PKPaymentSummaryItem *subtotal;
 @property (strong,nonatomic) PKPaymentSummaryItem *total;
 
-@property (strong,nonatomic) MMPickerView *drinkPickerView;
-@property (strong,nonatomic) UIView *drinkChoiceView;
 @property (nonatomic, strong) NSString *selectedDrink;
+@property (weak, nonatomic) IBOutlet UILabel *drinkRecipe;
+@property (weak, nonatomic) IBOutlet UIImageView *drinkPicture;
+
+@property (weak, nonatomic) IBOutlet UIPickerView *drinkPickerView;
 
 @end
 
@@ -48,134 +44,54 @@
   
   self.navigationItem.title = @"Bars";
   
-  self.drinkPickerView = [[MMPickerView alloc] init];
+  self.drinkPickerView.delegate = self;
+  self.drinkPickerView.dataSource = self;
+  
   
   //payment network setup
   self.paymentNetwork = [NSArray arrayWithObjects:PKPaymentNetworkAmex, PKPaymentNetworkMasterCard, PKPaymentNetworkVisa, nil];
   self.applePayMerchantID = @"merchant.cheers";
   
-  self.drinkPicture.layer.borderColor = [[UIColor whiteColor] CGColor];
-  self.drinkPicture.layer.cornerRadius = 25;
-  self.drinkPicture.clipsToBounds = true;
+  Drink *item1 = [[Drink alloc] init];
+  item1.drinkID = @"1";
+  item1.drinkName = @"Mimosa";
+  item1.drinkPicture = @"http://www.google.com";
+  item1.drinkRecipe = @"champagne, orange juice";
+  Drink *item2 = [[Drink alloc] init];
+  item2.drinkID = @"2";
+  item2.drinkName = @"Bellini";
+  item2.drinkPicture = @"http://www.google.com";
+  item2.drinkRecipe = @"champagne, peach juice";
+  Drink *item3 = [[Drink alloc] init];
+  item3.drinkID = @"3";
+  item3.drinkName = @"Gin and Tonic";
+  item3.drinkPicture = @"http://www.google.com";
+  item3.drinkRecipe = @"gin, tonic";
   
-  self.orderTable.delegate = self;
-  self.orderTable.dataSource = self;
-  
+  self.drinksArray = [[NSMutableArray alloc] initWithArray:@[item1, item2, item3]];
   
 }
 
-#pragma mark - orderTable Delegate Methods
--(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
+-(NSString *)pickerView:(UIPickerView *)pickerView titleForRow:(NSInteger)row forComponent:(NSInteger)component {
+  Drink *drinkInPickerView = [[Drink alloc] init];
+  drinkInPickerView = [self.drinksArray objectAtIndex:row];
+  return drinkInPickerView.drinkName;
+}
+
+-(NSInteger)pickerView:(UIPickerView *)pickerView numberOfRowsInComponent:(NSInteger)component {
+  return self.drinksArray.count;
+}
+
+-(NSInteger)numberOfComponentsInPickerView:(UIPickerView *)pickerView {
   return 1;
 }
 
--(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-  
-  UINib *cellNib = [UINib nibWithNibName:@"DrinkInCartCell" bundle:nil];
-  [tableView registerNib:cellNib forCellReuseIdentifier:@"DRINK_TO_ORDER_CELL"];
-  
-  DrinkToOrderCell *drinkCell = [tableView dequeueReusableCellWithIdentifier:@"DRINK_TO_ORDER_CELL" forIndexPath:indexPath];
-  
-  drinkCell.drinkName.text = @"Tap to add a drink";
-  drinkCell.drinkPrice.text = @" ";
-  
-  return drinkCell;
-}
-
--(NSString *) objectToStringConverter:(Drink *)drinkObject {
-  
-  NSString *drinkName = drinkObject.drinkName;
-  return drinkName;
+-(void)pickerView:(UIPickerView *)pickerView didSelectRow:(NSInteger)row inComponent:(NSInteger)component {
+  Drink *selectedDrink = [[Drink alloc] init];
+  selectedDrink = [self.drinksArray objectAtIndex:row];
+  self.drinkRecipe.text = selectedDrink.drinkRecipe;
   
 }
-
--(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-  
-  [[NetworkController sharedService] fetchDrinksForBar:self.bar.barID completionHandler:^(NSArray *results, NSString *error) {
-    
-    NSMutableArray *drinksArray = [[NSMutableArray alloc] init];
-    self.drinkValue = results.firstObject;
-    self.selectedDrink = results.firstObject;
-    
-    NSMutableDictionary *drinksDictionary = [[NSMutableDictionary alloc] init];
-    
-    //create dictionary with key: drink name, value: drinkID from drin
-    
-    
-    //create string array containing all the drink names
-    for (Drink *item in results) {
-      NSString *drinkName = item.drinkName;
-      NSString *drinkID = item.drinkID;
-      //[drinksDictionary setObject:drinkID forKey:drinkName];
-       [drinksArray addObject:drinkName];
-    }
-    
-//    [MMPickerView showPickerViewInView:self.view withObjects:results withOptions:nil objectToStringConverter:^NSString *(id object) {
-//      NSString *selectedDrinkName = [self objectToStringConverter:object];
-//      return selectedDrinkName;
-//      
-//    } completion:^(id selectedObject) {
-//      //self.selectedDrink = selectedString;
-//      
-//      //NSString *selectedDrinkID = [drinksDictionary objectForKey:selectedString];
-//      
-//      Drink *selectedDrink = (Drink *)selectedObject;
-//      
-//      DrinkToOrderCell *cell = (DrinkToOrderCell *)[tableView cellForRowAtIndexPath:indexPath];
-//      cell.drinkName.text = selectedDrink.drinkName;
-//      cell.drinkPrice.text = [NSString stringWithFormat: @"%ld", (long)selectedDrink.drinkPrice];
-//      
-//
-//    }];
-    
-    [MMPickerView showPickerViewInView:self.view
-                           withStrings:drinksArray
-                           withOptions:nil
-//  @{MMbackgroundColor: [UIColor blackColor],
-//                                         MMtextColor: [UIColor whiteColor],
-//                                         MMtoolbarColor: [UIColor blackColor],
-//                                         MMbuttonColor: [UIColor whiteColor],
-//                                         MMfont: [UIFont systemFontOfSize:18],
-//                                         MMvalueY: @3}
-//     
-                            completion:^(NSString *selectedString) {
-                              self.selectedDrink = selectedString;
-                              
-                              //NSString *selectedDrinkID = [drinksDictionary objectForKey:selectedString];
-                              
-                              
-                              DrinkToOrderCell *cell = (DrinkToOrderCell *)[tableView cellForRowAtIndexPath:indexPath];
-                              cell.drinkName.text = selectedString;
-                              cell.drinkPrice.text = @"$9";
-                              
-                              
-                            }];
-    
-    if (error) {
-      [[[UIAlertView alloc] initWithTitle:@"Unable to Connect" message:@"There was a connection error. Please try again later." delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil] show];
-    }}];
-  
-  
-  
-}
-
-
-//
-//-(NSString *)pickerView:(UIPickerView *)pickerView titleForRow:(NSInteger)row forComponent:(NSInteger)component {
-//  Drink *drink = self.drinksArray[row];
-//  return drink.drinkName;
-//}
-//
-//- (void)pickerView:(UIPickerView *)pickerView didSelectRow:(NSInteger)row inComponent:(NSInteger)component {
-//  self.drinkValue = [self.drinksArray objectAtIndex:[self.drinksPicker selectedRowInComponent:component ]];
-//  Drink *drink = self.drinkValue;
-//  self.recipe.text = drink.drinkRecipe;
-//
-//  [[NetworkController sharedService] fetchDrinkPicture:drink.drinkPicture completionHandler:^(UIImage *image) {
-//    self.drinkPicture.image = image;
-//  }];
-//}
-
 
 //MARK: Drink button
 - (IBAction)drinkButton:(id)sender {
@@ -296,10 +212,6 @@
                          }];
 }
 
-#pragma showPickerView
-+(void)showPickerViewInView:(UIView *)view withObjetcs:(NSArray *)objects withOptions:(NSDictionary *)options objectToStringConverter:(NSString *(^)(id))converter completion:(void (^)(id))completion {
-  
-}
 
 //MARK: checkoutController - didFinish & didCreate
 - (void) checkoutController:(STPCheckoutViewController *)controller didCreateToken:(STPToken *)token completion:(STPTokenSubmissionHandler)completion {
