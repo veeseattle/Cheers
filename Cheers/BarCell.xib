@@ -1,42 +1,63 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="6751" systemVersion="14C1510" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="7702" systemVersion="14D136" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6736"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7701"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
-        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="BAR_CELL" rowHeight="73" id="zxR-5g-G1r" customClass="BarCell">
-            <rect key="frame" x="0.0" y="0.0" width="412" height="73"/>
+        <tableViewCell contentMode="scaleToFill" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" reuseIdentifier="BAR_CELL" rowHeight="92" id="zxR-5g-G1r" customClass="BarCell">
+            <rect key="frame" x="0.0" y="0.0" width="360" height="100"/>
             <autoresizingMask key="autoresizingMask"/>
             <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="zxR-5g-G1r" id="KWi-rx-8yN">
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Bar Name" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Bdw-kh-BQx">
-                        <rect key="frame" x="10" y="10" width="84" height="25"/>
-                        <fontDescription key="fontDescription" name="Avenir-Heavy" family="Avenir" pointSize="18"/>
-                        <color key="textColor" red="0.0" green="0.0" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                        <nil key="highlightedColor"/>
-                    </label>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Location / Neighborhood" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="A62-cw-FCH">
-                        <rect key="frame" x="10" y="37" width="183" height="22"/>
+                        <rect key="frame" x="108" y="37" width="183" height="22"/>
                         <fontDescription key="fontDescription" name="Avenir-Roman" family="Avenir" pointSize="16"/>
                         <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="club" translatesAutoresizingMaskIntoConstraints="NO" id="4ih-bH-TSB">
+                        <rect key="frame" x="0.0" y="0.0" width="100" height="100"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="100" id="S3e-pz-tV6"/>
+                            <constraint firstAttribute="height" constant="100" id="deW-L0-D8f"/>
+                        </constraints>
+                    </imageView>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Bar Name" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Bdw-kh-BQx">
+                        <rect key="frame" x="108" y="10" width="84" height="25"/>
+                        <fontDescription key="fontDescription" name="Avenir-Heavy" family="Avenir" pointSize="18"/>
+                        <color key="textColor" red="0.0" green="0.0" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
                 </subviews>
                 <constraints>
                     <constraint firstItem="A62-cw-FCH" firstAttribute="leading" secondItem="Bdw-kh-BQx" secondAttribute="leading" id="6ED-ID-swF"/>
-                    <constraint firstItem="Bdw-kh-BQx" firstAttribute="leading" secondItem="KWi-rx-8yN" secondAttribute="leading" constant="10" id="6av-oM-f9S"/>
+                    <constraint firstItem="Bdw-kh-BQx" firstAttribute="leading" secondItem="KWi-rx-8yN" secondAttribute="leading" constant="100" id="6av-oM-f9S"/>
+                    <constraint firstItem="A62-cw-FCH" firstAttribute="leading" secondItem="Bdw-kh-BQx" secondAttribute="leading" id="9ex-Py-8Ya"/>
                     <constraint firstItem="A62-cw-FCH" firstAttribute="top" secondItem="Bdw-kh-BQx" secondAttribute="bottom" constant="2" id="C7z-ei-DSd"/>
+                    <constraint firstItem="A62-cw-FCH" firstAttribute="leading" secondItem="KWi-rx-8yN" secondAttribute="leadingMargin" constant="100" id="Zud-cf-di3"/>
+                    <constraint firstItem="4ih-bH-TSB" firstAttribute="leading" secondItem="KWi-rx-8yN" secondAttribute="leadingMargin" constant="-8" id="bN8-rc-S9B"/>
                     <constraint firstItem="Bdw-kh-BQx" firstAttribute="top" secondItem="KWi-rx-8yN" secondAttribute="top" constant="10" id="f24-3o-hLn"/>
+                    <constraint firstItem="4ih-bH-TSB" firstAttribute="top" secondItem="KWi-rx-8yN" secondAttribute="topMargin" constant="-8" id="oN6-3U-IRk"/>
                 </constraints>
+                <variation key="default">
+                    <mask key="constraints">
+                        <exclude reference="6av-oM-f9S"/>
+                        <exclude reference="6ED-ID-swF"/>
+                    </mask>
+                </variation>
             </tableViewCellContentView>
             <connections>
                 <outlet property="barLocation" destination="A62-cw-FCH" id="jbu-fO-okz"/>
                 <outlet property="barName" destination="Bdw-kh-BQx" id="Uk3-lI-c1U"/>
             </connections>
-            <point key="canvasLocation" x="335" y="289.5"/>
+            <point key="canvasLocation" x="309" y="303"/>
         </tableViewCell>
     </objects>
+    <resources>
+        <image name="club" width="1000" height="665"/>
+    </resources>
 </document>

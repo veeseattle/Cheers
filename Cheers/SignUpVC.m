@@ -10,8 +10,8 @@
 #import "ImagePickerObject.h"
 
 @interface SignUpVC() <UITextFieldDelegate, ImagePickerDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate, UIScrollViewDelegate>
+@property (weak, nonatomic) IBOutlet UIButton *userPicture;
 
-@property (weak, nonatomic) IBOutlet UIImageView *userPicture;
 @property (weak, nonatomic) IBOutlet UITextField *nameField;
 @property (weak, nonatomic) IBOutlet UITextField *emailField;
 @property (weak, nonatomic) IBOutlet UITextField *passwordField;
@@ -50,18 +50,16 @@
   self.promoCode.delegate = self;
   self.promoCode.text = self.customer.promoCode;
   
-  if (self.customer.image != nil) {
-    self.userPicture.image = self.customer.image;
-  }
-  else {
-    self.userPicture.image = [UIImage imageNamed:@"cosmo.jpeg"];
-  }
+  
+  
   //User picture set-up
   self.userPicture.layer.cornerRadius = 50;
   self.userPicture.layer.masksToBounds = true;
   self.userPicture.layer.borderColor = [[UIColor whiteColor] CGColor];
-  self.userPicture.layer.borderWidth = 6;
+  self.userPicture.layer.borderWidth = 3;
   self.userPicture.contentMode = UIViewContentModeScaleToFill;
+  [self.userPicture addTarget:self action:@selector(cameraButtonPressed) forControlEvents:UIControlEventTouchUpInside];
+  
   
   //Camera button
   UIBarButtonItem *cameraButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemCamera target:self action:@selector(cameraButtonPressed)];
@@ -105,7 +103,7 @@
 
 //Turn image to NSString
 -(void)turnImageIntoJSON {
-  UIImage *userImage = [self adjustImage:self.userPicture.image toSmallerSize:CGSizeMake(100,100)];
+  UIImage *userImage = [self adjustImage:self.customer.image toSmallerSize:CGSizeMake(100,100)];
   NSData *imageData = UIImageJPEGRepresentation(userImage, 0.8);
   NSString *imageString = [imageData base64EncodedStringWithOptions:NSDataBase64Encoding64CharacterLineLength];
   
@@ -151,8 +149,8 @@
 {
   
   UIImage *chosenImage = image;
-  self.userPicture.image = chosenImage;
   self.customer.image = chosenImage;
+  [self.userPicture setBackgroundImage:chosenImage forState:UIControlStateNormal];
   
   //Save selected image locally
   NSString *documentsDirectory = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) lastObject];

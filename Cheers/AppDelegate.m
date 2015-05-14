@@ -42,25 +42,25 @@ NSString * const StripePublishableKey = @"pk_test_W4Opd6G7v4lAT2s1sLsCy004";
     //
     //    UIViewController  *rootController = [[UIStoryboard storyboardWithName:@"Main" bundle:[NSBundle mainBundle]] instantiateViewControllerWithIdentifier:@"BarsTableViewController"];
     //    self.window.rootViewController = rootController;
-    UITabBarController *tabBarController = (UITabBarController *)self.window.rootViewController;
-    
-    UITabBar *tabBar = tabBarController.tabBar;
-    UITabBarItem *tabBarItem1 = [tabBar.items objectAtIndex:0];
-    UITabBarItem *tabBarItem2 = [tabBar.items objectAtIndex:1];
-    
-    tabBar.barStyle = UIBarStyleBlack;
-    tabBar.translucent = NO;
-    tabBar.barTintColor = [UIColor blackColor];
-    
-    UIImage *barImage1 = [UIImage imageNamed:@"home.png"];
-    UIImage *barImage1Selected = [UIImage imageNamed:@"home_selected.png"];
-    UIImage *barImage2 = [UIImage imageNamed:@"myplan.png"];
-    UIImage *barImage2Selected = [UIImage imageNamed:@"myplan_selected.png"];
-    
-    tabBarItem1 = [tabBarItem1 initWithTitle:@"Order Drinks" image:barImage1 selectedImage:barImage1Selected];
-    tabBarItem2 = [tabBarItem2 initWithTitle:@"Bar Queue" image:barImage2 selectedImage:barImage2Selected];
-    
-    [self.window setRootViewController:tabBarController];
+//    UITabBarController *tabBarController = (UITabBarController *)self.window.rootViewController;
+//    
+//    UITabBar *tabBar = tabBarController.tabBar;
+//    UITabBarItem *tabBarItem1 = [tabBar.items objectAtIndex:0];
+//    UITabBarItem *tabBarItem2 = [tabBar.items objectAtIndex:1];
+//    
+//    tabBar.barStyle = UIBarStyleBlack;
+//    tabBar.translucent = NO;
+//    tabBar.barTintColor = [UIColor blackColor];
+//    
+//    UIImage *barImage1 = [UIImage imageNamed:@"home.png"];
+//    UIImage *barImage1Selected = [UIImage imageNamed:@"home_selected.png"];
+//    UIImage *barImage2 = [UIImage imageNamed:@"myplan.png"];
+//    UIImage *barImage2Selected = [UIImage imageNamed:@"myplan_selected.png"];
+//    
+//    tabBarItem1 = [tabBarItem1 initWithTitle:@"Order Drinks" image:barImage1 selectedImage:barImage1Selected];
+//    tabBarItem2 = [tabBarItem2 initWithTitle:@"Bar Queue" image:barImage2 selectedImage:barImage2Selected];
+//    
+//    [self.window setRootViewController:tabBarController];
   }
   return YES;
 }
